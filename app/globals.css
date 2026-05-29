@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
+  --color-bg: #fafafa;
+  --color-fg: #111111;
+  --color-muted: #666666;
+  --color-border: #e0e0e0;
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-bg: #0d0d0d;
+    --color-fg: #e8e8e8;
+    --color-muted: #888888;
+    --color-border: #222222;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+}
