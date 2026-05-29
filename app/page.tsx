@@ -1,5 +1,6 @@
 import Link from "nlite/link";
 
+import { SiteNav } from "@/components/site-nav";
 import { projectsPreview, talksPreview, writingPreview } from "@/lib/content";
 
 const timeline = [
@@ -32,13 +33,14 @@ export default function HomePage() {
   const projects = projectsPreview();
 
   return (
-    <div className="mx-auto max-w-[640px] px-6 pb-16 pt-12 text-fg">
+    <>
       <h1 className="mb-2 text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">
         shamil
       </h1>
-      <p className="mb-8 text-[0.8125rem] text-muted [&_strong]:font-medium [&_strong]:text-fg">
+      <p className="mb-4 text-[0.8125rem] text-muted [&_strong]:font-medium [&_strong]:text-fg">
         software engineer · currently <strong>@ acme corp</strong>
       </p>
+      <SiteNav className="mb-8" />
 
       <section className="mb-10">
         <p className="mb-4 text-base font-semibold">hi !</p>
@@ -169,12 +171,6 @@ export default function HomePage() {
         ))}
       </section>
 
-      <footer className="mt-12 flex flex-wrap justify-between gap-4 border-t border-border pt-8 text-xs text-muted [&_a]:text-muted [&_a]:no-underline [&_a]:hover:text-fg">
-        <span>© 2026 shamil kotta</span>
-        <span>
-          <a href="#">github</a> · <a href="#">twitter</a> · <a href="#">email</a>
-        </span>
-      </footer>
-    </div>
+    </>
   );
 }

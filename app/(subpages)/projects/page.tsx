@@ -1,12 +1,10 @@
 import Link from "nlite/link";
 
-import { BackLink } from "@/components/back-link";
 import { projects } from "@/lib/content";
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-[640px] px-6 pb-16 pt-12 text-fg">
-      <BackLink />
+    <>
       <h1 className="mb-8 text-base font-semibold tracking-normal">projects</h1>
 
       {projects.map((project) => {
@@ -41,6 +39,6 @@ export default function ProjectsPage() {
           </Link>
         );
       })}
-    </div>
+    </>
   );
 }

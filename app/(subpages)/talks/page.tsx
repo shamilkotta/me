@@ -1,10 +1,8 @@
-import { BackLink } from "@/components/back-link";
 import { talks } from "@/lib/content";
 
 export default function TalksPage() {
   return (
-    <div className="mx-auto max-w-[640px] px-6 pb-16 pt-12 text-fg">
-      <BackLink />
+    <>
       <h1 className="mb-8 text-base font-semibold tracking-normal">talks</h1>
 
       <div>
@@ -21,6 +19,6 @@ export default function TalksPage() {
           </a>
         ))}
       </div>
-    </div>
+    </>
   );
 }

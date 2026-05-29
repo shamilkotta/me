@@ -3,6 +3,13 @@ import type { PropsWithChildren } from "react";
 import "@fontsource-variable/geist-mono/wght.css";
 import "./globals.css";
 
+import { SiteFooter } from "@/components/site-footer";
+
 export default function RootLayout({ children }: PropsWithChildren) {
-  return children;
+  return (
+    <div className="mx-auto max-w-[640px] px-6 pb-16 pt-12 text-fg">
+      {children}
+      <SiteFooter />
+    </div>
+  );
 }
