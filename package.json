@@ -7,7 +7,8 @@
     "build": "nlite build",
     "preview": "nlite preview",
     "format": "oxfmt",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",
@@ -16,6 +17,7 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.39.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
