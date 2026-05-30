@@ -25,7 +25,8 @@
     "oxfmt": "^0.35.0",
     "oxlint": "^1.50.0",
     "tailwindcss": "^4.3.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.95.0"
   },
   "packageManager": "pnpm@11.1.1"
 }
