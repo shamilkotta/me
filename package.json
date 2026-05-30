@@ -13,7 +13,7 @@
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",
     "lucide-react": "^1.17.0",
-    "nlite": "^0.1.2",
+    "nlite": "^0.2.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

@@ -5,6 +5,11 @@ import { cloudflare } from "nlite/adapters";
 
 export default defineConfig({
   plugins: [tailwindcss(), cloudflare()],
+  nlite: {
+    staleTimes: {
+      static: 600,
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(process.cwd()),
