@@ -9,7 +9,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  @theme {
+  :root {
     --color-bg: #0d0d0d;
     --color-fg: #e8e8e8;
     --color-muted: #888888;
@@ -27,6 +27,7 @@
   }
 
   html {
+    color-scheme: light dark;
     font-size: 16px;
   }
 
