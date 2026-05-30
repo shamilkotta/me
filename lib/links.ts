@@ -10,7 +10,7 @@ export const pageLinks: NavLink[] = [
   { href: "/projects", label: "projects" },
 ];
 
-export const contactEmail = "hello@shamilkotta.com";
+export const contactEmail = "hello@shamilkotta.me";
 
 export const socialLinks: NavLink[] = [
   { href: "https://github.com/shamilkotta", label: "github", external: true },

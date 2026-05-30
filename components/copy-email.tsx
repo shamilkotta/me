@@ -39,7 +39,7 @@ export function CopyEmail() {
             copied ? "pointer-events-none -translate-y-0.5 opacity-0" : "translate-y-0 opacity-100"
           }`}
         >
-         copy email
+          copy email
         </span>
         <span
           className={`transition-all duration-200 ease-out ${
