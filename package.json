@@ -12,10 +12,13 @@
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",
+    "@mdx-js/rollup": "^3.1.1",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^1.17.0",
-    "nlite": "^0.2.0",
+    "nlite": "^0.4.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.39.0",

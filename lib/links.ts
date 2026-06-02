@@ -4,10 +4,20 @@ export type NavLink = {
   external?: boolean;
 };
 
+export type SiteNavVariant = "home" | "section" | "writing-post";
+
 export const pageLinks: NavLink[] = [
   { href: "/writing", label: "writing" },
-  { href: "/talks", label: "talks" },
+  // { href: "/talks", label: "talks" },
   { href: "/projects", label: "projects" },
+];
+
+export const sectionNavLinks: NavLink[] = [{ href: "/", label: "home" }, ...pageLinks];
+
+export const writingPostNavLinks: NavLink[] = [
+  pageLinks[0],
+  { href: "/", label: "home" },
+  ...pageLinks.slice(1),
 ];
 
 export const contactEmail = "hello@shamilkotta.me";
@@ -17,3 +27,25 @@ export const socialLinks: NavLink[] = [
   { href: "https://x.com/shamilkotta", label: "twitter", external: true },
   { href: "https://linkedin.com/in/shamilkotta", label: "linkedin", external: true },
 ];
+
+export function navLinksForVariant(variant: SiteNavVariant): NavLink[] {
+  switch (variant) {
+    case "section":
+      return sectionNavLinks;
+    case "writing-post":
+      return writingPostNavLinks;
+    default:
+      return socialLinks;
+  }
+}
+
+export function navLinkWithArrow(variant: SiteNavVariant): string | null {
+  switch (variant) {
+    case "section":
+      return "home";
+    case "writing-post":
+      return "writing";
+    default:
+      return null;
+  }
+}

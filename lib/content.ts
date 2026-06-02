@@ -1,8 +1,4 @@
-export type Post = { date: string; title: string };
-
-export type YearGroup = { year: string; posts: Post[] };
-
-export type Talk = { date: string; title: string };
+import { getCollection } from "nlite/mdx";
 
 export type Project = {
   href: string;
@@ -12,103 +8,119 @@ export type Project = {
   external?: boolean;
 };
 
-export const writingByYear: YearGroup[] = [
+export const PROJECTS: Project[] = [
   {
-    year: "2026",
-    posts: [
-      { date: "03-14", title: "why logging still sucks in 2026" },
-      { date: "02-10", title: "how i use claude code for side projects" },
-      { date: "01-22", title: "notes on building a cli people actually use" },
-    ],
+    href: "https://npmx.dev/package/nlite",
+    name: "nlite",
+    desc: "a attempt to create a lite react 19 framework",
+    meta: "",
+    external: true,
   },
   {
-    year: "2025",
-    posts: [
-      { date: "12-21", title: "logging sucks (a follow-up)" },
-      { date: "11-04", title: "what even are distributed traces?" },
-      { date: "09-07", title: "observability wide events 101" },
-      {
-        date: "06-22",
-        title: "context engineering is what makes ai useful",
-      },
-      {
-        date: "03-05",
-        title: "optimizing hot paths with low-level memory tricks",
-      },
-    ],
+    href: "https://dotlet.app",
+    name: "dotlet",
+    desc: "make your environment portable",
+    meta: "",
+    external: true,
   },
   {
-    year: "2024",
-    posts: [
-      { date: "12-31", title: "2024 year in review" },
-      {
-        date: "08-19",
-        title: "became an open source maintainer — here's what i learned",
-      },
-      { date: "04-06", title: "graduated with a cs degree" },
-    ],
+    href: "https://github.com/shamilkotta/git-sync",
+    name: "git-sync",
+    desc: "obsidian plugin for syncing the vault with git",
+    meta: "",
+    external: true,
+  },
+  {
+    href: "https://rlist.app",
+    name: "rlist",
+    desc: "your digital library, simplified",
+    meta: "",
+    external: true,
+  },
+  {
+    href: "https://npmx.dev/package/zshi",
+    name: "zshi",
+    desc: "light intelligence in your zsh",
+    meta: "",
+    external: true,
+  },
+  {
+    href: "https://npmx.dev/package/@shamilkotta/rn-drag-resize",
+    name: "rn-drag-resize",
+    desc: "draggable, resizable component for react native",
+    meta: "",
+    external: true,
+  },
+  {
+    href: "https://github.com/shamilkotta/quick-switch",
+    name: "quick-switch",
+    desc: "quick tab search extension for Chrome",
+    meta: "",
+    external: true,
+  },
+  {
+    href: "https://npmx.dev/package/@shamilkotta/ghcp",
+    name: "ghcp",
+    desc: "download a file or subdirectory from a private/public github link.",
+    meta: "",
+    external: true,
   },
 ];
 
-export const talks: Talk[] = [
-  { date: "nov 26, 2025", title: "observing serverless applications" },
-  { date: "jun 18, 2025", title: "lessons from self-hosting clickhouse" },
-  { date: "mar 1, 2025", title: "building devtools people actually want" },
+export const WORK = [
+  { role: "software engineer — 75way technologies", period: "jan 24 — feb 26" },
   {
-    date: "nov 21, 2024",
-    title: "exploring javascript runtimes on aws lambda",
+    role: "intern — 75way technologies",
+    period: "jun 23 — jan 24",
   },
-  { date: "may 16, 2024", title: "serverless transactional outbox pattern" },
+  { role: "freelance software engineer — self", period: "nov 22 - jun 23" },
 ];
 
-export const projects: Project[] = [
-  {
-    href: "https://github.com/example/trace-view",
-    name: "trace-view",
-    desc: "lightweight distributed tracing ui",
-    meta: "★ 340",
-    external: true,
-  },
-  {
-    href: "https://github.com/example/devtools-cli",
-    name: "devtools-cli",
-    desc: "scaffolding for side projects",
-    meta: "★ 1.2k",
-    external: true,
-  },
-  {
-    href: "https://github.com/example/config-sync",
-    name: "config-sync",
-    desc: "dotfile sync across machines",
-    meta: "sunsetted",
-    external: true,
-  },
-  {
-    href: "https://github.com/example/queue-kit",
-    name: "queue-kit",
-    desc: "minimal job queue for node.js",
-    meta: "★ 89",
-    external: true,
-  },
-  {
-    href: "/",
-    name: "this site",
-    desc: "built with nlite and a little bit of magic",
-    meta: "—",
-  },
-];
+export type WritingPost = {
+  title: string;
+  slug: string;
+  date: Date;
+  description: string;
+};
 
-export function writingPreview(yearCount = 2, postsPerYear = 3): YearGroup[] {
-  return writingByYear.slice(0, yearCount).map((group) => ({
-    year: group.year,
-    posts: group.posts.slice(0, postsPerYear),
-  }));
+export function formatWritingDate(date: Date) {
+  return date
+    .toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    .toLowerCase();
 }
 
-export function talksPreview(count = 3): Talk[] {
-  return talks.slice(0, count);
-}
+export async function writingList(count?: number) {
+  const writings = await getCollection<WritingPost>("writing");
 
-export function projectsPreview(count = 3): Project[] {
-  return projects.slice(0, count);
+  return writings
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, count ?? writings.length)
+    .map((writing) => ({
+      title: writing.data.title,
+      slug: writing.slug,
+      date: formatWritingDate(new Date(writing.data.date)),
+      description: writing.data.description ?? "",
+    }));
+
+  // const grouped = writings
+  //   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  //   .slice(0, count ?? writings.length)
+  //   .reduce((acc: Record<string, WritingPost[]>, writing) => {
+  //     const year = writing.data.date.getFullYear().toString();
+  //     if (!acc[year]) acc[year] = [];
+  //     acc[year].push(writing.data);
+  //     return acc;
+  //   }, {});
+
+  // const groupedArray = Object.entries(grouped).map(([year, posts]) => ({
+  //   year,
+  //   posts: posts.map((post) => ({
+  //     title: post.title,
+  //     slug: post.slug,
+  //     date: formatWritingDate(new Date(post.date)),
+  //     description: post.description ?? "",
+  //   })),
+  // }));
+
+  // return groupedArray;
 }

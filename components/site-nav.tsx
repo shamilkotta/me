@@ -2,19 +2,16 @@ import Link from "nlite/link";
 import { ArrowLeft } from "lucide-react";
 
 import { CopyEmail } from "@/components/copy-email";
-import { pageLinks, socialLinks } from "@/lib/links";
+import { navLinkWithArrow, navLinksForVariant, type SiteNavVariant } from "@/lib/links";
 
 type SiteNavProps = {
   className?: string;
-  showHome?: boolean;
+  variant?: SiteNavVariant;
 };
 
-export function SiteNav({ className = "", showHome = false }: SiteNavProps) {
-  const items: Array<{ href: string; label: string; external?: boolean }> = [
-    ...(showHome ? [{ href: "/", label: "home" }] : []),
-    ...(showHome ? pageLinks : []),
-    ...(!showHome ? socialLinks : []),
-  ];
+export function SiteNav({ className = "", variant = "home" }: SiteNavProps) {
+  const items = navLinksForVariant(variant);
+  const arrowLabel = navLinkWithArrow(variant);
 
   return (
     <nav
@@ -28,19 +25,20 @@ export function SiteNav({ className = "", showHome = false }: SiteNavProps) {
             <a
               className={"text-muted no-underline transition-colors hover:text-fg"}
               href={item.href}
+              target="_blank"
             >
               {item.label}
             </a>
           ) : (
             <Link
               className={
-                item.label === "home"
+                item.label === arrowLabel
                   ? "inline-flex items-center gap-1 text-muted no-underline transition-colors hover:text-fg"
                   : "text-muted no-underline transition-colors hover:text-fg"
               }
               href={item.href}
             >
-              {item.label === "home" ? (
+              {item.label === arrowLabel ? (
                 <ArrowLeft aria-hidden className="size-[1em] shrink-0" />
               ) : null}
               {item.label}
@@ -48,7 +46,7 @@ export function SiteNav({ className = "", showHome = false }: SiteNavProps) {
           )}
         </div>
       ))}
-      {!showHome ? (
+      {variant === "home" ? (
         <span className="inline-flex items-baseline">
           <span className="mr-[0.35rem] text-muted">·</span>
           <CopyEmail />

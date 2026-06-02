@@ -2,25 +2,25 @@
 
 @theme {
   --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
-  --color-bg: #fafafa;
-  --color-fg: #111111;
+  --color-bg: #ffffff;
+  --color-fg: #000000;
   --color-muted: #666666;
   --color-border: #e0e0e0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0d0d0d;
-    --color-fg: #e8e8e8;
+    --color-bg: #000000;
+    --color-fg: #ffffff;
     --color-muted: #888888;
     --color-border: #222222;
   }
 }
 
 @layer base {
-  *,
-  *::before,
-  *::after {
+  :where(:not(.writing-content, .writing-content *)),
+  :where(:not(.writing-content, .writing-content *))::before,
+  :where(:not(.writing-content, .writing-content *))::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -38,4 +38,31 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+}
+
+/* MDX article: user-agent typography, not site globals */
+
+.writing-content
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    li,
+    blockquote,
+    pre,
+    hr,
+    table,
+    thead,
+    tbody,
+    tr,
+    th,
+    td
+  ) {
+  all: revert;
 }
