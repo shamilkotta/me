@@ -91,6 +91,16 @@ export default async function HomePage() {
                   <span className="text-fg group-hover:text-muted">{project.name}</span>
                   <span className="text-muted"> — </span>
                   <span className="text-muted group-hover:text-muted">{project.desc}</span>
+                  {project.name == "nlite" && (
+                    <a
+                      href="https://github.com/shamilkotta/me"
+                      target="_blank"
+                      className="text-muted/70 font-bold italic hover:text-fg"
+                    >
+                      {" "}
+                      (powers this site)
+                    </a>
+                  )}
                 </span>
                 <span className="shrink-0 whitespace-nowrap text-xs text-muted group-hover:text-muted">
                   {project.meta}
