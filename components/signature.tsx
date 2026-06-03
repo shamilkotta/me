@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { SIGN_PATHS, SIGN_VIEW_BOX } from "@/lib/sign-paths";
 
-const STROKE_MS = 22;
-const PAUSE_MS = 1800;
+const STROKE_MS = 16;
+const INTRO_DELAY_MS = 600;
 
 function sleep(ms: number, signal: AbortSignal) {
   return new Promise<void>((resolve, reject) => {
@@ -99,19 +99,18 @@ export function Signature({ className = "" }: SignatureProps) {
 
     void (async () => {
       try {
-        while (!signal.aborted) {
-          hideAll(paths);
-          await nextFrame();
+        await sleep(INTRO_DELAY_MS, signal);
+        if (signal.aborted) return;
 
-          for (const path of paths) {
-            if (signal.aborted) return;
-            await drawPath(path, STROKE_MS, signal);
-          }
+        hideAll(paths);
+        await nextFrame();
 
-          await sleep(PAUSE_MS, signal);
+        for (const path of paths) {
+          if (signal.aborted) return;
+          await drawPath(path, STROKE_MS, signal);
         }
       } catch {
-        // Aborted during unmount.
+        // Aborted during unmount or delay.
       }
     })();
 
