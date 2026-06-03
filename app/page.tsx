@@ -1,6 +1,6 @@
 import Link from "nlite/link";
 
-import { Signature } from "@/components/signature";
+// import { Signature } from "@/components/signature";
 import { SiteNav } from "@/components/site-nav";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
 

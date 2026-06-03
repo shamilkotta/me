@@ -43,26 +43,6 @@
 /* MDX article: user-agent typography, not site globals */
 
 .writing-content
-  :is(
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    ul,
-    ol,
-    li,
-    blockquote,
-    pre,
-    hr,
-    table,
-    thead,
-    tbody,
-    tr,
-    th,
-    td
-  ) {
+  :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, blockquote, pre, hr, table, thead, tbody, tr, th, td) {
   all: revert;
 }
