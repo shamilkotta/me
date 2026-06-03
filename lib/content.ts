@@ -77,10 +77,10 @@ export const WORK = [
 ];
 
 export const TIMELINE = [
-  "rooted in web fundamentals and principles",
+  "rooted in web fundamentals, guided by ai",
   "building tools I wish existed",
   "typeScript enthusiast, Effect pilled",
-  "developer experience matters",
+  "developer and ai experience matters",
   "junior for life, always learning, always experimenting",
   "exploring frameworks, runtimes, and everything in between",
 ];

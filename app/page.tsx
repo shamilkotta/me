@@ -17,14 +17,14 @@ export default async function HomePage() {
       <SiteNav className="mb-8" />
 
       <section className="mb-10">
-        <p className="mb-4 text-base font-semibold">hi !</p>
+        <p className="mb-4 text-base font-semibold">hi!</p>
         <p className="mb-3 text-sm">
-          i build software — mostly developer tools and backend systems. the unglamorous parts that
-          make everything else fast.
+          I build, break, and refine. love to build for developers, care about developer and ai
+          experience. driven by curiosity.
         </p>
         <p className="mb-3 text-sm">
-          i used to lead infra at a series b startup. before that, an internship at big tech got me
-          hooked on distributed systems.
+          worked across the stack, building everything from user facing applications to systems that
+          power automation workflows, e - commerce and much more. now exploring what's next.
         </p>
         <p className="text-[0.8125rem] text-muted [&_a]:text-inherit [&_a]:underline [&_a]:underline-offset-2">
           i hang out on{" "}
