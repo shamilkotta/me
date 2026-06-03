@@ -1,25 +1,7 @@
 import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
-import { WORK, writingList, PROJECTS } from "@/lib/content";
-
-const timeline = [
-  <>
-    shipped first production app at <em>16</em>
-  </>,
-  <>
-    built an open-source cli with <em>10k+ downloads</em> at <em>19</em>
-  </>,
-  <>
-    led backend for <em>50k concurrent users</em> at <em>22</em>
-  </>,
-  <>
-    contributed to <em>3 major oss projects</em> in devtools
-  </>,
-  <>
-    deep-diving into <em>systems programming</em> and <em>ai infra</em>
-  </>,
-];
+import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
 
 export default async function HomePage() {
   const writings = await writingList(5);
@@ -54,7 +36,7 @@ export default async function HomePage() {
       </section>
 
       <ul className="mb-10 list-none  border-border pb-10">
-        {timeline.map((item, index) => (
+        {TIMELINE.map((item, index) => (
           <li
             className="relative mb-[0.65rem] pl-4 text-[0.8125rem] before:absolute before:left-0 before:text-muted before:content-['•'] [&_em]:font-semibold [&_em]:not-italic"
             key={index}

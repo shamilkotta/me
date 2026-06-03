@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
   {
     href: "https://npmx.dev/package/@shamilkotta/ghcp",
     name: "ghcp",
-    desc: "download a file or subdirectory from a private/public github link.",
+    desc: "download file or subdirectory from a private/public github link.",
     meta: "",
     external: true,
   },
@@ -74,6 +74,15 @@ export const WORK = [
     period: "jun, 23 — jan, 24",
   },
   { role: "freelance software engineer — self", period: "nov, 22 - jun, 23" },
+];
+
+export const TIMELINE = [
+  "rooted in web fundamentals and principles",
+  "building tools I wish existed",
+  "typeScript enthusiast, Effect pilled",
+  "developer experience matters",
+  "junior for life, always learning, always experimenting",
+  "exploring frameworks, runtimes, and everything in between",
 ];
 
 export type WritingPost = {

@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <div className="mx-auto max-w-[720px] px-6 pb-16 pt-12 text-fg">
+    <div className="mx-auto max-w-[800px] px-6 pb-16 pt-12 text-fg">
       {children}
       <SiteFooter />
     </div>
