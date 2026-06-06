@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { SIGN_PATHS, SIGN_VIEW_BOX } from "@/lib/sign-paths";
+import { usePathname } from "nlite/navigation";
 
 const STROKE_MS = 16;
 const INTRO_DELAY_MS = 600;
@@ -71,7 +72,7 @@ type SignatureProps = {
   className?: string;
 };
 
-export function Signature({ className = "" }: SignatureProps) {
+export function SignatureImpl({ className = "" }: SignatureProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [ready, setReady] = useState(false);
 
@@ -84,37 +85,56 @@ export function Signature({ className = "" }: SignatureProps) {
     const controller = new AbortController();
     const { signal } = controller;
 
-    if (reducedMotion) {
-      for (const path of paths) {
-        cancelPathAnimations(path);
-        path.style.strokeDasharray = "none";
-        path.style.strokeDashoffset = "0";
-      }
-      setReady(true);
-      return () => controller.abort();
-    }
-
     hideAll(paths);
-    setReady(true);
 
-    void (async () => {
-      try {
-        await sleep(INTRO_DELAY_MS, signal);
-        if (signal.aborted) return;
-
-        hideAll(paths);
-        await nextFrame();
-
+    const startAnimation = () => {
+      if (reducedMotion) {
         for (const path of paths) {
-          if (signal.aborted) return;
-          await drawPath(path, STROKE_MS, signal);
+          cancelPathAnimations(path);
+          path.style.strokeDasharray = "none";
+          path.style.strokeDashoffset = "0";
         }
-      } catch {
-        // Aborted during unmount or delay.
+        setReady(true);
+        return;
       }
-    })();
 
-    return () => controller.abort();
+      hideAll(paths);
+      setReady(true);
+
+      void (async () => {
+        try {
+          await sleep(INTRO_DELAY_MS, signal);
+          if (signal.aborted) return;
+
+          hideAll(paths);
+          await nextFrame();
+
+          for (const path of paths) {
+            if (signal.aborted) return;
+            await drawPath(path, STROKE_MS, signal);
+          }
+        } catch {
+          // Aborted during unmount or delay.
+        }
+      })();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+          observer.disconnect();
+          startAnimation();
+        }
+      },
+      { threshold: 1 },
+    );
+
+    observer.observe(svg);
+
+    return () => {
+      controller.abort();
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -137,4 +157,14 @@ export function Signature({ className = "" }: SignatureProps) {
       ))}
     </svg>
   );
+}
+
+export function Signature({ className = "" }: SignatureProps) {
+  const pathname = usePathname();
+
+  if (pathname !== "/") {
+    return null;
+  }
+
+  return <SignatureImpl className={className} />;
 }

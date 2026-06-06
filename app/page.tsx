@@ -1,6 +1,5 @@
 import Link from "nlite/link";
 
-// import { Signature } from "@/components/signature";
 import { SiteNav } from "@/components/site-nav";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
 
@@ -9,13 +8,12 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className="mb-4 mt-2 w-fit relative flex gap-3">
+      <div className="mb-4 mt-2 w-fit relative ">
         <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">shamil</h1>
-        {/* <Signature className="block h-14 w-auto text-muted" /> */}
+        <p className="mb-4 text-[0.8125rem] -mt-1 text-muted [&_strong]:font-medium [&_strong]:text-fg">
+          software engineer · currently <strong>looking for opportunities</strong>
+        </p>
       </div>
-      <p className="mb-4 text-[0.8125rem] text-muted [&_strong]:font-medium [&_strong]:text-fg">
-        software engineer · currently <strong>looking for opportunities</strong>
-      </p>
       <SiteNav className="mb-8" />
 
       <section className="mb-10">
