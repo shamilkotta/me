@@ -18,6 +18,22 @@ function formatDate(date: Date) {
   });
 }
 
+export async function generateMetadata({ params }: WritingPostPageProps) {
+  const { slug } = await params;
+  const post = await getEntry<WritingPost>("writing", slug);
+
+  if (!post || !post.data) {
+    return {
+      title: "Post not found",
+    };
+  }
+
+  return {
+    title: post.data.title,
+    description: post.data.description,
+  };
+}
+
 export default async function WritingPostPage({ params }: WritingPostPageProps) {
   const { slug } = await params;
   const post = await getEntry<WritingPost>("writing", slug);
