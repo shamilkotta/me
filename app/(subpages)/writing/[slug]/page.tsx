@@ -1,6 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { WritingPost } from "@/lib/content";
 import { getEntry, getCollection } from "nlite/mdx";
+import { notFound } from "nlite/navigation";
 
 type WritingPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -39,11 +40,7 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
   const post = await getEntry<WritingPost>("writing", slug);
 
   if (!post || !post.data) {
-    return (
-      <>
-        <p className="mb-4 text-sm text-muted">post not found.</p>
-      </>
-    );
+    return notFound();
   }
 
   return (

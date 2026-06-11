@@ -68,12 +68,17 @@ export const PROJECTS: Project[] = [
 ];
 
 export const WORK = [
-  { role: "software engineer — 75way technologies", period: "jan, 24 — feb, 26" },
   {
-    role: "intern — 75way technologies",
+    role: "software engineer",
+    company: "75way technologies",
+    period: "jan, 24 — feb, 26",
+  },
+  {
+    role: "intern",
+    company: "75way technologies",
     period: "jun, 23 — jan, 24",
   },
-  { role: "freelance software engineer — self", period: "nov, 22 - jun, 23" },
+  { role: "freelance software engineer", company: "self", period: "nov, 22 - jun, 23" },
 ];
 
 export const TIMELINE = [

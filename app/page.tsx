@@ -60,6 +60,8 @@ export default async function HomePage() {
             >
               <span className="min-w-0">
                 <span className="text-fg">{job.role}</span>
+                <span className="text-muted"> — </span>
+                <span className="text-muted">{job.company}</span>
               </span>
               <span className="shrink-0 whitespace-nowrap text-xs text-muted">{job.period}</span>
             </li>
