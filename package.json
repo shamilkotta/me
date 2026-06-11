@@ -13,15 +13,19 @@
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",
     "@mdx-js/rollup": "^3.1.1",
+    "@shikijs/rehype": "^4.2.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.17.0",
-    "nlite": "^0.7.0",
+    "nlite": "^0.7.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.2.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.39.0",
+    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

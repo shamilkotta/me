@@ -57,7 +57,7 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
         </div>
       </header>
 
-      <article className="writing-content">
+      <article className="writing-content prose max-w-none font-mono text-fg prose-headings:font-bold prose-headings:tracking-tight prose-a:font-normal prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent">
         <post.Content />
       </article>
     </>

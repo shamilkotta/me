@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
@@ -28,7 +29,7 @@
 
   html {
     color-scheme: light dark;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   body {
@@ -40,9 +41,79 @@
   }
 }
 
-/* MDX article: user-agent typography, not site globals */
+/* Writing posts: typography + shiki */
 
-.writing-content
-  :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, blockquote, pre, hr, table, thead, tbody, tr, th, td) {
-  all: revert;
+.writing-content {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: var(--color-fg);
+  --tw-prose-bold: var(--color-fg);
+  --tw-prose-links: var(--color-fg);
+  --tw-prose-code: var(--color-fg);
+  --tw-prose-pre-code: var(--color-fg);
+  --tw-prose-quotes: var(--color-muted);
+  --tw-prose-quote-borders: var(--color-border);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+}
+
+.writing-content :where(a):not(:where(pre *)) {
+  text-underline-offset: 2px;
+}
+
+.writing-content :where(blockquote) {
+  font-style: normal;
+}
+
+.writing-content :where(:not(pre) > code) {
+  font-size: 0.875rem;
+  color: var(--color-fg);
+  padding: 0.125rem 0.375rem;
+  border: 1px solid color-mix(in srgb, var(--color-fg) 12%, var(--color-bg));
+  border-radius: 0.25rem;
+  background-color: color-mix(in srgb, var(--color-fg) 8%, var(--color-bg));
+}
+
+.writing-content :where(:not(pre) > code)::before,
+.writing-content :where(:not(pre) > code)::after {
+  content: none;
+}
+
+.writing-content :where(pre) {
+  margin-block: 1.25rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  background-color: color-mix(in srgb, var(--color-fg) 3%, var(--color-bg));
+}
+
+.writing-content :where(pre) > code {
+  display: block;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  background: transparent;
+}
+
+.writing-content .shiki {
+  background-color: var(--shiki-light-bg) !important;
+}
+
+.writing-content .shiki span {
+  color: var(--shiki-light) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .writing-content .shiki {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .writing-content .shiki span {
+    color: var(--shiki-dark) !important;
+  }
+}
+
+.writing-content .shiki .line:empty::after {
+  content: " ";
 }
