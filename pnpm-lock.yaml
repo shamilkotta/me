@@ -24,8 +24,8 @@ importers:
         specifier: ^1.17.0
         version: 1.17.0(react@19.2.7)
       nlite:
-        specifier: ^0.7.1
-        version: 0.7.1(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(@mdx-js/rollup@3.1.1(rollup@4.61.0))(esbuild@0.27.3)(gray-matter@4.0.3)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^0.7.2
+        version: 0.7.2(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(@mdx-js/rollup@3.1.1(rollup@4.61.0))(esbuild@0.27.3)(gray-matter@4.0.3)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react:
         specifier: ^19.2.5
         version: 19.2.7
@@ -1678,8 +1678,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nlite@0.7.1:
-    resolution: {integrity: sha512-V9/BfqqZ1Ue2n8VzCte8ljNOjN/HlHbRKDSIOetb/MTfg+2YB98opwG4LuPXRs/wf6K0HJ0YxMeAk0uSEKRPCg==}
+  nlite@0.7.2:
+    resolution: {integrity: sha512-AqIBxWxOf6l4eqlAacYbMxoNYBCSKPljVN8DW4fA6CtJLZIGwkPITKjnB+5O1kxy9juJ5tLAh4TqG76LkKzeqA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -3552,7 +3552,7 @@ snapshots:
 
   nanoid@3.3.12: {}
 
-  nlite@0.7.1(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(@mdx-js/rollup@3.1.1(rollup@4.61.0))(esbuild@0.27.3)(gray-matter@4.0.3)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  nlite@0.7.2(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(@mdx-js/rollup@3.1.1(rollup@4.61.0))(esbuild@0.27.3)(gray-matter@4.0.3)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       '@vitejs/plugin-react': 6.0.2(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))
       '@vitejs/plugin-rsc': 0.5.27(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))

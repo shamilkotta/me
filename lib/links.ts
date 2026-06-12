@@ -10,6 +10,7 @@ export const pageLinks: NavLink[] = [
   { href: "/writing", label: "writing" },
   // { href: "/talks", label: "talks" },
   { href: "/projects", label: "projects" },
+  { href: "/marks", label: "marks" },
 ];
 
 export const sectionNavLinks: NavLink[] = [{ href: "/", label: "home" }, ...pageLinks];
@@ -26,6 +27,7 @@ export const socialLinks: NavLink[] = [
   { href: "https://github.com/shamilkotta", label: "github", external: true },
   { href: "https://x.com/shamilkotta", label: "twitter", external: true },
   { href: "https://linkedin.com/in/shamilkotta", label: "linkedin", external: true },
+  { href: "/marks", label: "marks" },
 ];
 
 export function navLinksForVariant(variant: SiteNavVariant): NavLink[] {

@@ -8,7 +8,8 @@
     "preview": "nlite preview",
     "format": "oxfmt",
     "lint": "oxlint",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",
@@ -16,7 +17,7 @@
     "@shikijs/rehype": "^4.2.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.17.0",
-    "nlite": "^0.7.1",
+    "nlite": "^0.7.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "remark-gfm": "^4.0.1",
