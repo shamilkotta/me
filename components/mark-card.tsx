@@ -5,7 +5,26 @@ import { MarkLocation } from "@/components/mark-location";
 import { markImageSources } from "@/lib/mark-images";
 import { formatMarkDateShort, markCover, type Mark } from "@/lib/marks";
 
-const IMAGE_ASPECTS = ["aspect-[4/5]", "aspect-[3/4]", "aspect-square"] as const;
+const IMAGE_ASPECTS = [
+  "aspect-[2/3]",
+  "aspect-[3/4]",
+  "aspect-[4/5]",
+  "aspect-[5/6]",
+  "aspect-square",
+  "aspect-[5/4]",
+  "aspect-[4/3]",
+  "aspect-[3/2]",
+] as const;
+
+function variantIndex(seed: string, count: number) {
+  let hash = 0;
+  for (const char of seed) {
+    hash = (hash * 31 + char.charCodeAt(0)) | 0;
+  }
+  return Math.abs(hash) % count;
+}
+
+const seed = (mark: Mark) => mark.slug + mark.date + mark.caption + mark.location + mark.body;
 
 type MarkCardProps = {
   mark: Mark;
@@ -34,7 +53,7 @@ function CardButton({
 }
 
 export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
-  const aspect = IMAGE_ASPECTS[index % IMAGE_ASPECTS.length];
+  const aspect = IMAGE_ASPECTS[variantIndex(seed(mark), IMAGE_ASPECTS.length)];
   const cover = markCover(mark);
   if (!cover) return null;
 
@@ -72,8 +91,8 @@ export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
 
 const TEXT_HEIGHTS = ["min-h-28", "min-h-36", "min-h-32"] as const;
 
-export function MarkTextCard({ mark, index, onSelect }: MarkCardProps) {
-  const height = TEXT_HEIGHTS[index % TEXT_HEIGHTS.length];
+export function MarkTextCard({ mark, onSelect }: MarkCardProps) {
+  const height = TEXT_HEIGHTS[variantIndex(seed(mark), TEXT_HEIGHTS.length)];
 
   return (
     <CardButton
