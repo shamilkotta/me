@@ -2,33 +2,69 @@
   {
     "slug": "leaving-chandigarh",
     "date": "2026-06-11",
-    "caption": "leaving for good",
-    "body": "2 years of punjabi, food, and culture. time to move on.",
+    "caption": "goodbye, chandigarh",
+    "body": "two years of punjabi, parathas, and winters i wasn't ready for. leaving doesn't feel like an ending.",
     "location": "chandigarh",
     "images": ["20250726_150834.jpg", "20250816_172032.jpg"]
   },
   {
     "slug": "left-75way",
     "date": "2026-02-10",
-    "caption": "wrapped up at 75way",
-    "body": "two years of building across the stack. grateful for everyone, friends, and the team.",
+    "caption": "signed off",
+    "body": "two years of building across the stack. grateful for the team, the late nights, and everyone who made it worth showing up.",
     "location": "chandigarh",
     "images": []
   },
   {
     "slug": "team-outing-75way",
     "date": "2024-12-21",
-    "caption": "team outing at 75way",
-    "body": "a day of team bonding and fun. a small get together with the team to celebrate the end of the year.",
+    "caption": "year-end in the hills",
+    "body": "end of the year, end of a long stretch of building. himachal gave us cold mornings and easy laughter — the kind of trip that sticks because of who you went with.",
     "location": "himachal pradesh",
-    "images": ["20241221_182109.jpg", "20241221_120511.jpg", "20241221_112705.jpg"]
+    "images": [
+      "20241221_182109.jpg",
+      "20241221_120511.jpg",
+      "20241221_112705.jpg"
+    ]
   },
   {
     "slug": "fresh-air",
     "date": "2024-05-11",
     "caption": "fresh air",
-    "body": "few times outside of the office. a small break from the routine.",
+    "body": "hadn't really left the office rhythm in a while. uttarakhand was the exhale i didn't know i needed.",
     "location": "uttarakhand",
     "images": ["20240511_204359.jpg", "20240511_204224.jpg"]
+  },
+  {
+    "slug": "friends-wayanad",
+    "date": "2024-04-14",
+    "caption": "friends for life",
+    "body": "mist on the hills, coffee that tasted better because of who was across the table. the kind of friendships where you just pick up and keep going.",
+    "location": "wayanad",
+    "images": ["20240414_131312.jpg", "20240414_132615.jpg"]
+  },
+  {
+    "slug": "hello-punjab",
+    "date": "2024-01-22",
+    "caption": "hello punjab",
+    "body": "new year, new state, new everything. didn't know a word of punjabi yet — but the food, the people, the pace of it all made the move feel right.",
+    "location": "punjab",
+    "images": ["20240121_083238.jpg", "20240125_143202.jpg"]
+  },
+  {
+    "slug": "capital-city",
+    "date": "2024-01-28",
+    "caption": "capital city",
+    "body": "a few stolen hours between everything else. walked until my feet hurt — not enough time, but enough to know i'll be back.",
+    "location": "delhi",
+    "images": ["20240128_095527.jpg", "20240128_114419.jpg"]
+  },
+  {
+    "slug": "manali-hills",
+    "date": "2024-02-18",
+    "caption": "top of the country",
+    "body": "snow on the edges, mountains that made everything below feel far away. the kind of quiet you only get above a certain altitude.",
+    "location": "manali",
+    "images": ["20240218_170214.jpg"]
   }
 ]
