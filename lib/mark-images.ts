@@ -68,6 +68,17 @@ export function markImageUrl(
   return src.toString();
 }
 
+export function markImageBlurDataURL(
+  imageKey: string,
+  { grayscale = true, nocache = false }: { grayscale?: boolean; nocache?: boolean } = {},
+) {
+  const src = new URL(`${MEDIA_PATH}/${imageKey}`, markImageOrigin());
+  src.search = encodeOptions("placeholder", { grayscale });
+  src.searchParams.set("blurDataURL", "1");
+  if (nocache) src.searchParams.set("nocache", "1");
+  return src.toString();
+}
+
 export function markImageSrcSet(
   imageKey: string,
   preset: Exclude<MarkImagePreset, "placeholder">,
