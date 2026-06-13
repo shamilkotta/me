@@ -1,6 +1,6 @@
 export type MarkImagePreset = "thumb" | "detail" | "placeholder";
 
-const MEDIA_PATH = "/api/marks";
+const MEDIA_PATH = "/marks";
 
 type PresetOptions = {
   width?: number;
