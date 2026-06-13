@@ -15,7 +15,7 @@ const PRESETS = {
     width: 400,
     height: 500,
     fit: "cover",
-    quality: 75,
+    quality: 85,
   },
   detail: {
     width: 1120,
@@ -23,11 +23,11 @@ const PRESETS = {
     quality: 85,
   },
   placeholder: {
-    width: 64,
-    height: 80,
+    width: 200,
+    height: 250,
     fit: "cover",
-    blur: 20,
-    quality: 55,
+    blur: 70,
+    quality: 75,
   },
 } as const satisfies Record<MarkImagePreset, PresetOptions>;
 

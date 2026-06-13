@@ -1,8 +1,8 @@
 import { MarksGrid } from "@/components/marks-grid";
-import { sortedMarksWithBlurDataURL } from "@/lib/marks";
+import { sortedMarksWithBlurDataURL } from "@/lib/marks-blur";
 
 export default async function MarksPage() {
-  const marks = await sortedMarksWithBlurDataURL();
+  const marks = await sortedMarksWithBlurDataURL({ cache: false });
 
   return (
     <>

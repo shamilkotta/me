@@ -2,6 +2,13 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "me",
   "compatibility_date": "2026-05-29",
+  "kv_namespaces": [
+    {
+      "binding": "MARKS_BLUR_CACHE",
+      "id": "bda1318b98c8446b96c0ba58f25c4186",
+      "remote": true
+    }
+  ],
   "r2_buckets": [
     {
       "binding": "MARKS_BUCKET",
