@@ -1,17 +1,45 @@
 "use server";
 
+import { execFile } from "node:child_process";
+import { createRequire } from "node:module";
+import { promisify } from "node:util";
 import { markImageUrl } from "@/lib/mark-images";
 import { sortedMarks } from "@/lib/marks";
-import { env } from "cloudflare:workers";
 
 const memoryCache = new Map<string, string>();
 const blurDataURLInflight = new Map<string, Promise<string | undefined>>();
+
+const execFileAsync = promisify(execFile);
+const require = createRequire(import.meta.url);
+const WRANGLER_BIN = require.resolve("wrangler/bin/wrangler.js");
+const BINDING = "MARKS_BLUR_CACHE";
+const EXEC_OPTIONS = { maxBuffer: 10 * 1024 * 1024 };
+
+async function kvGetViaWrangler(key: string) {
+  try {
+    const { stdout } = await execFileAsync(
+      process.execPath,
+      [WRANGLER_BIN, "kv", "key", "get", key, "--binding", BINDING, "--remote"],
+      EXEC_OPTIONS,
+    );
+    return stdout.trimEnd();
+  } catch {
+    return null;
+  }
+}
+async function kvPutViaWrangler(key: string, value: string) {
+  await execFileAsync(
+    process.execPath,
+    [WRANGLER_BIN, "kv", "key", "put", key, value, "--binding", BINDING, "--remote"],
+    EXEC_OPTIONS,
+  );
+}
 
 async function getBlurDataURLFromKv(key: string) {
   const cached = memoryCache.get(key);
   if (cached) return cached;
 
-  const fromKv = await env.MARKS_BLUR_CACHE.get(key);
+  const fromKv = await kvGetViaWrangler(key);
   if (fromKv) {
     memoryCache.set(key, fromKv);
     return fromKv;
@@ -23,7 +51,7 @@ async function getBlurDataURLFromKv(key: string) {
 async function putBlurDataURLInKv(key: string, value: string) {
   memoryCache.set(key, value);
   try {
-    await env.MARKS_BLUR_CACHE.put(key, value);
+    await kvPutViaWrangler(key, value);
   } catch {}
 }
 
