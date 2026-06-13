@@ -42,7 +42,7 @@ export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
 
   return (
     <CardButton
-      className={`group relative mb-3 break-inside-avoid overflow-hidden border border-border bg-border/20 ${aspect}`}
+      className={`group relative overflow-hidden border border-border bg-border/20 ${aspect}`}
       onSelect={onSelect}
     >
       <Image
@@ -77,7 +77,7 @@ export function MarkTextCard({ mark, index, onSelect }: MarkCardProps) {
 
   return (
     <CardButton
-      className={`mb-3 flex break-inside-avoid flex-col justify-end border border-border p-3 ${height}`}
+      className={`flex flex-col justify-end border border-border p-3 ${height}`}
       onSelect={onSelect}
     >
       <p className="text-[0.6875rem] tabular-nums text-muted">{formatMarkDateShort(mark.date)}</p>
