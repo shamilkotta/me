@@ -1,5 +1,17 @@
 [
   {
+    "slug": "attappadi-trip",
+    "date": "2026-05-29",
+    "caption": "friends and western ghats",
+    "body": "back in the ghats with the people who matter. attappadi was green and unhurried — long drives, open hills, and nowhere else i'd rather have been.",
+    "location": "attappadi",
+    "images": [
+      "IMG-20260611-WA0218.jpg",
+      "VID-20260531-WA0003.jpg",
+      "VID-20260611-WA0248(1).jpg"
+    ]
+  },
+  {
     "slug": "leaving-chandigarh",
     "date": "2026-02-11",
     "caption": "goodbye, chandigarh",
@@ -44,12 +56,12 @@
     "images": ["20240414_131312.jpg", "20240414_132615.jpg"]
   },
   {
-    "slug": "hello-punjab",
-    "date": "2024-01-22",
-    "caption": "hello punjab",
-    "body": "new year, new state, new everything. didn't know a word of punjabi yet — but the food, the people, the pace of it all made the move feel right.",
-    "location": "punjab",
-    "images": ["20240121_083238.jpg", "20240125_143202.jpg"]
+    "slug": "manali-hills",
+    "date": "2024-02-18",
+    "caption": "top of the country",
+    "body": "snow on the edges, mountains that made everything below feel far away. the kind of quiet you only get above a certain altitude.",
+    "location": "manali",
+    "images": ["20240218_170214.jpg"]
   },
   {
     "slug": "capital-city",
@@ -60,11 +72,11 @@
     "images": ["20240128_095527.jpg", "20240128_114419.jpg"]
   },
   {
-    "slug": "manali-hills",
-    "date": "2024-02-18",
-    "caption": "top of the country",
-    "body": "snow on the edges, mountains that made everything below feel far away. the kind of quiet you only get above a certain altitude.",
-    "location": "manali",
-    "images": ["20240218_170214.jpg"]
+    "slug": "hello-punjab",
+    "date": "2024-01-22",
+    "caption": "hello punjab",
+    "body": "new year, new state, new everything. didn't know a word of punjabi yet — but the food, the people, the pace of it all made the move feel right.",
+    "location": "punjab",
+    "images": ["20240121_083238.jpg", "20240125_143202.jpg"]
   }
 ]
