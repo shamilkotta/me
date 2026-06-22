@@ -1,5 +1,13 @@
 [
   {
+    "slug": "wayanad-trip",
+    "date": "2026-06-20",
+    "caption": "mist over wayanad",
+    "body": "tea estates, spice-scented hills, and the western ghats at their greenest. went with friends — long drives through mist, no real plan, and wayanad being exactly what you come back for.",
+    "location": "wayanad",
+    "images": ["IMG_0803.HEIC", "IMG_0662.JPG"]
+  },
+  {
     "slug": "attappadi-trip",
     "date": "2026-05-29",
     "caption": "friends and western ghats",
@@ -48,11 +56,11 @@
     "images": ["20240511_204359.jpg", "20240511_204224.jpg"]
   },
   {
-    "slug": "friends-wayanad",
+    "slug": "friends-munnar",
     "date": "2024-04-14",
     "caption": "friends for life",
     "body": "mist on the hills, coffee that tasted better because of who was across the table. the kind of friendships where you just pick up and keep going.",
-    "location": "wayanad",
+    "location": "munnar",
     "images": ["20240414_131312.jpg", "20240414_132615.jpg"]
   },
   {
