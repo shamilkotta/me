@@ -39,6 +39,11 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+
+  ::selection {
+    background-color: var(--color-fg);
+    color: var(--color-bg);
+  }
 }
 
 /* Writing posts: typography + shiki */
