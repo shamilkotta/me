@@ -3,6 +3,10 @@ import Link from "nlite/link";
 import { SiteNav } from "@/components/site-nav";
 import { writingList } from "@/lib/content";
 
+export const metadata = {
+  title: "Writing",
+};
+
 export default async function WritingPage() {
   const writings = await writingList();
 

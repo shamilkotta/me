@@ -1,6 +1,10 @@
 import { MarksGrid } from "@/components/marks-grid";
 import { sortedMarksWithBlurDataURL } from "@/lib/marks-blur";
 
+export const metadata = {
+  title: "Marks",
+};
+
 export default async function MarksPage() {
   const marks = await sortedMarksWithBlurDataURL({ cache: true });
 

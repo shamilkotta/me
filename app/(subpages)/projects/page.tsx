@@ -3,6 +3,10 @@ import Link from "nlite/link";
 import { PROJECTS } from "@/lib/content";
 import { SiteNav } from "@/components/site-nav";
 
+export const metadata = {
+  title: "Projects",
+};
+
 export default function ProjectsPage() {
   return (
     <>

@@ -4,6 +4,14 @@ import "@fontsource-variable/geist-mono/wght.css";
 import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
+import { Metadata } from "nlite";
+
+export const metadata: Metadata = {
+  title: {
+    default: "shamil",
+    template: "%s | shamil",
+  },
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
