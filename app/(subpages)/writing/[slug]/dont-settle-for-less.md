@@ -25,7 +25,7 @@ For a long time, I underestimated myself.
 
 Maybe that lack of confidence is what led me to a bootcamp. Maybe it also made me miss some of the opportunities that existed during the COVID hiring boom.
 
-In hindsight, I probably started my career seven months to a year later than I could have. At the time, it felt like everyone else was moving faster.
+In hindsight, I probably started my career year later than I could have. At the time, it felt like everyone else was moving faster.
 
 ### COVID
 
