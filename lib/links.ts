@@ -21,7 +21,7 @@ export const writingPostNavLinks: NavLink[] = [
   ...pageLinks.slice(1),
 ];
 
-export const contactEmail = "hello@shamilkotta.me";
+export const contactEmail = "hello@shamilkotta.com";
 
 export const socialLinks: NavLink[] = [
   { href: "https://github.com/shamilkotta", label: "github", external: true },
