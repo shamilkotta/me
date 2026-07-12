@@ -30,21 +30,25 @@ type MarkCardProps = {
   mark: Mark;
   index: number;
   onSelect: () => void;
+  cardRef?: (element: HTMLElement | null) => void;
 };
 
 function CardButton({
   children,
   className,
   onSelect,
+  cardRef,
 }: {
   children: ReactNode;
   className: string;
   onSelect: () => void;
+  cardRef?: (element: HTMLElement | null) => void;
 }) {
   return (
     <button
-      className={`${className} block w-full cursor-pointer bg-transparent p-0 text-left font-[inherit]`}
+      className={`${className} block w-full cursor-pointer rounded-none bg-transparent p-0 text-left font-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-bg`}
       onClick={onSelect}
+      ref={cardRef}
       type="button"
     >
       {children}
@@ -52,7 +56,7 @@ function CardButton({
   );
 }
 
-export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
+export function MarkImageCard({ mark, index, onSelect, cardRef }: MarkCardProps) {
   const aspect = IMAGE_ASPECTS[variantIndex(seed(mark), IMAGE_ASPECTS.length)];
   const cover = markCover(mark);
   if (!cover) return null;
@@ -61,7 +65,8 @@ export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
 
   return (
     <CardButton
-      className={`group relative overflow-hidden border border-border bg-border/20 ${aspect}`}
+      cardRef={cardRef}
+      className={`group relative overflow-hidden border border-border bg-border/20 transition-colors hover:border-fg/30 focus-visible:border-fg/30 ${aspect}`}
       onSelect={onSelect}
     >
       <Image
@@ -91,12 +96,13 @@ export function MarkImageCard({ mark, index, onSelect }: MarkCardProps) {
 
 const TEXT_HEIGHTS = ["min-h-28", "min-h-36", "min-h-32"] as const;
 
-export function MarkTextCard({ mark, onSelect }: MarkCardProps) {
+export function MarkTextCard({ mark, onSelect, cardRef }: MarkCardProps) {
   const height = TEXT_HEIGHTS[variantIndex(seed(mark), TEXT_HEIGHTS.length)];
 
   return (
     <CardButton
-      className={`flex flex-col justify-end border border-border p-3 ${height}`}
+      cardRef={cardRef}
+      className={`flex flex-col justify-end border border-border p-3 transition-colors hover:border-fg/30 focus-visible:border-fg/30 ${height}`}
       onSelect={onSelect}
     >
       <p className="text-[0.6875rem] tabular-nums text-muted">{formatMarkDateShort(mark.date)}</p>
@@ -109,10 +115,10 @@ export function MarkTextCard({ mark, onSelect }: MarkCardProps) {
   );
 }
 
-export function MarkCard({ mark, index, onSelect }: MarkCardProps) {
+export function MarkCard({ mark, index, onSelect, cardRef }: MarkCardProps) {
   if (markCover(mark)) {
-    return <MarkImageCard index={index} mark={mark} onSelect={onSelect} />;
+    return <MarkImageCard cardRef={cardRef} index={index} mark={mark} onSelect={onSelect} />;
   }
 
-  return <MarkTextCard index={index} mark={mark} onSelect={onSelect} />;
+  return <MarkTextCard cardRef={cardRef} index={index} mark={mark} onSelect={onSelect} />;
 }

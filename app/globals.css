@@ -44,6 +44,10 @@
     background-color: var(--color-fg);
     color: var(--color-bg);
   }
+
+  :focus-visible {
+    outline-color: var(--color-fg);
+  }
 }
 
 /* Writing posts: typography + shiki */

@@ -160,7 +160,7 @@ function CollectionCardShell({
   return (
     <article
       aria-label={cardLabel(item)}
-      className={`group block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${isLink ? "cursor-pointer" : ""}`}
+      className={`group block rounded-none outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${isLink ? "cursor-pointer" : ""}`}
       onClick={(event) => {
         if (!isLink) return;
         if ((event.target as HTMLElement).closest("button")) return;

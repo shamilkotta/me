@@ -1,19 +1,29 @@
 "use client";
 
 import { Masonry } from "masonic";
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FocusEvent,
+} from "react";
 
 import { CollectionCard } from "@/components/collections/collection-card";
 import { CollectionsSearch } from "@/components/collections/collections-search";
 import { isImageOnlyItem, matchesQuery, type CollectionItem } from "@/lib/collections";
+import {
+  findSpatialTargetFromKey,
+  findVisualOrderEdge,
+  findVisualOrderTarget,
+  isArrowNavigationKey,
+  type SpatialEntry,
+} from "@/lib/spatial-navigation";
 
 type CollectionsViewProps = {
   items: CollectionItem[];
-};
-
-type SpatialEntry = {
-  index: number;
-  rect: DOMRect;
 };
 
 const COLUMN_GUTTER = 12;
@@ -27,104 +37,12 @@ function useIsClient() {
   );
 }
 
-function overlaps(a: DOMRect, b: DOMRect, axis: "x" | "y") {
-  if (axis === "x") return a.left < b.right && a.right > b.left;
-  return a.top < b.bottom && a.bottom > b.top;
-}
-
-function center(rect: DOMRect) {
-  return {
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2,
-  };
-}
-
-function findSpatialTarget(
-  current: DOMRect,
-  entries: SpatialEntry[],
-  currentIndex: number,
-  direction: "left" | "right" | "up" | "down",
-) {
-  const currentCenter = center(current);
-  let bestIndex: number | null = null;
-  let bestScore = Infinity;
-
-  for (const entry of entries) {
-    if (entry.index === currentIndex) continue;
-
-    const targetCenter = center(entry.rect);
-    const dx = targetCenter.x - currentCenter.x;
-    const dy = targetCenter.y - currentCenter.y;
-
-    let valid = false;
-    let primary = 0;
-    let secondary = 0;
-
-    switch (direction) {
-      case "right":
-        valid =
-          dx > 0 && (overlaps(current, entry.rect, "y") || Math.abs(dy) < current.height * 0.75);
-        primary = dx;
-        secondary = Math.abs(dy);
-        break;
-      case "left":
-        valid =
-          dx < 0 && (overlaps(current, entry.rect, "y") || Math.abs(dy) < current.height * 0.75);
-        primary = -dx;
-        secondary = Math.abs(dy);
-        break;
-      case "down":
-        valid =
-          dy > 0 && (overlaps(current, entry.rect, "x") || Math.abs(dx) < current.width * 0.75);
-        primary = dy;
-        secondary = Math.abs(dx);
-        break;
-      case "up":
-        valid =
-          dy < 0 && (overlaps(current, entry.rect, "x") || Math.abs(dx) < current.width * 0.75);
-        primary = -dy;
-        secondary = Math.abs(dx);
-        break;
-    }
-
-    if (!valid) continue;
-
-    const score = primary + secondary * 0.5;
-    if (score < bestScore) {
-      bestScore = score;
-      bestIndex = entry.index;
-    }
-  }
-
-  return bestIndex;
-}
-
-function findSpatialTargetFromKey(
-  key: string,
-  current: DOMRect,
-  entries: SpatialEntry[],
-  currentIndex: number,
-) {
-  const direction =
-    key === "ArrowLeft"
-      ? "left"
-      : key === "ArrowRight"
-        ? "right"
-        : key === "ArrowUp"
-          ? "up"
-          : key === "ArrowDown"
-            ? "down"
-            : null;
-
-  if (!direction) return null;
-  return findSpatialTarget(current, entries, currentIndex, direction);
-}
-
 export function CollectionsView({ items }: CollectionsViewProps) {
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const lastTabDirectionRef = useRef<"forwards" | "backwards" | null>(null);
   const isClient = useIsClient();
 
   const filtered = useMemo(() => items.filter((item) => matchesQuery(item, query)), [items, query]);
@@ -148,6 +66,12 @@ export function CollectionsView({ items }: CollectionsViewProps) {
     );
   }, []);
 
+  const getSpatialEntries = useCallback(() => {
+    return cardRefs.current
+      .map((element, index) => (element ? { index, rect: element.getBoundingClientRect() } : null))
+      .filter((entry): entry is SpatialEntry => entry !== null);
+  }, []);
+
   const navigateCardsSpatial = useCallback(
     (key: string) => {
       const currentIndex = getFocusedCardIndex();
@@ -156,16 +80,10 @@ export function CollectionsView({ items }: CollectionsViewProps) {
       const currentElement = cardRefs.current[currentIndex];
       if (!currentElement) return false;
 
-      const entries = cardRefs.current
-        .map((element, index) =>
-          element ? { index, rect: element.getBoundingClientRect() } : null,
-        )
-        .filter((entry): entry is SpatialEntry => entry !== null);
-
       const nextIndex = findSpatialTargetFromKey(
         key,
         currentElement.getBoundingClientRect(),
-        entries,
+        getSpatialEntries(),
         currentIndex,
       );
 
@@ -174,7 +92,43 @@ export function CollectionsView({ items }: CollectionsViewProps) {
       focusCard(nextIndex);
       return true;
     },
-    [focusCard, getFocusedCardIndex],
+    [focusCard, getFocusedCardIndex, getSpatialEntries],
+  );
+
+  const navigateCardsInVisualOrder = useCallback(
+    (backwards: boolean) => {
+      const currentIndex = getFocusedCardIndex();
+      if (currentIndex === -1) return false;
+
+      const nextIndex = findVisualOrderTarget(
+        getSpatialEntries(),
+        currentIndex,
+        backwards ? "previous" : "next",
+      );
+
+      if (nextIndex === null) return false;
+
+      focusCard(nextIndex);
+      return true;
+    },
+    [focusCard, getFocusedCardIndex, getSpatialEntries],
+  );
+
+  const handleGridFocus = useCallback(
+    (event: FocusEvent<HTMLDivElement>) => {
+      if (!lastTabDirectionRef.current) return;
+      if (
+        event.relatedTarget instanceof Node &&
+        event.currentTarget.contains(event.relatedTarget)
+      ) {
+        return;
+      }
+
+      const edge = lastTabDirectionRef.current === "backwards" ? "last" : "first";
+      const nextIndex = findVisualOrderEdge(getSpatialEntries(), edge);
+      if (nextIndex !== null) focusCard(nextIndex);
+    },
+    [focusCard, getSpatialEntries],
   );
 
   const activateItem = useCallback((item: CollectionItem) => {
@@ -189,6 +143,13 @@ export function CollectionsView({ items }: CollectionsViewProps) {
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Tab") {
+        lastTabDirectionRef.current = event.shiftKey ? "backwards" : "forwards";
+        window.setTimeout(() => {
+          lastTabDirectionRef.current = null;
+        }, 0);
+      }
+
       if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         searchRef.current?.focus();
@@ -198,19 +159,19 @@ export function CollectionsView({ items }: CollectionsViewProps) {
 
       if (!gridRef.current?.contains(document.activeElement)) return;
 
-      if (
-        event.key === "ArrowLeft" ||
-        event.key === "ArrowRight" ||
-        event.key === "ArrowUp" ||
-        event.key === "ArrowDown"
-      ) {
+      if (event.key === "Tab") {
+        if (navigateCardsInVisualOrder(event.shiftKey)) event.preventDefault();
+        return;
+      }
+
+      if (isArrowNavigationKey(event.key)) {
         if (navigateCardsSpatial(event.key)) event.preventDefault();
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [navigateCardsSpatial]);
+  }, [navigateCardsInVisualOrder, navigateCardsSpatial]);
 
   return (
     <>
@@ -219,6 +180,7 @@ export function CollectionsView({ items }: CollectionsViewProps) {
       <div
         aria-label="Collections"
         className="relative left-1/2 ml-[-50vw] w-screen px-2"
+        onFocusCapture={handleGridFocus}
         ref={gridRef}
         role="list"
       >
