@@ -19,7 +19,7 @@ export default async function HomePage() {
       <section className="mb-10">
         <p className="mb-4 text-base font-semibold">hi!</p>
         <p className="mb-3 text-sm">
-          I build, break, and refine. love to build for developers, care about developer and ai
+          i build, break, and refine. love to build for developers, care about developer and ai
           experience. driven by curiosity.
         </p>
         <p className="mb-3 text-sm">

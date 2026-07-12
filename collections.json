@@ -1,0 +1,234 @@
+[
+  {
+    "id": "linear",
+    "title": "Linear",
+    "url": "https://linear.app",
+    "type": "website",
+    "tags": ["productivity", "ui", "saas"],
+    "createdAt": "2026-07-08T10:00:00.000Z"
+  },
+  {
+    "id": "radix-ui",
+    "title": "Radix UI",
+    "url": "https://radix-ui.com",
+    "type": "library",
+    "tags": ["react", "accessibility", "components"],
+    "createdAt": "2026-07-07T14:30:00.000Z"
+  },
+  {
+    "id": "geist",
+    "title": "Vercel Geist Design System",
+    "url": "https://vercel.com/geist",
+    "type": "design",
+    "tags": ["design-system", "monospace", "minimal"],
+    "createdAt": "2026-07-06T09:15:00.000Z"
+  },
+  {
+    "id": "animated-tabs",
+    "title": "Animated Tab Bar",
+    "url": "https://ui.aceternity.com/components/tabs",
+    "type": "component",
+    "tags": ["animation", "tabs", "navigation"],
+    "createdAt": "2026-07-05T16:45:00.000Z"
+  },
+  {
+    "id": "brutalist",
+    "title": "Brutalist Web Gallery",
+    "url": "https://brutalistwebsites.com",
+    "type": "website",
+    "tags": ["brutalist", "inspiration", "layout"],
+    "createdAt": "2026-07-04T11:20:00.000Z"
+  },
+  {
+    "id": "tanstack-query",
+    "title": "TanStack Query",
+    "url": "https://tanstack.com/query",
+    "type": "library",
+    "tags": ["react", "data-fetching", "cache"],
+    "createdAt": "2026-07-03T08:00:00.000Z"
+  },
+  {
+    "id": "glass-card",
+    "title": "Glass morphism card",
+    "type": "design",
+    "tags": ["glass", "card", "css"],
+    "createdAt": "2026-07-02T19:30:00.000Z"
+  },
+  {
+    "id": "better-buttons",
+    "title": "How to Design Better Buttons",
+    "url": "https://www.smashingmagazine.com/2023/05/design-better-buttons/",
+    "type": "article",
+    "tags": ["ux", "buttons", "read-later"],
+    "createdAt": "2026-07-01T13:00:00.000Z"
+  },
+  {
+    "id": "command-palette",
+    "title": "Command palette pattern",
+    "type": "component",
+    "tags": ["search", "keyboard", "pattern"],
+    "createdAt": "2026-06-30T10:45:00.000Z"
+  },
+  {
+    "id": "are-na",
+    "title": "Are.na",
+    "url": "https://www.are.na",
+    "type": "website",
+    "tags": ["inspiration", "bookmarking", "visual"],
+    "createdAt": "2026-06-29T15:20:00.000Z"
+  },
+  {
+    "id": "gradient-mesh",
+    "title": "gradient mesh",
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800",
+    "tags": ["gradient", "background"],
+    "createdAt": "2026-06-28T12:00:00.000Z"
+  },
+  {
+    "id": "color-blend",
+    "title": "color blend",
+    "type": "image",
+    "imageUrl": "https://images.unsplash.com/photo-1557683316-973673baf926?w=800",
+    "tags": ["gradient", "vivid"],
+    "createdAt": "2026-06-27T09:00:00.000Z"
+  },
+  {
+    "id": "mesh-gradient",
+    "title": "mesh gradient",
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800",
+    "tags": ["mesh", "wallpaper"],
+    "createdAt": "2026-06-26T18:00:00.000Z"
+  },
+  {
+    "id": "stripe-docs",
+    "title": "Stripe Docs",
+    "url": "https://docs.stripe.com",
+    "type": "website",
+    "tags": ["docs", "design", "reference"],
+    "createdAt": "2026-06-25T11:00:00.000Z"
+  },
+  {
+    "id": "shadcn-ui",
+    "title": "shadcn/ui",
+    "url": "https://ui.shadcn.com",
+    "type": "library",
+    "tags": ["react", "components", "tailwind"],
+    "createdAt": "2026-06-24T16:30:00.000Z"
+  },
+  {
+    "id": "framer-motion",
+    "title": "Framer Motion",
+    "url": "https://www.framer.com/motion",
+    "type": "library",
+    "tags": ["animation", "react", "motion"],
+    "createdAt": "2026-06-23T09:45:00.000Z"
+  },
+  {
+    "id": "minimal-nav",
+    "title": "Minimal sticky nav",
+    "type": "component",
+    "tags": ["navigation", "sticky", "minimal"],
+    "createdAt": "2026-06-22T14:00:00.000Z"
+  },
+  {
+    "id": "godly",
+    "title": "Godly",
+    "url": "https://godly.website",
+    "type": "website",
+    "tags": ["inspiration", "web-design", "gallery"],
+    "createdAt": "2026-06-21T10:20:00.000Z"
+  },
+  {
+    "id": "mobbin",
+    "title": "Mobbin",
+    "url": "https://mobbin.com",
+    "type": "website",
+    "tags": ["mobile", "ui", "patterns"],
+    "createdAt": "2026-06-20T08:15:00.000Z"
+  },
+  {
+    "id": "typography-scale",
+    "title": "Fluid type scale",
+    "type": "design",
+    "tags": ["typography", "css", "clamp"],
+    "createdAt": "2026-06-19T17:40:00.000Z"
+  },
+  {
+    "id": "sidebar-layout",
+    "title": "Collapsible sidebar",
+    "type": "component",
+    "tags": ["layout", "sidebar", "dashboard"],
+    "createdAt": "2026-06-18T13:10:00.000Z"
+  },
+  {
+    "id": "dark-texture",
+    "title": "dark texture",
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800",
+    "tags": ["texture", "dark", "background"],
+    "createdAt": "2026-06-17T12:00:00.000Z"
+  },
+  {
+    "id": "pastel-waves",
+    "title": "pastel waves",
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800",
+    "tags": ["pastel", "abstract", "wallpaper"],
+    "createdAt": "2026-06-16T09:30:00.000Z"
+  },
+  {
+    "id": "noise-overlay",
+    "title": "Subtle noise overlay",
+    "type": "design",
+    "tags": ["texture", "css", "grain"],
+    "createdAt": "2026-06-15T15:00:00.000Z"
+  },
+  {
+    "id": "react-aria",
+    "title": "React Aria",
+    "url": "https://react-spectrum.adobe.com/react-aria",
+    "type": "library",
+    "tags": ["react", "accessibility", "hooks"],
+    "createdAt": "2026-06-14T11:45:00.000Z"
+  },
+  {
+    "id": "hover-card",
+    "title": "Hover reveal card",
+    "type": "component",
+    "tags": ["hover", "card", "interaction"],
+    "createdAt": "2026-06-13T08:00:00.000Z"
+  },
+  {
+    "id": "siteinspire",
+    "title": "SiteInspire",
+    "url": "https://www.siteinspire.com",
+    "type": "website",
+    "tags": ["inspiration", "web-design", "curated"],
+    "createdAt": "2026-06-12T14:25:00.000Z"
+  },
+  {
+    "id": "infinite-scroll",
+    "title": "Infinite scroll pattern",
+    "type": "component",
+    "tags": ["scroll", "pagination", "feed"],
+    "createdAt": "2026-06-11T10:50:00.000Z"
+  },
+  {
+    "id": "abstract-shapes",
+    "title": "abstract shapes",
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=800",
+    "tags": ["abstract", "3d", "color"],
+    "createdAt": "2026-06-10T16:00:00.000Z"
+  },
+  {
+    "id": "tailwind-v4",
+    "title": "Tailwind CSS v4",
+    "url": "https://tailwindcss.com",
+    "type": "library",
+    "tags": ["css", "utility", "styling"],
+    "createdAt": "2026-06-09T09:00:00.000Z"
+  }
+]
