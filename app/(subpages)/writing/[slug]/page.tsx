@@ -1,4 +1,5 @@
 import { CopyUrl } from "@/components/copy-url";
+import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";
@@ -45,6 +46,7 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
 
   return (
     <>
+      <TrackPostView slug={slug} />
       <header className="mb-8 border-b border-border pb-8 text-center">
         <h1 className="mb-2 text-[clamp(1.375rem,4vw,1.875rem)] font-bold">{post.data.title}</h1>
         <div className="flex justify-center gap-2 items-center">

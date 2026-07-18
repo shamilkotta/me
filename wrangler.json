@@ -9,6 +9,20 @@
       "remote": true
     }
   ],
+  "d1_databases": [
+    {
+      "binding": "POST_VIEWS_DB",
+      "database_name": "post-views",
+      "database_id": "0fbc93ff-9a32-43d2-bd9a-83f79ebf4dce",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "post_views"
+    }
+  ],
   "r2_buckets": [
     {
       "binding": "MARKS_BUCKET",
