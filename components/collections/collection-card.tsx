@@ -36,11 +36,21 @@ function CardText({ item }: { item: CollectionItem }) {
   );
 }
 
+const IMAGE_BOTTOM_FADE = "clamp(2.5rem, 35%, 5rem)";
+const IMAGE_TEXT_OVERLAP = "2.5rem";
+
+function imageBottomMask() {
+  return `linear-gradient(to bottom, #000 calc(100% - ${IMAGE_BOTTOM_FADE}), transparent 100%)`;
+}
+
 function ImageOverlay({ item }: { item: CollectionItem }) {
   if (!item.title && item.tags.length === 0) return null;
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-focus-within:-translate-y-0.5">
+    <div
+      className="pointer-events-none relative z-10 px-3 pb-3 pt-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-focus-within:-translate-y-0.5"
+      style={{ marginTop: `calc(-1 * ${IMAGE_TEXT_OVERLAP})` }}
+    >
       <CardText item={item} />
     </div>
   );
@@ -323,21 +333,33 @@ function ImageCard({ item, cardRef, onActivate }: CollectionCardProps) {
   return (
     <CollectionCardShell cardRef={mergedRef} item={item} onActivate={onActivate}>
       {imageUrl && size ? (
-        <div
-          className="relative overflow-hidden border border-border bg-bg transition-colors group-focus-within:border-fg/30 group-hover:border-fg/30"
-          style={{ aspectRatio: `${size.width} / ${size.height}` }}
-        >
-          <img
-            alt=""
-            className="block h-auto w-full"
-            decoding="async"
-            height={size.height}
-            src={imageUrl}
-            width={size.width}
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-bg via-bg/45 to-transparent opacity-95 transition-opacity duration-300 group-focus-within:opacity-80 group-hover:opacity-80" />
+        <div className="relative border border-border bg-bg transition-colors group-focus-within:border-fg/30 group-hover:border-fg/30">
+          <div
+            className="relative"
+            style={{ aspectRatio: `${size.width} / ${size.height}` }}
+          >
+            <img
+              alt=""
+              className="block h-auto w-full"
+              decoding="async"
+              height={size.height}
+              src={imageUrl}
+              style={{
+                maskImage: imageBottomMask(),
+                WebkitMaskImage: imageBottomMask(),
+              }}
+              width={size.width}
+            />
+            <ImageActions imageUrl={imageUrl} itemId={item.id} />
+          </div>
           <ImageOverlay item={item} />
-          <ImageActions imageUrl={imageUrl} itemId={item.id} />
+          {item.title || item.tags.length > 0 ? (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-1 bg-linear-to-t from-bg from-25% via-bg/90 to-transparent"
+              style={{ height: `calc(${IMAGE_BOTTOM_FADE} + ${IMAGE_TEXT_OVERLAP} + 2.5rem)` }}
+            />
+          ) : null}
         </div>
       ) : showTextFallback ? (
         <div className="border border-border p-3 transition-colors group-focus-within:border-fg/30 group-hover:border-fg/30">

@@ -1,19 +1,26 @@
 [
   {
-    "id": "linear",
-    "title": "Linear",
-    "url": "https://linear.app",
+    "id": "amicro",
+    "title": "React micro-interaction & transition components",
+    "url": "https://amicro.vercel.app/",
     "type": "website",
-    "tags": ["productivity", "ui", "saas"],
-    "createdAt": "2026-07-08T10:00:00.000Z"
+    "tags": ["react", "animation", "micro-interactions", "motion"],
+    "createdAt": "2026-07-19T10:00:00.000Z"
   },
   {
-    "id": "radix-ui",
-    "title": "Radix UI",
-    "url": "https://radix-ui.com",
-    "type": "library",
-    "tags": ["react", "accessibility", "components"],
-    "createdAt": "2026-07-07T14:30:00.000Z"
+    "id": "detail",
+    "title": "Curated UI details & interface patterns",
+    "url": "https://detail.design/",
+    "type": "website",
+    "tags": ["design", "ui", "patterns", "accessibility"],
+    "createdAt": "2026-07-19T14:30:00.000Z"
+  },
+  {
+    "id": "placeholder",
+    "title": "Place Holder data start here",
+    "tags": ["placeholder"],
+    "type": "component",
+    "createdAt": "2026-07-19T14:30:00.000Z"
   },
   {
     "id": "geist",
