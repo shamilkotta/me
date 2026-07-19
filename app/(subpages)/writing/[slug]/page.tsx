@@ -1,8 +1,10 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
+import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";
+import { ComponentProps } from "react";
 
 type WritingPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -57,8 +59,26 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
       </header>
 
       <article className="writing-content prose max-w-none font-mono text-fg prose-headings:font-bold prose-headings:tracking-tight prose-a:font-normal prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent">
-        <post.Content />
+        <post.Content components={{ a: MdxLink }} />
       </article>
     </>
+  );
+}
+
+function MdxLink({ href, children, ...props }: ComponentProps<"a">) {
+  const external = !href || href.startsWith("http://") || href.startsWith("https://");
+
+  if (!external) {
+    return (
+      <Link href={href} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} {...props} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
   );
 }
