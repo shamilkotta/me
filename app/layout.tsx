@@ -4,12 +4,21 @@ import geistMonoLatin from "@fontsource-variable/geist-mono/files/geist-mono-lat
 import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
+import { SiteJsonLd } from "@/components/site-json-ld";
+import { siteName, siteUrl } from "@/lib/links";
 import { Metadata } from "nlite";
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
-    default: "shamil",
-    template: "%s | shamil",
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  applicationName: siteName,
+  openGraph: {
+    siteName,
+    type: "website",
+    locale: "en_US",
   },
   links: [
     {
@@ -25,6 +34,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <div className="mx-auto max-w-200 px-6 pb-16 pt-12 text-fg">
+      <SiteJsonLd />
       {children}
       <SiteFooter />
     </div>

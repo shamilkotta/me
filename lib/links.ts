@@ -1,3 +1,6 @@
+export const siteUrl = "https://www.shamilkotta.com";
+export const siteName = "shamil";
+
 export type NavLink = {
   href: string;
   label: string;
