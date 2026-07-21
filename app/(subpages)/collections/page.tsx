@@ -4,6 +4,10 @@ import { sortedCollections } from "@/lib/collections";
 
 export const metadata = {
   title: "Collections",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function CollectionsPage() {

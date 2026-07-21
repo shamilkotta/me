@@ -3,6 +3,10 @@ import { sortedMarksWithBlurDataURL } from "@/lib/marks-blur";
 
 export const metadata = {
   title: "Marks",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function MarksPage() {
