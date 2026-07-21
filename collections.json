@@ -16,6 +16,14 @@
     "createdAt": "2026-07-19T14:30:00.000Z"
   },
   {
+    "id": "nan",
+    "title": "Deep dives cs & web internals",
+    "url": "https://www.nan.fyi",
+    "type": "website",
+    "tags": ["fundamentals", "web", "learn", "tutorials"],
+    "createdAt": "2026-07-21T05:06:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],
