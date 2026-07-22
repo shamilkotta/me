@@ -5,11 +5,10 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteJsonLd } from "@/components/site-json-ld";
-import { siteName, siteUrl } from "@/lib/links";
+import { siteName } from "@/lib/links";
 import { Metadata } from "nlite";
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl,
   title: {
     default: siteName,
     template: `%s | ${siteName}`,
