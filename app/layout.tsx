@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <div className="mx-auto max-w-200 px-6 pb-16 pt-12 text-fg">
+    <div className="mx-auto max-w-[800px] px-6 pb-16 pt-12 text-fg">
       <SiteJsonLd />
       {children}
       <SiteFooter />
