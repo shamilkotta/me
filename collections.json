@@ -24,6 +24,22 @@
     "createdAt": "2026-07-21T05:06:00.000Z"
   },
   {
+    "id": "animation-vocabulary",
+    "title": "UI animation vocabulary & reference glossary",
+    "url": "https://animations.dev/vocabulary",
+    "type": "website",
+    "tags": ["animation", "motion", "ui", "reference", "vocabulary"],
+    "createdAt": "2026-07-22T17:04:00.000Z"
+  },
+  {
+    "id": "coss-ui",
+    "title": "React component library on Base UI",
+    "url": "https://coss.com/ui",
+    "type": "library",
+    "tags": ["react", "components", "base-ui", "accessibility"],
+    "createdAt": "2026-07-23T14:09:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],

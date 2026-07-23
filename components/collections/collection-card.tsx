@@ -6,9 +6,12 @@ import { Copy, Download } from "lucide-react";
 import { isImageOnlyItem, type CollectionItem } from "@/lib/collections";
 import {
   fetchOgImageForItem,
+  getCachedOgImage,
   resolveItemImageUrl,
   shouldFetchOgImage,
 } from "@/lib/collections-media";
+
+const imageSizeCache = new Map<string, { width: number; height: number }>();
 
 type CollectionCardProps = {
   item: CollectionItem;
@@ -231,35 +234,51 @@ function useInViewport() {
   return { ref, inView };
 }
 
+function initialCollectionImage(item: CollectionItem) {
+  const resolved = resolveItemImageUrl(item);
+  if (resolved) return { imageUrl: resolved, loading: false };
+
+  const cachedOg = item.url ? getCachedOgImage(item.url) : undefined;
+  if (cachedOg !== undefined) return { imageUrl: cachedOg, loading: false };
+
+  return {
+    imageUrl: null,
+    loading: shouldFetchOgImage(item),
+  };
+}
+
 function useCollectionImage(item: CollectionItem, enabled: boolean) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState(() => initialCollectionImage(item));
 
   useEffect(() => {
     if (!enabled) return;
 
     const resolved = resolveItemImageUrl(item);
     if (resolved) {
-      setImageUrl(resolved);
-      setLoading(false);
+      setState({ imageUrl: resolved, loading: false });
       return;
     }
 
     if (!shouldFetchOgImage(item)) {
-      setImageUrl(null);
-      setLoading(false);
+      setState({ imageUrl: null, loading: false });
+      return;
+    }
+
+    const cachedOg = item.url ? getCachedOgImage(item.url) : undefined;
+    if (cachedOg !== undefined) {
+      setState({ imageUrl: cachedOg, loading: false });
       return;
     }
 
     let cancelled = false;
-    setLoading(true);
+    setState((current) => ({ ...current, loading: true }));
 
     fetchOgImageForItem(item.url!)
       .then((ogImage) => {
-        if (!cancelled) setImageUrl(ogImage);
+        if (!cancelled) setState({ imageUrl: ogImage, loading: false });
       })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+      .catch(() => {
+        if (!cancelled) setState({ imageUrl: null, loading: false });
       });
 
     return () => {
@@ -268,13 +287,15 @@ function useCollectionImage(item: CollectionItem, enabled: boolean) {
   }, [enabled, item.id, item.url, item.imageUrl, item.type]);
 
   return {
-    imageUrl: enabled ? imageUrl : null,
-    loading: enabled && loading && !imageUrl,
+    imageUrl: state.imageUrl,
+    loading: enabled && state.loading && !state.imageUrl,
   };
 }
 
 function useImageSize(src: string | null) {
-  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const [size, setSize] = useState<{ width: number; height: number } | null>(
+    () => (src ? (imageSizeCache.get(src) ?? null) : null),
+  );
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -284,15 +305,25 @@ function useImageSize(src: string | null) {
       return;
     }
 
+    const cached = imageSizeCache.get(src);
+    if (cached) {
+      setSize(cached);
+      setFailed(false);
+      return;
+    }
+
     let cancelled = false;
     setSize(null);
     setFailed(false);
 
+    const imageSrc = src;
     const image = new window.Image();
 
     function commit() {
       if (cancelled || !image.naturalWidth || !image.naturalHeight) return;
-      setSize({ width: image.naturalWidth, height: image.naturalHeight });
+      const nextSize = { width: image.naturalWidth, height: image.naturalHeight };
+      imageSizeCache.set(imageSrc, nextSize);
+      setSize(nextSize);
     }
 
     function fail() {
@@ -301,7 +332,7 @@ function useImageSize(src: string | null) {
 
     image.addEventListener("load", commit);
     image.addEventListener("error", fail);
-    image.src = src;
+    image.src = imageSrc;
 
     if (image.complete) commit();
 
@@ -329,6 +360,7 @@ function ImageCard({ item, cardRef, onActivate }: CollectionCardProps) {
   );
 
   const showTextFallback = inView && !loading && (!imageUrl || failed);
+  const showLoading = inView && loading && !imageUrl;
 
   return (
     <CollectionCardShell cardRef={mergedRef} item={item} onActivate={onActivate}>
@@ -365,10 +397,12 @@ function ImageCard({ item, cardRef, onActivate }: CollectionCardProps) {
         <div className="border border-border p-3 transition-colors group-focus-within:border-fg/30 group-hover:border-fg/30">
           <CardText item={item} />
         </div>
-      ) : (
+      ) : showLoading ? (
         <div className="flex min-h-16 items-center justify-center border border-border bg-fg/3 px-3 py-6">
           <span className="text-[0.6875rem] text-muted">loading preview...</span>
         </div>
+      ) : (
+        <div className="min-h-16 border border-border bg-fg/3" />
       )}
     </CollectionCardShell>
   );

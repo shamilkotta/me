@@ -26,10 +26,33 @@ export function shouldFetchOgImage(item: CollectionItem) {
   return OG_FETCH_TYPES.includes(item.type) || item.type === "other";
 }
 
-export async function fetchOgImageForItem(url: string) {
-  const response = await fetch(`/collections/og?url=${encodeURIComponent(url)}`);
-  if (!response.ok) return null;
+const ogImageCache = new Map<string, string | null>();
+const ogImageRequests = new Map<string, Promise<string | null>>();
 
-  const data = (await response.json()) as { imageUrl?: string | null };
-  return data.imageUrl ?? null;
+export function getCachedOgImage(url: string) {
+  return ogImageCache.get(url);
+}
+
+export async function fetchOgImageForItem(url: string) {
+  if (ogImageCache.has(url)) {
+    return ogImageCache.get(url) ?? null;
+  }
+
+  const pending = ogImageRequests.get(url);
+  if (pending) return pending;
+
+  const request = (async () => {
+    const response = await fetch(`/collections/og?url=${encodeURIComponent(url)}`);
+    if (!response.ok) return null;
+
+    const data = (await response.json()) as { imageUrl?: string | null };
+    const imageUrl = data.imageUrl ?? null;
+    ogImageCache.set(url, imageUrl);
+    return imageUrl;
+  })().finally(() => {
+    ogImageRequests.delete(url);
+  });
+
+  ogImageRequests.set(url, request);
+  return request;
 }

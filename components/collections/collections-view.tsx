@@ -1,15 +1,7 @@
 "use client";
 
-import { Masonry } from "masonic";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  type FocusEvent,
-} from "react";
+import { Masonry } from "@/components/masonry";
+import { useCallback, useEffect, useMemo, useRef, useState, type FocusEvent } from "react";
 
 import { CollectionCard } from "@/components/collections/collection-card";
 import { CollectionsSearch } from "@/components/collections/collections-search";
@@ -27,15 +19,6 @@ type CollectionsViewProps = {
 };
 
 const COLUMN_GUTTER = 12;
-const COLUMN_WIDTH = 220;
-
-function useIsClient() {
-  return useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-}
 
 export function CollectionsView({ items }: CollectionsViewProps) {
   const [query, setQuery] = useState("");
@@ -43,15 +26,42 @@ export function CollectionsView({ items }: CollectionsViewProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const lastTabDirectionRef = useRef<"forwards" | "backwards" | null>(null);
-  const isClient = useIsClient();
 
-  const filtered = useMemo(() => items.filter((item) => matchesQuery(item, query)), [items, query]);
+  const trimmedQuery = query.trim();
+  const visibleIds = useMemo(() => {
+    if (!trimmedQuery) return null;
+    return new Set(items.filter((item) => matchesQuery(item, trimmedQuery)).map((item) => item.id));
+  }, [items, trimmedQuery]);
 
-  const setCardRef = useCallback((index: number) => {
-    return (element: HTMLElement | null) => {
-      cardRefs.current[index] = element;
-    };
-  }, []);
+  const visibleItems = useMemo(
+    () => (visibleIds === null ? items : items.filter((item) => visibleIds.has(item.id))),
+    [items, visibleIds],
+  );
+
+  const hasMatches = visibleIds === null || visibleIds.size > 0;
+
+  const isItemVisible = useCallback(
+    (item: CollectionItem) => visibleIds === null || visibleIds.has(item.id),
+    [visibleIds],
+  );
+
+  const itemIndexById = useMemo(() => {
+    const map = new Map<string, number>();
+    items.forEach((item, index) => map.set(item.id, index));
+    return map;
+  }, [items]);
+
+  const setCardRef = useCallback(
+    (itemId: string) => {
+      const index = itemIndexById.get(itemId);
+      if (index === undefined) return () => {};
+
+      return (element: HTMLElement | null) => {
+        cardRefs.current[index] = element;
+      };
+    },
+    [itemIndexById],
+  );
 
   const focusCard = useCallback((index: number) => {
     const element = cardRefs.current[index];
@@ -68,9 +78,16 @@ export function CollectionsView({ items }: CollectionsViewProps) {
 
   const getSpatialEntries = useCallback(() => {
     return cardRefs.current
-      .map((element, index) => (element ? { index, rect: element.getBoundingClientRect() } : null))
+      .map((element, index) => {
+        if (!element) return null;
+
+        const item = items[index];
+        if (!item || !isItemVisible(item)) return null;
+
+        return { index, rect: element.getBoundingClientRect() };
+      })
       .filter((entry): entry is SpatialEntry => entry !== null);
-  }, []);
+  }, [isItemVisible, items]);
 
   const navigateCardsSpatial = useCallback(
     (key: string) => {
@@ -138,8 +155,8 @@ export function CollectionsView({ items }: CollectionsViewProps) {
   }, []);
 
   useEffect(() => {
-    cardRefs.current = cardRefs.current.slice(0, filtered.length);
-  }, [filtered.length]);
+    cardRefs.current = cardRefs.current.slice(0, items.length);
+  }, [items.length]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -184,17 +201,15 @@ export function CollectionsView({ items }: CollectionsViewProps) {
         ref={gridRef}
         role="list"
       >
-        {isClient && filtered.length > 0 ? (
+        {items.length > 0 ? (
           <Masonry
-            columnGutter={COLUMN_GUTTER}
-            columnWidth={COLUMN_WIDTH}
+            gutter={COLUMN_GUTTER}
             itemKey={(item) => item.id}
-            items={filtered}
-            overscanBy={5}
-            render={({ data: item, index, width }) => (
+            items={visibleItems}
+            render={({ item, width }) => (
               <div role="listitem" style={{ width }}>
                 <CollectionCard
-                  cardRef={setCardRef(index)}
+                  cardRef={setCardRef(item.id)}
                   item={item}
                   onActivate={() => activateItem(item)}
                 />
@@ -203,7 +218,7 @@ export function CollectionsView({ items }: CollectionsViewProps) {
           />
         ) : null}
 
-        {filtered.length === 0 ? (
+        {trimmedQuery && !hasMatches ? (
           <p className="py-8 text-center text-[0.8125rem] text-muted">no matches</p>
         ) : null}
       </div>
