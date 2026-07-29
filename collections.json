@@ -40,6 +40,22 @@
     "createdAt": "2026-07-23T14:09:00.000Z"
   },
   {
+    "id": "aicodingdictionary",
+    "title": "AI agent & coding vocabulary in plain English",
+    "url": "https://aicodingdictionary.com",
+    "type": "website",
+    "tags": ["ai", "agents", "reference", "vocabulary"],
+    "createdAt": "2026-07-29T02:42:00.000Z"
+  },
+  {
+    "id": "evilcharts",
+    "title": "Handcrafted animated chart components for React",
+    "url": "https://evilcharts.com",
+    "type": "library",
+    "tags": ["react", "charts", "animation", "data-visualization"],
+    "createdAt": "2026-07-29T02:46:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],
