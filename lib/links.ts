@@ -1,7 +1,8 @@
 export const siteUrl = "https://shamilkotta.com";
 export const siteName = "shamil";
-export const siteTitle = "Hi I'm SHAMIL";
-export const siteDescription = "Solving problems as a profession. Software engineer building for developers.";
+export const siteTitle = "SHAMIL";
+export const siteDescription =
+  "Solving problems as a profession. Software engineer building for developers.";
 export const ogImage = {
   url: "/shamilkotta.png",
   width: 2400,
