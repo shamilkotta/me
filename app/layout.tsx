@@ -5,19 +5,50 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteJsonLd } from "@/components/site-json-ld";
-import { siteName } from "@/lib/links";
+import { ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/links";
 import { Metadata } from "nlite";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: siteName,
     template: `%s | ${siteName}`,
   },
+  description: siteDescription,
   applicationName: siteName,
+  authors: [{ name: "Shamil Kotta", url: siteUrl }],
+  creator: "Shamilkotta",
+  publisher: "Shamilkotta",
+  keywords: ["Shamil", "shamilkotta", "software engineer", "developer"],
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
   openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
     siteName,
     type: "website",
     locale: "en_US",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    creator: "@shamilkotta",
+    site: "@shamilkotta",
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   links: [
     {

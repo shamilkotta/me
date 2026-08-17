@@ -32,9 +32,26 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
     };
   }
 
+  const description = post.data.description;
+  const title = post.data.title;
+
   return {
-    title: post.data.title,
-    description: post.data.description,
+    title,
+    description,
+    alternates: {
+      canonical: `/writing/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/writing/${slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
