@@ -7,7 +7,7 @@ const websiteJsonLd = {
   alternateName: ["shamil kotta", "shamilkotta"],
   description: siteDescription,
   url: `${siteUrl}/`,
-  image: `${siteUrl}/shamilkotta.png`,
+  image: `${siteUrl}/shamilkotta.jpg`,
 };
 
 export function SiteJsonLd() {

@@ -4,11 +4,11 @@ export const siteTitle = "SHAMIL";
 export const siteDescription =
   "Solving problems as a profession. Software engineer building for developers.";
 export const ogImage = {
-  url: "/shamilkotta.png",
+  url: "/shamilkotta.jpg",
   width: 2400,
   height: 1260,
   alt: "Hi I'm SHAMIL — Solving problems as a profession",
-  type: "image/png",
+  type: "image/jpeg",
 } as const;
 
 export type NavLink = {
