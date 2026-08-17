@@ -9,7 +9,7 @@ import { ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/li
 import { Metadata } from "nlite";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrl,
   title: {
     default: siteName,
     template: `%s | ${siteName}`,
