@@ -4,8 +4,10 @@ import { siteUrl } from "@/lib/links";
 export const WRITING_OG_WIDTH = 1200;
 export const WRITING_OG_HEIGHT = 630;
 export const WRITING_OG_R2_PREFIX = "writing-og";
+export const WRITING_OG_TEMPLATE_VERSION = "2";
 
 const domain = new URL(siteUrl).hostname;
+const geistFontFamily = "Geist";
 
 function formatOgDate(date: Date) {
   return date.toLocaleDateString("en-US", {
@@ -32,7 +34,7 @@ function titleFontSize(title: string) {
 }
 
 function wrapTitle(title: string, fontSize: number) {
-  const maxWidth = WRITING_OG_WIDTH - 80 - 360;
+  const maxWidth = WRITING_OG_WIDTH - 160;
   const approxCharWidth = fontSize * 0.52;
   const maxChars = Math.max(12, Math.floor(maxWidth / approxCharWidth));
   const words = title.split(/\s+/);
@@ -56,31 +58,12 @@ function wrapTitle(title: string, fontSize: number) {
   return lines;
 }
 
-function dotPatternSvg() {
-  const columns = 14;
-  const rows = 20;
-  const dotSize = 3;
-  const gap = 22;
-  const originX = WRITING_OG_WIDTH - 72 - (columns * dotSize + (columns - 1) * gap);
-  const originY = 96;
-  const dots: string[] = [];
-
-  for (let row = 0; row < rows; row += 1) {
-    for (let column = 0; column < columns; column += 1) {
-      const fade = 0.08 + (column / columns) * 0.14 + (row / rows) * 0.06;
-      const cx = originX + column * (dotSize + gap) + dotSize / 2;
-      const cy = originY + row * (dotSize + gap) + dotSize / 2;
-      dots.push(
-        `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(dotSize / 2).toFixed(1)}" fill="rgba(255,255,255,${fade.toFixed(2)})" />`,
-      );
-    }
-  }
-
-  return dots.join("");
+function dotPatternBackgroundSvg() {
+  return `<rect width="${WRITING_OG_WIDTH}" height="${WRITING_OG_HEIGHT}" fill="url(#writing-og-dots)" mask="url(#writing-og-dot-mask)" />`;
 }
 
 export async function writingOgContentHash(title: string, date: Date) {
-  const payload = `${title}\n${date.toISOString()}`;
+  const payload = `${WRITING_OG_TEMPLATE_VERSION}\n${title}\n${date.toISOString()}`;
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(payload));
   return [...new Uint8Array(digest)]
     .slice(0, 8)
@@ -95,14 +78,14 @@ export function writingOgR2Key(slug: string, hash: string) {
 export function generateWritingOgSvg(title: string, date: Date) {
   const fontSize = titleFontSize(title);
   const lines = wrapTitle(title, fontSize);
-  const lineHeight = Math.round(fontSize * 1.08);
-  const textBlockHeight = lines.length * lineHeight;
+  const lineHeight = Math.round(fontSize * 0.96);
+  const textBlockHeight = (lines.length - 1) * lineHeight + fontSize;
   const metaHeight = 22;
-  const metaGap = 20;
-  const domainGap = 28;
-  const contentHeight = metaHeight + metaGap + textBlockHeight + domainGap + metaHeight;
+  const dateTitleGap = 12;
+  const titleDomainGap = 16;
+  const contentHeight = metaHeight + dateTitleGap + textBlockHeight + titleDomainGap + metaHeight;
   const contentTop = (WRITING_OG_HEIGHT - contentHeight) / 2;
-  const titleStartY = contentTop + metaHeight + metaGap + fontSize * 0.82;
+  const titleStartY = contentTop + metaHeight + dateTitleGap + fontSize * 0.82;
   const titleLines = lines
     .map((line, index) => {
       const y = titleStartY + index * lineHeight;
@@ -115,18 +98,30 @@ export function generateWritingOgSvg(title: string, date: Date) {
   <defs>
     <style>
       @font-face {
-        font-family: "Geist";
+        font-family: "${geistFontFamily}";
         src: url("data:font/woff2;base64,${geistFontBase64}") format("woff2");
         font-weight: 100 900;
         font-style: normal;
       }
     </style>
+    <pattern id="writing-og-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="1.1" fill="rgba(255,255,255,0.2)" />
+    </pattern>
+    <linearGradient id="writing-og-dot-fade" x1="0" y1="0" x2="${WRITING_OG_WIDTH}" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0" />
+      <stop offset="0.4" stop-color="white" stop-opacity="0" />
+      <stop offset="0.68" stop-color="white" stop-opacity="0.45" />
+      <stop offset="1" stop-color="white" stop-opacity="1" />
+    </linearGradient>
+    <mask id="writing-og-dot-mask">
+      <rect width="${WRITING_OG_WIDTH}" height="${WRITING_OG_HEIGHT}" fill="url(#writing-og-dot-fade)" />
+    </mask>
   </defs>
   <rect width="100%" height="100%" fill="#0a0a0a" />
-  ${dotPatternSvg()}
-  <text x="80" y="${(contentTop + metaHeight).toFixed(1)}" fill="#737373" font-family="Geist, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(formatOgDate(date))}</text>
-  <text fill="#ffffff" font-family="Geist, sans-serif" font-size="${fontSize}" font-weight="600" letter-spacing="-0.03em">${titleLines}</text>
-  <text x="80" y="${(contentTop + metaHeight + metaGap + textBlockHeight + domainGap + metaHeight * 0.75).toFixed(1)}" fill="#737373" font-family="Geist, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(domain)}</text>
+  ${dotPatternBackgroundSvg()}
+  <text x="80" y="${(contentTop + metaHeight).toFixed(1)}" fill="#737373" font-family="${geistFontFamily}, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(formatOgDate(date))}</text>
+  <text fill="#ffffff" font-family="${geistFontFamily}, sans-serif" font-size="${fontSize}" font-weight="600" letter-spacing="-0.03em">${titleLines}</text>
+  <text x="80" y="${(contentTop + metaHeight + dateTitleGap + textBlockHeight + titleDomainGap + metaHeight * 0.75).toFixed(1)}" fill="#737373" font-family="${geistFontFamily}, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(domain)}</text>
 </svg>`;
 }
 
