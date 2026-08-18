@@ -1,6 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
+import { writingOgImageMeta } from "@/lib/writing-og";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";
@@ -35,6 +36,8 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
   const description = post.data.description;
   const title = post.data.title;
 
+  const ogImage = writingOgImageMeta(title, slug);
+
   return {
     title,
     description,
@@ -46,11 +49,14 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
       description,
       url: `/writing/${slug}`,
       type: "article",
+      publishedTime: post.data.date.toISOString(),
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage.url],
     },
   };
 }
