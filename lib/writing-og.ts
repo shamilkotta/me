@@ -3,6 +3,7 @@ import { siteUrl } from "@/lib/links";
 
 export const WRITING_OG_WIDTH = 1200;
 export const WRITING_OG_HEIGHT = 630;
+export const WRITING_OG_R2_PREFIX = "writing-og";
 
 const domain = new URL(siteUrl).hostname;
 
@@ -78,6 +79,19 @@ function dotPatternSvg() {
   return dots.join("");
 }
 
+export async function writingOgContentHash(title: string, date: Date) {
+  const payload = `${title}\n${date.toISOString()}`;
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(payload));
+  return [...new Uint8Array(digest)]
+    .slice(0, 8)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+export function writingOgR2Key(slug: string, hash: string) {
+  return `${WRITING_OG_R2_PREFIX}/${slug}/${hash}.png`;
+}
+
 export function generateWritingOgSvg(title: string, date: Date) {
   const fontSize = titleFontSize(title);
   const lines = wrapTitle(title, fontSize);
@@ -116,9 +130,9 @@ export function generateWritingOgSvg(title: string, date: Date) {
 </svg>`;
 }
 
-export function writingOgImageMeta(title: string, slug: string) {
+export function writingOgImageMeta(title: string, slug: string, hash: string) {
   return {
-    url: `/writing/${slug}/og`,
+    url: `/writing/${slug}/og?v=${hash}`,
     width: WRITING_OG_WIDTH,
     height: WRITING_OG_HEIGHT,
     alt: title,
@@ -126,8 +140,10 @@ export function writingOgImageMeta(title: string, slug: string) {
   } as const;
 }
 
-export function writingOgResponseHeaders() {
+export function writingOgResponseHeaders(hash: string) {
   return {
-    "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+    "Cache-Control": "public, max-age=31536000, immutable",
+    ETag: `"${hash}"`,
+    "Content-Type": "image/png",
   };
 }

@@ -1,7 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
-import { writingOgImageMeta } from "@/lib/writing-og";
+import { writingOgContentHash, writingOgImageMeta } from "@/lib/writing-og";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";
@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
 
   const description = post.data.description;
   const title = post.data.title;
-
-  const ogImage = writingOgImageMeta(title, slug);
+  const hash = await writingOgContentHash(title, post.data.date);
+  const ogImage = writingOgImageMeta(title, slug, hash);
 
   return {
     title,
