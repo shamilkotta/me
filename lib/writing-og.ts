@@ -4,10 +4,14 @@ import { siteUrl } from "@/lib/links";
 export const WRITING_OG_WIDTH = 1200;
 export const WRITING_OG_HEIGHT = 630;
 export const WRITING_OG_R2_PREFIX = "writing-og";
-export const WRITING_OG_TEMPLATE_VERSION = "2";
+export const WRITING_OG_TEMPLATE_VERSION = "3";
 
 const domain = new URL(siteUrl).hostname;
 const geistFontFamily = "Geist";
+const TITLE_LEFT_PADDING = 80;
+const TITLE_RIGHT_INSET_RATIO = 0.15;
+const TITLE_MAX_LINES = 2;
+const TITLE_ELLIPSIS = "…";
 
 function formatOgDate(date: Date) {
   return date.toLocaleDateString("en-US", {
@@ -33,11 +37,32 @@ function titleFontSize(title: string) {
   return 38;
 }
 
-function wrapTitle(title: string, fontSize: number) {
-  const maxWidth = WRITING_OG_WIDTH - 160;
+function titleMaxChars(fontSize: number) {
+  const maxWidth = WRITING_OG_WIDTH * (1 - TITLE_RIGHT_INSET_RATIO) - TITLE_LEFT_PADDING;
   const approxCharWidth = fontSize * 0.52;
-  const maxChars = Math.max(12, Math.floor(maxWidth / approxCharWidth));
-  const words = title.split(/\s+/);
+  return Math.max(12, Math.floor(maxWidth / approxCharWidth));
+}
+
+function truncateWithEllipsis(text: string, maxChars: number) {
+  if (text.length <= maxChars) return text;
+
+  const limit = maxChars - TITLE_ELLIPSIS.length;
+  if (limit <= 0) return TITLE_ELLIPSIS;
+
+  let trimmed = text.slice(0, limit).trimEnd();
+  const lastSpace = trimmed.lastIndexOf(" ");
+  if (lastSpace > limit * 0.5) {
+    trimmed = trimmed.slice(0, lastSpace);
+  }
+
+  return `${trimmed}${TITLE_ELLIPSIS}`;
+}
+
+function wrapTitle(title: string, fontSize: number) {
+  const maxChars = titleMaxChars(fontSize);
+  const words = title.trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return [""];
+
   const lines: string[] = [];
   let current = "";
 
@@ -55,7 +80,13 @@ function wrapTitle(title: string, fontSize: number) {
     lines.push(current);
   }
 
-  return lines;
+  if (lines.length <= TITLE_MAX_LINES) {
+    return lines.map((line) =>
+      line.length > maxChars ? truncateWithEllipsis(line, maxChars) : line,
+    );
+  }
+
+  return [lines[0], truncateWithEllipsis(lines.slice(1).join(" "), maxChars)];
 }
 
 function dotPatternBackgroundSvg() {
@@ -79,7 +110,8 @@ export function generateWritingOgSvg(title: string, date: Date) {
   const fontSize = titleFontSize(title);
   const lines = wrapTitle(title, fontSize);
   const lineHeight = Math.round(fontSize * 0.96);
-  const textBlockHeight = (lines.length - 1) * lineHeight + fontSize;
+  const lineCount = Math.min(lines.length, TITLE_MAX_LINES);
+  const textBlockHeight = (lineCount - 1) * lineHeight + fontSize;
   const metaHeight = 22;
   const dateTitleGap = 12;
   const titleDomainGap = 16;
