@@ -1,13 +1,15 @@
 import { MarksGrid } from "@/components/marks-grid";
 import { sortedMarksWithBlurDataURL } from "@/lib/marks-blur";
+import { buildPageOgMetadata } from "@/lib/page-og";
 
-export const metadata = {
-  title: "Marks",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export async function generateMetadata() {
+  return buildPageOgMetadata("marks", {
+    robots: {
+      index: false,
+      follow: false,
+    },
+  });
+}
 
 export default async function MarksPage() {
   const marks = await sortedMarksWithBlurDataURL({ cache: true });

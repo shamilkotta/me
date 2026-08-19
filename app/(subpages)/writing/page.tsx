@@ -2,10 +2,11 @@ import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
 import { writingList } from "@/lib/content";
+import { buildPageOgMetadata } from "@/lib/page-og";
 
-export const metadata = {
-  title: "Writing",
-};
+export async function generateMetadata() {
+  return buildPageOgMetadata("writing");
+}
 
 export default async function WritingPage() {
   const writings = await writingList();

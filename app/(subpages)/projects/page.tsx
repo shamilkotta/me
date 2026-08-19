@@ -2,10 +2,11 @@ import Link from "nlite/link";
 
 import { PROJECTS } from "@/lib/content";
 import { SiteNav } from "@/components/site-nav";
+import { buildPageOgMetadata } from "@/lib/page-og";
 
-export const metadata = {
-  title: "Projects",
-};
+export async function generateMetadata() {
+  return buildPageOgMetadata("projects");
+}
 
 export default function ProjectsPage() {
   return (
