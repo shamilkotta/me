@@ -67,7 +67,7 @@ export function pageOgImageMeta(key: PageOgKey) {
   const { title } = PAGE_OG_CONFIG[key];
 
   return {
-    url: `/og/${key}`,
+    url: `/${key}/og`,
     width: OG_WIDTH,
     height: OG_HEIGHT,
     alt: title,
@@ -79,10 +79,7 @@ export function pageOgResponseHeaders(key: PageOgKey) {
   return ogResponseHeaders(`${key}-${PAGE_OG_TEMPLATE_VERSION}`);
 }
 
-export function buildPageOgMetadata(
-  key: PageOgKey,
-  extra?: Pick<Metadata, "robots">,
-): Metadata {
+export function buildPageOgMetadata(key: PageOgKey, extra?: Pick<Metadata, "robots">): Metadata {
   const { title, path } = PAGE_OG_CONFIG[key];
   const image = pageOgImageMeta(key);
 

@@ -1,15 +1,11 @@
 import { env } from "cloudflare:workers";
 import {
   PAGE_OG_CONFIG,
+  type PageOgKey,
   generatePageOgSvg,
-  isPageOgKey,
   pageOgR2Key,
   pageOgResponseHeaders,
 } from "@/lib/page-og";
-
-type PageOgRouteProps = {
-  params: Promise<{ key: string }>;
-};
 
 async function renderPageOgPng(title: string) {
   const svg = generatePageOgSvg(title);
@@ -20,13 +16,7 @@ async function renderPageOgPng(title: string) {
   return new Uint8Array(await response.arrayBuffer());
 }
 
-export async function GET(_request: Request, { params }: PageOgRouteProps) {
-  const { key } = await params;
-
-  if (!isPageOgKey(key)) {
-    return new Response("Not found", { status: 404 });
-  }
-
+export async function servePageOg(key: PageOgKey) {
   const { title } = PAGE_OG_CONFIG[key];
   const cacheKey = pageOgR2Key(key);
   const headers = pageOgResponseHeaders(key);
