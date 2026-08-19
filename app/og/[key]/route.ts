@@ -3,7 +3,6 @@ import {
   PAGE_OG_CONFIG,
   generatePageOgSvg,
   isPageOgKey,
-  pageOgContentHash,
   pageOgR2Key,
   pageOgResponseHeaders,
 } from "@/lib/page-og";
@@ -29,9 +28,8 @@ export async function GET(_request: Request, { params }: PageOgRouteProps) {
   }
 
   const { title } = PAGE_OG_CONFIG[key];
-  const hash = await pageOgContentHash(title);
-  const cacheKey = pageOgR2Key(key, hash);
-  const headers = pageOgResponseHeaders(hash);
+  const cacheKey = pageOgR2Key(key);
+  const headers = pageOgResponseHeaders(key);
 
   const cached = await env.MARKS_BUCKET.get(cacheKey);
   if (cached) {
@@ -48,7 +46,6 @@ export async function GET(_request: Request, { params }: PageOgRouteProps) {
       },
       customMetadata: {
         key,
-        hash,
         title,
       },
     });
@@ -61,7 +58,7 @@ export async function GET(_request: Request, { params }: PageOgRouteProps) {
       headers: {
         "Content-Type": "image/svg+xml; charset=utf-8",
         "Cache-Control": "public, max-age=3600",
-        ETag: `"${hash}"`,
+        ETag: headers.ETag,
       },
     });
   }

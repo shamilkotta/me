@@ -8,7 +8,6 @@ import {
   dotPatternBackgroundSvg,
   escapeXml,
   geistFontFamily,
-  ogContentHash,
   ogResponseHeaders,
   ogSvgDefs,
   textBlockHeight,
@@ -36,12 +35,8 @@ export function isPageOgKey(key: string): key is PageOgKey {
   return PAGE_OG_KEYS.includes(key as PageOgKey);
 }
 
-export async function pageOgContentHash(title: string) {
-  return ogContentHash(PAGE_OG_TEMPLATE_VERSION, title);
-}
-
-export function pageOgR2Key(key: PageOgKey, hash: string) {
-  return `${PAGE_OG_R2_PREFIX}/${key}/${hash}.png`;
+export function pageOgR2Key(key: PageOgKey) {
+  return `${PAGE_OG_R2_PREFIX}/${key}.png`;
 }
 
 export function generatePageOgSvg(title: string) {
@@ -68,11 +63,11 @@ export function generatePageOgSvg(title: string) {
 </svg>`;
 }
 
-export function pageOgImageMeta(key: PageOgKey, hash: string) {
+export function pageOgImageMeta(key: PageOgKey) {
   const { title } = PAGE_OG_CONFIG[key];
 
   return {
-    url: `/og/${key}?v=${hash}`,
+    url: `/og/${key}`,
     width: OG_WIDTH,
     height: OG_HEIGHT,
     alt: title,
@@ -80,8 +75,8 @@ export function pageOgImageMeta(key: PageOgKey, hash: string) {
   } as const;
 }
 
-export function pageOgResponseHeaders(hash: string) {
-  return ogResponseHeaders(hash);
+export function pageOgResponseHeaders(key: PageOgKey) {
+  return ogResponseHeaders(`${key}-${PAGE_OG_TEMPLATE_VERSION}`);
 }
 
 export async function buildPageOgMetadata(
@@ -89,8 +84,7 @@ export async function buildPageOgMetadata(
   extra?: Pick<Metadata, "robots">,
 ): Promise<Metadata> {
   const { title, path } = PAGE_OG_CONFIG[key];
-  const hash = await pageOgContentHash(title);
-  const image = pageOgImageMeta(key, hash);
+  const image = pageOgImageMeta(key);
 
   return {
     title,
