@@ -3,14 +3,12 @@ import { SiteNav } from "@/components/site-nav";
 import { sortedCollections } from "@/lib/collections";
 import { buildPageOgMetadata } from "@/lib/page-og";
 
-export async function generateMetadata() {
-  return buildPageOgMetadata("collections", {
-    robots: {
-      index: false,
-      follow: false,
-    },
-  });
-}
+export const metadata = buildPageOgMetadata("collections", {
+  robots: {
+    index: false,
+    follow: false,
+  },
+});
 
 export default function CollectionsPage() {
   const items = sortedCollections();

@@ -4,9 +4,7 @@ import { PROJECTS } from "@/lib/content";
 import { SiteNav } from "@/components/site-nav";
 import { buildPageOgMetadata } from "@/lib/page-og";
 
-export async function generateMetadata() {
-  return buildPageOgMetadata("projects");
-}
+export const metadata = buildPageOgMetadata("projects");
 
 export default function ProjectsPage() {
   return (

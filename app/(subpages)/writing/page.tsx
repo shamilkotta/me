@@ -4,9 +4,7 @@ import { SiteNav } from "@/components/site-nav";
 import { writingList } from "@/lib/content";
 import { buildPageOgMetadata } from "@/lib/page-og";
 
-export async function generateMetadata() {
-  return buildPageOgMetadata("writing");
-}
+export const metadata = buildPageOgMetadata("writing");
 
 export default async function WritingPage() {
   const writings = await writingList();

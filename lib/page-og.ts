@@ -79,10 +79,10 @@ export function pageOgResponseHeaders(key: PageOgKey) {
   return ogResponseHeaders(`${key}-${PAGE_OG_TEMPLATE_VERSION}`);
 }
 
-export async function buildPageOgMetadata(
+export function buildPageOgMetadata(
   key: PageOgKey,
   extra?: Pick<Metadata, "robots">,
-): Promise<Metadata> {
+): Metadata {
   const { title, path } = PAGE_OG_CONFIG[key];
   const image = pageOgImageMeta(key);
 
