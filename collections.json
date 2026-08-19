@@ -56,6 +56,14 @@
     "createdAt": "2026-07-29T02:46:00.000Z"
   },
   {
+    "id": "recent",
+    "title": "Daily curated design, websites & tools",
+    "url": "https://recent.design",
+    "type": "website",
+    "tags": ["inspiration", "web design", "gallery", "ui"],
+    "createdAt": "2026-08-19T00:51:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],
