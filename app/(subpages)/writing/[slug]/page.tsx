@@ -1,7 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
-import { writingOgContentHash, writingOgImageMeta } from "@/lib/writing-og";
+import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";

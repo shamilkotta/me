@@ -1,7 +1,7 @@
 import { CollectionsView } from "@/components/collections/collections-view";
 import { SiteNav } from "@/components/site-nav";
 import { sortedCollections } from "@/lib/collections";
-import { buildPageOgMetadata } from "@/lib/page-og";
+import { buildPageOgMetadata } from "@/lib/og/page";
 
 export const metadata = buildPageOgMetadata("collections", {
   robots: {

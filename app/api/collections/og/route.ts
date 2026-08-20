@@ -1,18 +1,13 @@
-import { fetchOgImage } from "@/lib/og-image";
+import { fetchOgImage, parseAllowedHttpUrl } from "@/lib/og/web-image";
 
 export async function GET(request: Request) {
-  const url = new URL(request.url).searchParams.get("url");
+  const parsed = parseAllowedHttpUrl(new URL(request.url).searchParams.get("url"));
 
-  if (!url) {
-    return Response.json({ error: "missing url" }, { status: 400 });
+  if (!parsed) {
+    return Response.json({ error: "invalid url" }, { status: 400 });
   }
 
   try {
-    const parsed = new URL(url);
-    if (!["http:", "https:"].includes(parsed.protocol)) {
-      return Response.json({ error: "invalid url" }, { status: 400 });
-    }
-
     const imageUrl = await fetchOgImage(parsed.toString());
 
     return Response.json(

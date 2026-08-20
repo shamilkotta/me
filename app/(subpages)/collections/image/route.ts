@@ -1,16 +1,13 @@
-export async function GET(request: Request) {
-  const url = new URL(request.url).searchParams.get("url");
+import { parseAllowedHttpUrl } from "@/lib/og/web-image";
 
-  if (!url) {
-    return new Response("missing url", { status: 400 });
+export async function GET(request: Request) {
+  const parsed = parseAllowedHttpUrl(new URL(request.url).searchParams.get("url"));
+
+  if (!parsed) {
+    return new Response("invalid url", { status: 400 });
   }
 
   try {
-    const parsed = new URL(url);
-    if (!["http:", "https:"].includes(parsed.protocol)) {
-      return new Response("invalid url", { status: 400 });
-    }
-
     const response = await fetch(parsed.toString(), {
       headers: {
         Accept: "image/*",

@@ -8,6 +8,7 @@ export const TITLE_LEFT_PADDING = 80;
 export const TITLE_RIGHT_INSET_RATIO = 0.15;
 export const TITLE_MAX_LINES = 2;
 export const TITLE_ELLIPSIS = "…";
+export const OG_R2_PREFIX = "og";
 
 export const domain = new URL(siteUrl).hostname;
 export const geistFontFamily = "Geist";
@@ -123,6 +124,46 @@ export function textBlockHeight(fontSize: number, lineCount: number) {
   return (lineCount - 1) * lineHeight + fontSize;
 }
 
+const META_HEIGHT = 22;
+const TITLE_DOMAIN_GAP = 16;
+const TOP_LABEL_GAP = 12;
+
+type TitleOgSvgOptions = {
+  idPrefix: string;
+  title: string;
+  topLabel?: string;
+};
+
+export function generateTitleOgSvg({ idPrefix, title, topLabel }: TitleOgSvgOptions) {
+  const fontSize = titleFontSize(title);
+  const lines = wrapTitle(title, fontSize);
+  const lineCount = Math.min(lines.length, TITLE_MAX_LINES);
+  const blockHeight = textBlockHeight(fontSize, lineCount);
+  const topSectionHeight = topLabel ? META_HEIGHT + TOP_LABEL_GAP : 0;
+  const contentHeight = topSectionHeight + blockHeight + TITLE_DOMAIN_GAP + META_HEIGHT;
+  const contentTop = (OG_HEIGHT - contentHeight) / 2;
+  const titleStartY = contentTop + topSectionHeight + fontSize * 0.82;
+  const titleLines = titleLinesSvg(lines, fontSize, titleStartY);
+  const domainY =
+    contentTop + topSectionHeight + blockHeight + TITLE_DOMAIN_GAP + META_HEIGHT * 0.75;
+
+  const topLabelSvg = topLabel
+    ? `<text x="${TITLE_LEFT_PADDING}" y="${(contentTop + META_HEIGHT).toFixed(1)}" fill="#737373" font-family="${geistFontFamily}, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(topLabel)}</text>`
+    : "";
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}">
+  <defs>
+    ${ogSvgDefs(idPrefix)}
+  </defs>
+  <rect width="100%" height="100%" fill="#0a0a0a" />
+  ${dotPatternBackgroundSvg(idPrefix)}
+  ${topLabelSvg}
+  <text fill="#ffffff" font-family="${geistFontFamily}, sans-serif" font-size="${fontSize}" font-weight="600" letter-spacing="-0.03em">${titleLines}</text>
+  <text x="${TITLE_LEFT_PADDING}" y="${domainY.toFixed(1)}" fill="#737373" font-family="${geistFontFamily}, sans-serif" font-size="22" letter-spacing="-0.01em">${escapeXml(domain)}</text>
+</svg>`;
+}
+
 export async function ogContentHash(templateVersion: string, ...parts: string[]) {
   const payload = [templateVersion, ...parts].join("\n");
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(payload));
@@ -138,4 +179,8 @@ export function ogResponseHeaders(hash: string) {
     ETag: `"${hash}"`,
     "Content-Type": "image/png",
   };
+}
+
+export function ogR2Key(key: string) {
+  return `${OG_R2_PREFIX}/${key}.png`;
 }

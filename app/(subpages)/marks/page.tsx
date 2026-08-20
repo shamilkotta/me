@@ -1,6 +1,6 @@
 import { MarksGrid } from "@/components/marks-grid";
 import { sortedMarksWithBlurDataURL } from "@/lib/marks-blur";
-import { buildPageOgMetadata } from "@/lib/page-og";
+import { buildPageOgMetadata } from "@/lib/og/page";
 
 export const metadata = buildPageOgMetadata("marks", {
   robots: {
