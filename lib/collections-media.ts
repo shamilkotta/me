@@ -42,7 +42,7 @@ export async function fetchOgImageForItem(url: string) {
   if (pending) return pending;
 
   const request = (async () => {
-    const response = await fetch(`/collections/og?url=${encodeURIComponent(url)}`);
+    const response = await fetch(`/api/collections/og?url=${encodeURIComponent(url)}`);
     if (!response.ok) return null;
 
     const data = (await response.json()) as { imageUrl?: string | null };

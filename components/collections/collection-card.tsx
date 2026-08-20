@@ -293,8 +293,8 @@ function useCollectionImage(item: CollectionItem, enabled: boolean) {
 }
 
 function useImageSize(src: string | null) {
-  const [size, setSize] = useState<{ width: number; height: number } | null>(
-    () => (src ? (imageSizeCache.get(src) ?? null) : null),
+  const [size, setSize] = useState<{ width: number; height: number } | null>(() =>
+    src ? (imageSizeCache.get(src) ?? null) : null,
   );
   const [failed, setFailed] = useState(false);
 
@@ -366,10 +366,7 @@ function ImageCard({ item, cardRef, onActivate }: CollectionCardProps) {
     <CollectionCardShell cardRef={mergedRef} item={item} onActivate={onActivate}>
       {imageUrl && size ? (
         <div className="relative border border-border bg-bg transition-colors group-focus-within:border-fg/30 group-hover:border-fg/30">
-          <div
-            className="relative"
-            style={{ aspectRatio: `${size.width} / ${size.height}` }}
-          >
+          <div className="relative" style={{ aspectRatio: `${size.width} / ${size.height}` }}>
             <img
               alt=""
               className="block h-auto w-full"

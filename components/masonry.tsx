@@ -121,9 +121,7 @@ export function Masonry<T>({ items, itemKey, render, gutter = 12 }: MasonryProps
     const ids = new Set(items.map(itemKey));
 
     setHeights((current) => {
-      const next = Object.fromEntries(
-        Object.entries(current).filter(([id]) => ids.has(id)),
-      );
+      const next = Object.fromEntries(Object.entries(current).filter(([id]) => ids.has(id)));
 
       return Object.keys(next).length === Object.keys(current).length ? current : next;
     });

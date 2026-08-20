@@ -1,14 +1,14 @@
 import { CollectionsView } from "@/components/collections/collections-view";
 import { SiteNav } from "@/components/site-nav";
 import { sortedCollections } from "@/lib/collections";
+import { buildPageOgMetadata } from "@/lib/og/page";
 
-export const metadata = {
-  title: "Collections",
+export const metadata = buildPageOgMetadata("collections", {
   robots: {
     index: false,
     follow: false,
   },
-};
+});
 
 export default function CollectionsPage() {
   const items = sortedCollections();

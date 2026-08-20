@@ -5,6 +5,18 @@ const OG_IMAGE_PATTERNS = [
   /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image(?::src)?["']/i,
 ];
 
+export function parseAllowedHttpUrl(raw: string | null) {
+  if (!raw) return null;
+
+  try {
+    const parsed = new URL(raw);
+    if (!["http:", "https:"].includes(parsed.protocol)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 function extractOgImage(html: string, baseUrl: URL): string | null {
   for (const pattern of OG_IMAGE_PATTERNS) {
     const match = html.match(pattern);
