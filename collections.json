@@ -64,6 +64,14 @@
     "createdAt": "2026-08-19T00:51:00.000Z"
   },
   {
+    "id": "threeui",
+    "title": "Procedural Three.js web design templates",
+    "url": "https://threeui.com",
+    "type": "library",
+    "tags": ["three.js", "web design", "templates", "agents", "motion", "ui"],
+    "createdAt": "2026-08-23T06:37:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],
