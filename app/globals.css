@@ -10,12 +10,28 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --color-bg: #000000;
     --color-fg: #ffffff;
     --color-muted: #888888;
     --color-border: #222222;
   }
+}
+
+html.light {
+  --color-bg: #ffffff;
+  --color-fg: #000000;
+  --color-muted: #666666;
+  --color-border: #e0e0e0;
+  color-scheme: light;
+}
+
+html.dark {
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+  --color-muted: #888888;
+  --color-border: #222222;
+  color-scheme: dark;
 }
 
 @layer base {
@@ -114,13 +130,21 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .writing-content .shiki {
+  html:not(.light) .writing-content .shiki {
     background-color: var(--shiki-dark-bg) !important;
   }
 
-  .writing-content .shiki span {
+  html:not(.light) .writing-content .shiki span {
     color: var(--shiki-dark) !important;
   }
+}
+
+html.dark .writing-content .shiki {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+html.dark .writing-content .shiki span {
+  color: var(--shiki-dark) !important;
 }
 
 .writing-content .shiki .line:empty::after {
