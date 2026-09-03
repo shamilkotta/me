@@ -26,13 +26,8 @@ export const pageLinks: NavLink[] = [
   { href: "/marks", label: "marks" },
 ];
 
-export const sectionNavLinks: NavLink[] = [{ href: "/", label: "home" }, ...pageLinks];
-
-export const writingPostNavLinks: NavLink[] = [
-  pageLinks[0],
-  { href: "/", label: "home" },
-  ...pageLinks.slice(1),
-];
+export const sectionNavLinks: NavLink[] = [{ href: "/", label: "home" }];
+export const writingPostNavLinks: NavLink[] = [{ href: "/writing", label: "writing" }];
 
 export const contactEmail = "hello@shamilkotta.com";
 
