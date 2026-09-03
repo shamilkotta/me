@@ -1,6 +1,7 @@
 import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
 
 export default async function HomePage() {
@@ -9,7 +10,7 @@ export default async function HomePage() {
   return (
     <>
       <div className="mb-4 mt-2 w-fit relative ">
-        <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">shamil</h1>
+        <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">shamil<span className="ml-1.5"><ThemeToggle /></span></h1>
         <p className="mb-4 text-[0.8125rem] -mt-1 text-muted [&_strong]:font-medium [&_strong]:text-fg">
           software engineer · currently <strong>looking for opportunities</strong>
         </p>

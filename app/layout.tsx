@@ -5,7 +5,6 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteJsonLd } from "@/components/site-json-ld";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/links";
 import { themeInitScript } from "@/lib/theme";
 import { Metadata } from "nlite";
@@ -68,7 +67,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <>
       <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       <div className="relative mx-auto max-w-[800px] px-6 pb-16 pt-12 text-fg">
-        <ThemeToggle />
         <SiteJsonLd />
         {children}
         <SiteFooter />

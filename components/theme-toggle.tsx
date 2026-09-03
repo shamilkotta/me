@@ -26,7 +26,7 @@ export function ThemeToggle() {
   return (
     <button
       aria-label="Toggle theme"
-      className="absolute right-6 top-12 z-10 flex size-8 cursor-pointer items-center justify-center border-0 bg-transparent p-0"
+      className="inline-flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 align-baseline"
       onClick={onClick}
       type="button"
     >
