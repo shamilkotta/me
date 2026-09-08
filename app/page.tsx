@@ -1,6 +1,7 @@
 import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
+import { ProjectRow } from "@/components/project-row";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
 
@@ -89,22 +90,7 @@ export default async function HomePage() {
         </div>
         <ul className="list-none">
           {PROJECTS.slice(0, 4).map((project) => (
-            <li key={project.name}>
-              <a
-                className="group flex items-baseline justify-between gap-4 border-b border-border py-[0.45rem] text-[0.8125rem] text-inherit no-underline hover:text-muted"
-                href={project.href}
-                target="_blank"
-              >
-                <span className="min-w-0">
-                  <span className="text-fg group-hover:text-muted">{project.name}</span>
-                  <span className="text-muted"> — </span>
-                  <span className="text-muted group-hover:text-muted">{project.desc}</span>
-                </span>
-                <span className="shrink-0 whitespace-nowrap text-xs text-muted group-hover:text-muted">
-                  {project.meta}
-                </span>
-              </a>
-            </li>
+            <ProjectRow key={project.name} project={project} separator=" — " />
           ))}
         </ul>
       </section>
