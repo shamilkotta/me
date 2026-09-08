@@ -10,6 +10,12 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    href: "",
+    name: "···",
+    desc: "design, run, and iterate on ai agents",
+    meta: "soon",
+  },
+  {
     href: "https://npmx.dev/package/nlite",
     name: "nlite",
     desc: "a attempt to create a lite react 19 framework",
