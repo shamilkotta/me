@@ -10,7 +10,12 @@ export default async function HomePage() {
   return (
     <>
       <div className="mb-4 mt-2 w-fit relative ">
-        <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">shamil<span className="ml-1.5"><ThemeToggle /></span></h1>
+        <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">
+          shamil
+          <span className="ml-1.5">
+            <ThemeToggle />
+          </span>
+        </h1>
         <p className="mb-4 text-[0.8125rem] -mt-1 text-muted [&_strong]:font-medium [&_strong]:text-fg">
           software engineer · currently <strong>looking for opportunities</strong>
         </p>
@@ -83,7 +88,7 @@ export default async function HomePage() {
           </Link>
         </div>
         <ul className="list-none">
-          {PROJECTS.slice(0, 3).map((project) => (
+          {PROJECTS.slice(0, 4).map((project) => (
             <li key={project.name}>
               <a
                 className="group flex items-baseline justify-between gap-4 border-b border-border py-[0.45rem] text-[0.8125rem] text-inherit no-underline hover:text-muted"
