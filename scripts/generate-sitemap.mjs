@@ -17,10 +17,14 @@ function urlEntry(loc) {
   return `  <url>\n    <loc>${loc}</loc>\n  </url>`;
 }
 
+// Leave out until intentionally re-included in the sitemap.
+const excludedWritingSlugs = new Set(["dont-settle-for-less"]);
+
 const files = await readdir(postsDir);
 const slugs = files
   .filter((name) => name.endsWith(".md"))
   .map((name) => name.slice(0, -3))
+  .filter((slug) => !excludedWritingSlugs.has(slug))
   .sort();
 
 const locs = [
