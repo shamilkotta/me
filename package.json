@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "nlite dev",
-    "build": "nlite build",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "pnpm generate:sitemap && nlite build",
     "preview": "nlite preview",
     "format": "oxfmt",
     "lint": "oxlint",
