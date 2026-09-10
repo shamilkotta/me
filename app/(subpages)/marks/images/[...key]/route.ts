@@ -84,6 +84,7 @@ export async function GET(r: Request, context: { params: Promise<{ key: string[]
   const response = transformed.response();
   const headers = new Headers(response.headers);
   headers.set("Cache-Control", `public, max-age=${ONE_YEAR}, immutable`);
+  headers.set("X-Robots-Tag", "noindex, nofollow");
 
   return new Response(response.body, {
     headers,

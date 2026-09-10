@@ -7,6 +7,7 @@ import {
   ogResponseHeaders,
 } from "@/lib/og/shared";
 import { serveOgImage } from "@/lib/og/render";
+import { absoluteUrl } from "@/lib/links";
 
 export const PAGE_OG_TEMPLATE_VERSION = "1";
 
@@ -52,11 +53,11 @@ export function buildPageOgMetadata(key: PageOgKey, extra?: Pick<Metadata, "robo
     title,
     ...extra,
     alternates: {
-      canonical: path,
+      canonical: absoluteUrl(path),
     },
     openGraph: {
       title,
-      url: path,
+      url: absoluteUrl(path),
       type: "website",
       images: [image],
     },

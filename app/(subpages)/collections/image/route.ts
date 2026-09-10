@@ -29,6 +29,7 @@ export async function GET(request: Request) {
       headers: {
         "Content-Type": contentType,
         "Cache-Control": "public, max-age=86400",
+          "X-Robots-Tag": "noindex, nofollow",
       },
     });
   } catch {

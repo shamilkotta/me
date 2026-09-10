@@ -1,3 +1,7 @@
 User-agent: *
 Disallow: /marks
 Disallow: /collections
+Disallow: /*/og
+Disallow: /*/og?*
+
+Sitemap: https://shamilkotta.com/sitemap.xml

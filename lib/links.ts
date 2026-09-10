@@ -1,4 +1,10 @@
 export const siteUrl = "https://shamilkotta.com";
+
+export function absoluteUrl(path: string = "/") {
+  if (!path || path === "/") return `${siteUrl}/`;
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return `${siteUrl}${normalized}`;
+}
 export const siteName = "shamil";
 export const siteTitle = "SHAMIL";
 export const siteDescription =

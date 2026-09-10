@@ -48,6 +48,7 @@ export async function serveOgImage({
       headers: {
         "Content-Type": "image/svg+xml; charset=utf-8",
         "Cache-Control": "public, max-age=3600",
+        "X-Robots-Tag": "noindex, nofollow",
         ...(headers.ETag ? { ETag: headers.ETag } : {}),
       },
     });
