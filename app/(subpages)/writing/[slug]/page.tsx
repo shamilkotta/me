@@ -1,6 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { WritingPost } from "@/lib/content";
+import { absoluteUrl } from "@/lib/links";
 import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
@@ -42,12 +43,12 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
     title,
     description,
     alternates: {
-      canonical: `/writing/${slug}`,
+      canonical: absoluteUrl(`/writing/${slug}`),
     },
     openGraph: {
       title,
       description,
-      url: `/writing/${slug}`,
+      url: absoluteUrl(`/writing/${slug}`),
       type: "article",
       publishedTime: post.data.date.toISOString(),
       images: [ogImage],

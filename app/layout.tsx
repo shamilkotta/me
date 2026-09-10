@@ -5,7 +5,7 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteJsonLd } from "@/components/site-json-ld";
-import { ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/links";
+import { absoluteUrl, ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/links";
 import { themeInitScript } from "@/lib/theme";
 import { Metadata } from "nlite";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   publisher: "Shamilkotta",
   keywords: ["Shamil", "shamilkotta", "software engineer", "developer"],
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
   },
   icons: {
     icon: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteTitle,
     description: siteDescription,
-    url: "/",
+    url: absoluteUrl("/"),
     siteName,
     type: "website",
     locale: "en_US",

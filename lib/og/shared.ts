@@ -178,6 +178,7 @@ export function ogResponseHeaders(hash: string) {
     "Cache-Control": "public, max-age=31536000, immutable",
     ETag: `"${hash}"`,
     "Content-Type": "image/png",
+    "X-Robots-Tag": "noindex, nofollow",
   };
 }
 
