@@ -32,7 +32,7 @@ function toggleWithCircleReveal(origin: { x: number; y: number }, next: Theme) {
         ],
       },
       {
-        duration: 1450,
+        duration: 450,
         easing: "ease-out",
         pseudoElement: "::view-transition-new(root)",
       },
