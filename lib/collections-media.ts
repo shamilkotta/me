@@ -19,6 +19,14 @@ export function resolveItemImageUrl(item: CollectionItem) {
   return null;
 }
 
+export function collectionImageSrc(imageUrl: string) {
+  if (imageUrl.startsWith("data:") || imageUrl.startsWith("/collections/image?")) {
+    return imageUrl;
+  }
+
+  return `/collections/image?url=${encodeURIComponent(imageUrl)}`;
+}
+
 export function shouldFetchOgImage(item: CollectionItem) {
   if (resolveItemImageUrl(item)) return false;
   if (!item.url) return false;

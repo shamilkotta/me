@@ -5,6 +5,7 @@ import { Copy, Download } from "lucide-react";
 
 import { isImageOnlyItem, type CollectionItem } from "@/lib/collections";
 import {
+  collectionImageSrc,
   fetchOgImageForItem,
   getCachedOgImage,
   resolveItemImageUrl,
@@ -60,12 +61,7 @@ function ImageOverlay({ item }: { item: CollectionItem }) {
 }
 
 async function fetchImageBlob(imageUrl: string) {
-  if (imageUrl.startsWith("data:")) {
-    const response = await fetch(imageUrl);
-    return response.blob();
-  }
-
-  const response = await fetch(`/collections/image?url=${encodeURIComponent(imageUrl)}`);
+  const response = await fetch(collectionImageSrc(imageUrl));
   if (!response.ok) throw new Error("failed to fetch image");
 
   return response.blob();
@@ -287,7 +283,7 @@ function useCollectionImage(item: CollectionItem, enabled: boolean) {
   }, [enabled, item.id, item.url, item.imageUrl, item.type]);
 
   return {
-    imageUrl: state.imageUrl,
+    imageUrl: state.imageUrl ? collectionImageSrc(state.imageUrl) : null,
     loading: enabled && state.loading && !state.imageUrl,
   };
 }
