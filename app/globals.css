@@ -2,6 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
   --color-bg: #ffffff;
   --color-fg: #000000;

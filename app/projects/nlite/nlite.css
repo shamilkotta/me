@@ -1,0 +1,527 @@
+/* Isolated design tokens for /projects/nlite — does not alter the portfolio site. */
+
+.nlite-root {
+  --nl-bg: #fafafa;
+  --nl-fg: #0a0a0a;
+  --nl-muted: #666666;
+  --nl-subtle: #999999;
+  --nl-border: #eaeaea;
+  --nl-border-strong: #d4d4d4;
+  --nl-surface: #ffffff;
+  --nl-surface-2: #f4f4f4;
+  --nl-code-bg: #ffffff;
+  --nl-code-fg: #171717;
+  --nl-code-border: #eaeaea;
+  --nl-code-line: #a8a8a8;
+  --shiki-color-text: #171717;
+  --shiki-color-background: transparent;
+  --shiki-token-comment: #4d4d4d;
+  --shiki-token-keyword: oklch(53.5% 0.2058 2.84);
+  --shiki-token-string: oklch(51.75% 0.1453 147.65);
+  --shiki-token-function: oklch(47.18% 0.2579 304);
+  --shiki-token-constant: oklch(53.18% 0.2399 256.99);
+  --shiki-token-punctuation: #171717;
+  --nl-accent: #0a0a0a;
+  /* Shared dotted rule (matches hero grid strokeDasharray="2 6") */
+  --nl-dot-dash: 2px;
+  --nl-dot-gap: 6px;
+  --nl-dot-line: color-mix(in srgb, var(--nl-fg) 48%, transparent);
+
+  color: var(--nl-fg);
+  background: var(--nl-bg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .nlite-root {
+    --nl-bg: #000000;
+    --nl-fg: #ededed;
+    --nl-muted: #888888;
+    --nl-subtle: #666666;
+    --nl-border: #1a1a1a;
+    --nl-border-strong: #2a2a2a;
+    --nl-surface: #0a0a0a;
+    --nl-surface-2: #111111;
+    --nl-code-bg: #0a0a0a;
+    --nl-code-fg: #ededed;
+    --nl-code-border: #1e1e1e;
+    --nl-code-line: #878787;
+    --shiki-color-text: #ededed;
+    --shiki-color-background: transparent;
+    --shiki-token-comment: #a0a0a0;
+    --shiki-token-keyword: oklch(69.36% 0.2223 3.91);
+    --shiki-token-string: oklch(73.1% 0.2158 148.29);
+    --shiki-token-function: oklch(69.87% 0.2037 309.51);
+    --shiki-token-constant: oklch(71.7% 0.1648 250.79);
+    --shiki-token-punctuation: #ededed;
+    --nl-accent: #ededed;
+    --nl-dot-line: color-mix(in srgb, var(--nl-fg) 28%, transparent);
+  }
+}
+
+html.dark .nlite-root {
+  --nl-bg: #000000;
+  --nl-fg: #ededed;
+  --nl-muted: #888888;
+  --nl-subtle: #666666;
+  --nl-border: #1a1a1a;
+  --nl-border-strong: #2a2a2a;
+  --nl-surface: #0a0a0a;
+  --nl-surface-2: #111111;
+  --nl-code-bg: #0a0a0a;
+  --nl-code-fg: #ededed;
+  --nl-code-border: #1e1e1e;
+  --nl-code-line: #878787;
+  --shiki-color-text: #ededed;
+  --shiki-color-background: transparent;
+  --shiki-token-comment: #a0a0a0;
+  --shiki-token-keyword: oklch(69.36% 0.2223 3.91);
+  --shiki-token-string: oklch(73.1% 0.2158 148.29);
+  --shiki-token-function: oklch(69.87% 0.2037 309.51);
+  --shiki-token-constant: oklch(71.7% 0.1648 250.79);
+  --shiki-token-punctuation: #ededed;
+  --nl-accent: #ededed;
+  --nl-dot-line: color-mix(in srgb, var(--nl-fg) 28%, transparent);
+}
+
+html.light .nlite-root {
+  --nl-bg: #fafafa;
+  --nl-fg: #0a0a0a;
+  --nl-muted: #666666;
+  --nl-subtle: #999999;
+  --nl-border: #eaeaea;
+  --nl-border-strong: #d4d4d4;
+  --nl-surface: #ffffff;
+  --nl-surface-2: #f4f4f4;
+  --nl-code-bg: #ffffff;
+  --nl-code-fg: #171717;
+  --nl-code-border: #eaeaea;
+  --nl-code-line: #a8a8a8;
+  --shiki-color-text: #171717;
+  --shiki-color-background: transparent;
+  --shiki-token-comment: #4d4d4d;
+  --shiki-token-keyword: oklch(53.5% 0.2058 2.84);
+  --shiki-token-string: oklch(51.75% 0.1453 147.65);
+  --shiki-token-function: oklch(47.18% 0.2579 304);
+  --shiki-token-constant: oklch(53.18% 0.2399 256.99);
+  --shiki-token-punctuation: #171717;
+  --nl-accent: #0a0a0a;
+  --nl-dot-line: color-mix(in srgb, var(--nl-fg) 48%, transparent);
+}
+
+.nlite-root ::selection {
+  background: var(--nl-fg);
+  color: var(--nl-bg);
+}
+
+.nlite-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Ambient hero field — stronger lines in light, softer in dark */
+.nlite-hero-backdrop {
+  --nl-hero-grid-opacity: 0.48;
+  --nl-hero-orbit-a: 0.55;
+  --nl-hero-orbit-b: 0.4;
+  --nl-hero-orbit-c: 0.45;
+  --nl-hero-cross: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .nlite-hero-backdrop {
+    --nl-hero-grid-opacity: 0.28;
+    --nl-hero-orbit-a: 0.38;
+    --nl-hero-orbit-b: 0.24;
+    --nl-hero-orbit-c: 0.28;
+    --nl-hero-cross: 0.32;
+  }
+}
+
+html.dark .nlite-hero-backdrop {
+  --nl-hero-grid-opacity: 0.28;
+  --nl-hero-orbit-a: 0.38;
+  --nl-hero-orbit-b: 0.24;
+  --nl-hero-orbit-c: 0.28;
+  --nl-hero-cross: 0.32;
+}
+
+.nlite-hero-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at 70% 45%,
+      color-mix(in srgb, var(--nl-fg) 8%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 18% 28%,
+      color-mix(in srgb, var(--nl-fg) 5%, transparent),
+      transparent 65%
+    );
+}
+
+.nlite-hero-grid-stroke {
+  stroke-opacity: var(--nl-hero-grid-opacity);
+}
+
+.nlite-hero-orbit {
+  opacity: var(--nl-hero-orbit-c);
+}
+
+.nlite-hero-orbit-a {
+  opacity: var(--nl-hero-orbit-a);
+  animation: nlite-orbit-dash 42s linear infinite;
+}
+
+.nlite-hero-orbit-b {
+  opacity: var(--nl-hero-orbit-b);
+  animation: nlite-orbit-dash 56s linear infinite reverse;
+}
+
+.nlite-hero-orbit-c {
+  opacity: var(--nl-hero-orbit-c);
+}
+
+.nlite-hero-cross {
+  opacity: var(--nl-hero-cross);
+}
+
+@keyframes nlite-orbit-dash {
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nlite-hero-orbit-a,
+  .nlite-hero-orbit-b {
+    animation: none;
+  }
+}
+
+.nlite-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes nlite-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nlite-animate-in {
+  animation: nlite-fade-up 0.7s ease both;
+}
+
+.nlite-animate-in-delay-1 {
+  animation-delay: 0.08s;
+}
+.nlite-animate-in-delay-2 {
+  animation-delay: 0.16s;
+}
+.nlite-animate-in-delay-3 {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nlite-animate-in {
+    animation: none;
+  }
+
+  .nlite-arc-dash,
+  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter) {
+    animation: none !important;
+  }
+}
+
+@keyframes nlite-arc-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.nlite-arc-dash {
+  animation: nlite-arc-flow 0.7s linear infinite;
+}
+
+.nlite-code-float {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 8px 24px rgb(0 0 0 / 0.08),
+    0 24px 48px rgb(0 0 0 / 0.06);
+}
+
+.nlite-globe-light {
+  display: block;
+}
+
+.nlite-globe-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .nlite-globe-light {
+    display: none;
+  }
+
+  :root:not(.light) .nlite-globe-dark {
+    display: block;
+  }
+}
+
+html.dark .nlite-globe-light {
+  display: none;
+}
+
+html.dark .nlite-globe-dark {
+  display: block;
+}
+
+html.light .nlite-globe-light {
+  display: block;
+}
+
+html.light .nlite-globe-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .nlite-code-float {
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.5),
+      0 12px 32px rgb(0 0 0 / 0.45),
+      0 28px 56px rgb(0 0 0 / 0.35);
+  }
+}
+
+html.dark .nlite-code-float {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.5),
+    0 12px 32px rgb(0 0 0 / 0.45),
+    0 28px 56px rgb(0 0 0 / 0.35);
+}
+
+.nl-code .shiki {
+  margin: 0;
+  overflow-x: auto;
+  background-color: transparent !important;
+  padding: 16px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-feature-settings: "liga" off;
+  scrollbar-width: thin;
+  scrollbar-color: var(--nl-code-line) transparent;
+}
+
+.nl-code .shiki code {
+  display: grid;
+  counter-reset: nl-line;
+  font-feature-settings: "liga" off;
+}
+
+.nl-code .shiki .line {
+  display: inline-block;
+  width: max-content;
+  min-width: 100%;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 20px;
+}
+
+.nl-code .shiki .line::before {
+  content: counter(nl-line);
+  counter-increment: nl-line;
+  display: inline-block;
+  width: 16px;
+  margin-right: 20px;
+  text-align: right;
+  color: var(--nl-code-line);
+  font-variant-numeric: tabular-nums;
+}
+
+.nl-code-tight-bottom .shiki {
+  padding-bottom: 4px;
+}
+
+.nl-code-tight-top .shiki {
+  padding-top: 4px;
+}
+
+.nl-code-compact .shiki {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* Vite section: dotted rules matching hero grid (2 / 6) */
+.nlite-vite-cell {
+  position: relative;
+}
+
+.nlite-vite-dot-h,
+.nlite-vite-cell-b::after,
+.nlite-vite-cell-br::after,
+.nlite-vite-cell-b-mobile::after,
+.nlite-vite-cell-b-sm::after {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--nl-dot-line) 0 var(--nl-dot-dash),
+    transparent var(--nl-dot-dash) calc(var(--nl-dot-dash) + var(--nl-dot-gap))
+  );
+}
+
+.nlite-vite-dot-v,
+.nlite-vite-cell-br::before,
+.nlite-vite-cell-r-sm::before,
+.nlite-vite-cell-r-lg::before {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--nl-dot-line) 0 var(--nl-dot-dash),
+    transparent var(--nl-dot-dash) calc(var(--nl-dot-dash) + var(--nl-dot-gap))
+  );
+}
+
+.nlite-vite-cell-b::after,
+.nlite-vite-cell-br::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  pointer-events: none;
+}
+
+.nlite-vite-cell-br::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .nlite-vite-cell-br::before {
+    display: block;
+  }
+}
+
+/* Feature cells: mobile bottom dashes */
+.nlite-vite-cell-b-mobile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .nlite-vite-cell-b-mobile::after {
+    display: none;
+  }
+
+  .nlite-vite-cell-r-sm::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    pointer-events: none;
+  }
+
+  .nlite-vite-cell-b-sm::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nlite-vite-cell-r-sm::before {
+    display: none;
+  }
+
+  .nlite-vite-cell-b-sm::after {
+    display: none;
+  }
+
+  .nlite-vite-cell-r-lg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    pointer-events: none;
+    display: block;
+  }
+}
+
+.nl-code-from-6 .shiki code {
+  counter-reset: nl-line 6;
+}
+
+.nlite-stream-skeleton {
+  padding: 0 20px;
+}
+
+.nlite-stream-skeleton-gutter {
+  display: inline-block;
+  width: 16px;
+  margin-right: 20px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--nl-code-line);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter) {
+    animation: nlite-skeleton-pulse 1.6s ease-in-out infinite;
+  }
+
+  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter):nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter):nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes nlite-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}

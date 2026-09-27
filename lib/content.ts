@@ -16,11 +16,10 @@ export const PROJECTS: Project[] = [
     meta: "soon",
   },
   {
-    href: "https://npmx.dev/package/nlite",
+    href: "/projects/nlite",
     name: "nlite",
-    desc: "a attempt to create a lite react 19 framework",
+    desc: "react 19 framework on vite — ppr, ssr, ssg, first-party deploys",
     meta: "",
-    external: true,
   },
   {
     href: "https://npmx.dev/",

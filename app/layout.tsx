@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from "react";
+import "@fontsource-variable/geist/wght.css";
 import "@fontsource-variable/geist-mono/wght.css";
+import geistLatin from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import geistMonoLatin from "@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url";
 import "./globals.css";
 
-import { SiteFooter } from "@/components/site-footer";
-import { SiteJsonLd } from "@/components/site-json-ld";
 import { absoluteUrl, ogImage, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/links";
 import { themeInitScript } from "@/lib/theme";
 import { Metadata } from "nlite";
@@ -54,6 +54,13 @@ export const metadata: Metadata = {
   links: [
     {
       rel: "preload",
+      href: geistLatin,
+      as: "font",
+      type: "font/woff2",
+      crossOrigin: "anonymous",
+    },
+    {
+      rel: "preload",
       href: geistMonoLatin,
       as: "font",
       type: "font/woff2",
@@ -66,11 +73,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      <div className="relative mx-auto max-w-[800px] px-6 pb-16 pt-12 text-fg">
-        <SiteJsonLd />
-        {children}
-        <SiteFooter />
-      </div>
+      {children}
     </>
   );
 }
