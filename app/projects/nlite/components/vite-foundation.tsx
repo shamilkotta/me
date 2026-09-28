@@ -27,10 +27,13 @@ export function ViteFoundation() {
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-(--nl-subtle)">
               Powered by Vite
             </p>
-            <h2 className="mb-4 max-w-md text-3xl font-semibold tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
-              Framework rails. Vite speed.
+            <h2 className="mb-5 text-[clamp(2.5rem,6vw,3.5rem)] font-semibold tracking-tight lg:text-5xl">
+              Framework rails.
+              <br className="hidden lg:block" />
+              <span className="lg:hidden"> </span>
+              Vite speed.
             </h2>
-            <p className="mb-8 max-w-md text-(--nl-muted) sm:text-lg">
+            <p className="mb-8 max-w-xl text-(--nl-muted) sm:text-lg">
               nlite is a React framework on Vite. You get framework conventions and the same DX Vite
               is known for.
             </p>
@@ -49,24 +52,49 @@ export function ViteFoundation() {
             </div>
           </div>
 
-          <div className="nlite-vite-cell nlite-vite-cell-b relative flex min-h-[16rem] items-center justify-center p-6 sm:min-h-[18rem] sm:p-8 lg:min-h-0 lg:p-10">
+          <div className="nlite-vite-cell nlite-vite-cell-b relative flex min-h-[16rem] items-center justify-center overflow-hidden p-6 sm:min-h-[18rem] sm:p-8 lg:min-h-0 lg:p-10">
             <div className="relative aspect-square w-full max-w-[28rem] lg:max-w-none" aria-hidden>
+              {/* Soft bloom behind the strokes */}
+              <div className="nlite-vite-bloom pointer-events-none absolute inset-0">
+                <img
+                  src="/projects/nlite/vite-isometric-light.png"
+                  alt=""
+                  width={1024}
+                  height={1024}
+                  className="nlite-globe-light h-full w-full object-contain"
+                  draggable={false}
+                />
+                <img
+                  src="/projects/nlite/vite-isometric-dark.png"
+                  alt=""
+                  width={1024}
+                  height={1024}
+                  className="nlite-globe-dark absolute inset-0 h-full w-full object-contain"
+                  draggable={false}
+                />
+              </div>
+
               <img
                 src="/projects/nlite/vite-isometric-light.png"
                 alt=""
-                width={2048}
-                height={2048}
-                className="nlite-globe-light h-full w-full object-contain"
+                width={1024}
+                height={1024}
+                className="nlite-globe-light nlite-vite-art relative z-[1] h-full w-full object-contain"
                 draggable={false}
               />
               <img
                 src="/projects/nlite/vite-isometric-dark.png"
                 alt=""
-                width={2048}
-                height={2048}
-                className="nlite-globe-dark absolute inset-0 h-full w-full object-contain"
+                width={1024}
+                height={1024}
+                className="nlite-globe-dark nlite-vite-art absolute inset-0 z-[1] h-full w-full object-contain"
                 draggable={false}
               />
+
+              {/* Traveling edge glow — PNG alpha masks the beam to exact strokes */}
+              <div className="nlite-vite-edge-glow pointer-events-none absolute inset-0 z-[2]">
+                <div className="nlite-vite-edge-glow-beam" />
+              </div>
             </div>
           </div>
         </div>

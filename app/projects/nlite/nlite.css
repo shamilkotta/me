@@ -26,6 +26,12 @@
   --nl-dot-dash: 2px;
   --nl-dot-gap: 6px;
   --nl-dot-line: color-mix(in srgb, var(--nl-fg) 48%, transparent);
+  /* Hero ambient — orbits match grid stroke opacity */
+  --nl-hero-grid-opacity: 0.48;
+  --nl-hero-orbit-a: 0.48;
+  --nl-hero-orbit-b: 0.4;
+  --nl-hero-orbit-c: 0.4;
+  --nl-hero-cross: 0.4;
 
   color: var(--nl-fg);
   background: var(--nl-bg);
@@ -60,6 +66,11 @@
     --shiki-token-punctuation: #ededed;
     --nl-accent: #ededed;
     --nl-dot-line: color-mix(in srgb, var(--nl-fg) 28%, transparent);
+    --nl-hero-grid-opacity: 0.28;
+    --nl-hero-orbit-a: 0.28;
+    --nl-hero-orbit-b: 0.22;
+    --nl-hero-orbit-c: 0.22;
+    --nl-hero-cross: 0.24;
   }
 }
 
@@ -86,6 +97,11 @@ html.dark .nlite-root {
   --shiki-token-punctuation: #ededed;
   --nl-accent: #ededed;
   --nl-dot-line: color-mix(in srgb, var(--nl-fg) 28%, transparent);
+  --nl-hero-grid-opacity: 0.28;
+  --nl-hero-orbit-a: 0.28;
+  --nl-hero-orbit-b: 0.22;
+  --nl-hero-orbit-c: 0.22;
+  --nl-hero-cross: 0.24;
 }
 
 html.light .nlite-root {
@@ -111,6 +127,11 @@ html.light .nlite-root {
   --shiki-token-punctuation: #171717;
   --nl-accent: #0a0a0a;
   --nl-dot-line: color-mix(in srgb, var(--nl-fg) 48%, transparent);
+  --nl-hero-grid-opacity: 0.48;
+  --nl-hero-orbit-a: 0.48;
+  --nl-hero-orbit-b: 0.4;
+  --nl-hero-orbit-c: 0.4;
+  --nl-hero-cross: 0.4;
 }
 
 .nlite-root ::selection {
@@ -121,49 +142,6 @@ html.light .nlite-root {
 .nlite-root a {
   color: inherit;
   text-decoration: none;
-}
-
-/* Ambient hero field — stronger lines in light, softer in dark */
-.nlite-hero-backdrop {
-  --nl-hero-grid-opacity: 0.48;
-  --nl-hero-orbit-a: 0.55;
-  --nl-hero-orbit-b: 0.4;
-  --nl-hero-orbit-c: 0.45;
-  --nl-hero-cross: 0.5;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) .nlite-hero-backdrop {
-    --nl-hero-grid-opacity: 0.28;
-    --nl-hero-orbit-a: 0.38;
-    --nl-hero-orbit-b: 0.24;
-    --nl-hero-orbit-c: 0.28;
-    --nl-hero-cross: 0.32;
-  }
-}
-
-html.dark .nlite-hero-backdrop {
-  --nl-hero-grid-opacity: 0.28;
-  --nl-hero-orbit-a: 0.38;
-  --nl-hero-orbit-b: 0.24;
-  --nl-hero-orbit-c: 0.28;
-  --nl-hero-cross: 0.32;
-}
-
-.nlite-hero-glow {
-  position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(
-      ellipse 55% 45% at 70% 45%,
-      color-mix(in srgb, var(--nl-fg) 8%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 40% 35% at 18% 28%,
-      color-mix(in srgb, var(--nl-fg) 5%, transparent),
-      transparent 65%
-    );
 }
 
 .nlite-hero-grid-stroke {
@@ -244,8 +222,31 @@ html.dark .nlite-hero-backdrop {
   }
 
   .nlite-arc-dash,
-  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter) {
+  .nlite-stream-skeleton span:not(.nlite-stream-skeleton-gutter),
+  .nlite-vite-bloom,
+  .nlite-vite-edge-glow-beam,
+  .nlite-vite-art {
     animation: none !important;
+  }
+
+  .nlite-vite-bloom {
+    opacity: 0.4;
+  }
+
+  .nlite-vite-edge-glow-beam {
+    background: color-mix(in srgb, var(--nl-fg) 55%, transparent);
+    inset: 0;
+  }
+
+  .nlite-vite-art {
+    filter: drop-shadow(0 0 4px rgb(255 255 255 / 0.28))
+      drop-shadow(0 0 12px rgb(255 255 255 / 0.14));
+  }
+
+  html.light .nlite-vite-art {
+    filter: drop-shadow(0 0 5px rgb(255 255 255 / 0.8))
+      drop-shadow(0 0 14px rgb(200 208 220 / 0.5))
+      drop-shadow(0 0 24px rgb(180 190 205 / 0.3));
   }
 }
 
@@ -366,6 +367,173 @@ html.dark .nlite-code-float {
 .nl-code-compact .shiki {
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+/* Vite isometric: soft bloom + traveling edge glow (edge-mask PNG) */
+.nlite-vite-art {
+  animation: nlite-vite-art-glow 3.6s ease-in-out infinite;
+}
+
+html.light .nlite-vite-art {
+  animation-name: nlite-vite-art-glow-light;
+}
+
+.nlite-vite-bloom {
+  z-index: 0;
+  filter: blur(18px) brightness(1.6);
+  opacity: 0.55;
+  transform: scale(1.01);
+  animation: nlite-vite-bloom-pulse 3.6s ease-in-out infinite;
+}
+
+.nlite-vite-edge-glow {
+  z-index: 2;
+  overflow: hidden;
+  -webkit-mask-image: url("/projects/nlite/vite-isometric-edge-light.png");
+  mask-image: url("/projects/nlite/vite-isometric-edge-light.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  filter: blur(4px) brightness(1.4);
+  opacity: 0.95;
+}
+
+.nlite-vite-edge-glow-beam {
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 30deg,
+    rgb(255 255 255 / 0.2) 55deg,
+    rgb(255 255 255 / 0.85) 78deg,
+    #fff 95deg,
+    rgb(255 255 255 / 0.85) 112deg,
+    rgb(255 255 255 / 0.2) 135deg,
+    transparent 160deg,
+    transparent 360deg
+  );
+  animation: nlite-vite-glow-spin 4.5s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .nlite-vite-edge-glow {
+    -webkit-mask-image: url("/projects/nlite/vite-isometric-edge-dark.png");
+    mask-image: url("/projects/nlite/vite-isometric-edge-dark.png");
+    mix-blend-mode: screen;
+    opacity: 1;
+    filter: blur(5px) brightness(1.7);
+  }
+
+  :root:not(.light) .nlite-vite-bloom {
+    filter: blur(20px) brightness(1.8);
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) .nlite-vite-edge-glow {
+    mix-blend-mode: plus-lighter;
+    opacity: 1;
+    filter: blur(5px) brightness(1.5);
+  }
+
+  :root:not(.dark) .nlite-vite-bloom {
+    filter: blur(18px) brightness(2.4);
+    opacity: 0.4;
+    mix-blend-mode: soft-light;
+  }
+
+  :root:not(.dark) .nlite-vite-art {
+    animation-name: nlite-vite-art-glow-light;
+  }
+}
+
+html.dark .nlite-vite-edge-glow {
+  -webkit-mask-image: url("/projects/nlite/vite-isometric-edge-dark.png");
+  mask-image: url("/projects/nlite/vite-isometric-edge-dark.png");
+  mix-blend-mode: screen;
+  opacity: 1;
+  filter: blur(5px) brightness(1.7);
+}
+
+html.dark .nlite-vite-bloom {
+  filter: blur(20px) brightness(1.8);
+  opacity: 0.6;
+}
+
+html.light .nlite-vite-edge-glow {
+  -webkit-mask-image: url("/projects/nlite/vite-isometric-edge-light.png");
+  mask-image: url("/projects/nlite/vite-isometric-edge-light.png");
+  mix-blend-mode: plus-lighter;
+  opacity: 1;
+  filter: blur(5px) brightness(1.5);
+}
+
+html.light .nlite-vite-edge-glow-beam {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 30deg,
+    rgb(220 225 230 / 0.35) 55deg,
+    rgb(245 247 250 / 0.9) 78deg,
+    #fff 95deg,
+    rgb(245 247 250 / 0.9) 112deg,
+    rgb(220 225 230 / 0.35) 135deg,
+    transparent 160deg,
+    transparent 360deg
+  );
+}
+
+html.light .nlite-vite-bloom {
+  filter: blur(18px) brightness(2.4);
+  opacity: 0.4;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes nlite-vite-glow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nlite-vite-bloom-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+@keyframes nlite-vite-art-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px rgb(255 255 255 / 0.22))
+      drop-shadow(0 0 10px rgb(255 255 255 / 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgb(255 255 255 / 0.45))
+      drop-shadow(0 0 18px rgb(255 255 255 / 0.22));
+  }
+}
+
+@keyframes nlite-vite-art-glow-light {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgb(255 255 255 / 0.7))
+      drop-shadow(0 0 12px rgb(200 208 220 / 0.45))
+      drop-shadow(0 0 22px rgb(180 190 205 / 0.28));
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgb(255 255 255 / 0.95))
+      drop-shadow(0 0 18px rgb(210 218 230 / 0.6))
+      drop-shadow(0 0 32px rgb(190 200 215 / 0.4));
+  }
 }
 
 /* Vite section: dotted rules matching hero grid (2 / 6) */

@@ -2,7 +2,7 @@ export const NLITE = {
   name: "nlite",
   tagline: "Next.js familiar React on Vite Native",
   description:
-    "File-based routing, SSR, SSG, and Partial Pre-Rendering. First-party deploys to Vercel, Cloudflare, Netlify, or any Node server. Full Vite DX.",
+    "File-based routing, SSR, SSG, and Partial Pre-Rendering. First-party deploys to Vercel, Cloudflare, Netlify, or any JS server. Full Vite DX.",
   install: "pnpm add nlite react react-dom",
   github: "https://github.com/shamilkotta/nlite",
   npm: "https://npmx.dev/package/nlite",
@@ -45,10 +45,10 @@ export default defineConfig({
   },
   {
     id: "node",
-    name: "Any Node server",
-    body: "Run the Node build on your own machine, VPS, Docker, or platform of choice.",
+    name: "Any JS server",
+    body: "Run the JS build on your own machine, VPS, Docker, or platform of choice.",
     code: `import { defineConfig } from "nlite/config";
-import { node } from "nlite/adapters";
+
 
 export default defineConfig({
   

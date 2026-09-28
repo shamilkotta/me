@@ -9,10 +9,31 @@ import { HeroBackdrop } from "./components/hero-backdrop";
 import { PprShowcase } from "./components/ppr-showcase";
 import { ViteFoundation } from "./components/vite-foundation";
 
+const ogImage = {
+  url: "/projects/nlite/og.jpg",
+  width: 2400,
+  height: 1260,
+  alt: "nlite — Next.js familiar React on Vite",
+  type: "image/png",
+} as const;
+
 export const metadata: Metadata = {
   title: "nlite — The React framework on Vite",
   description: NLITE.description,
   alternates: { canonical: absoluteUrl("/projects/nlite") },
+  openGraph: {
+    title: "nlite — The React framework on Vite",
+    description: NLITE.description,
+    url: absoluteUrl("/projects/nlite"),
+    type: "website",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "nlite — The React framework on Vite",
+    description: NLITE.description,
+    images: [ogImage.url],
+  },
 };
 
 const press =
@@ -27,7 +48,7 @@ export default function NlitePage() {
         <HeroBackdrop />
         <div className="nlite-noise absolute inset-0" />
         <div className="relative mx-auto grid w-full max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
-          <div className="max-w-md">
+          <div className="relative z-10 max-w-md">
             <p className="nlite-animate-in mb-5 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--nl-subtle)]">
               Next.js-familiar · Vite-native
             </p>
@@ -70,40 +91,109 @@ export default function NlitePage() {
             </div>
           </div>
 
-          <div
-            className={`nlite-animate-in nlite-animate-in-delay-2 relative overflow-hidden rounded-2xl border border-[var(--nl-border)] bg-[var(--nl-surface)] p-5 transition-[border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] sm:p-6 ${hoverFine}border-[var(--nl-border-strong)]`}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <span className="font-mono text-[11px] text-[var(--nl-subtle)]">explorer</span>
-              <span className="rounded border border-[var(--nl-border)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--nl-muted)]">
-                nlite/
-              </span>
-            </div>
-            <ul className="font-mono text-[13px] leading-7">
-              {TREE.map((node) => (
-                <li
-                  key={`${node.name}-${node.note}`}
-                  className={`-mx-1 flex items-baseline justify-between gap-4 rounded-md px-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] ${hoverFine}bg-[var(--nl-surface-2)]`}
-                  style={{ paddingLeft: `${(node.depth ?? 0) * 14 + 4}px` }}
-                >
-                  <span className="flex items-center gap-2">
-                    <span
-                      className={
-                        node.kind === "dir" ? "text-[var(--nl-fg)]" : "text-[var(--nl-muted)]"
-                      }
-                    >
-                      {node.kind === "dir" ? "▸" : "·"}
-                    </span>
-                    <span className={node.kind === "dir" ? "font-medium" : ""}>{node.name}</span>
-                  </span>
-                  <span
-                    className={`hidden truncate text-[11px] text-[var(--nl-subtle)] transition-colors duration-150 sm:inline ${hoverFine}text-[var(--nl-muted)]`}
+          <div className="nlite-animate-in nlite-animate-in-delay-2 relative">
+            {/* Orbit rings centered on the explorer */}
+            <div
+              aria-hidden
+              className="nlite-explorer-orbits pointer-events-none absolute left-1/2 top-1/2 z-0 aspect-square min-h-[125%] min-w-[125%] -translate-x-1/2 -translate-y-1/2 text-[var(--nl-fg)]"
+            >
+              <svg
+                className="h-full w-full"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="nl-explorer-orbit-fade-outer"
+                    x1="0%"
+                    x2="100%"
+                    y1="0%"
+                    y2="0%"
                   >
-                    {node.note}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                    <stop offset="0%" stopColor="white" stopOpacity="1" />
+                    <stop offset="55%" stopColor="white" stopOpacity="0.7" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient
+                    id="nl-explorer-orbit-fade-inner"
+                    x1="0%"
+                    x2="100%"
+                    y1="0%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="white" stopOpacity="1" />
+                    <stop offset="70%" stopColor="white" stopOpacity="0.85" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0.25" />
+                  </linearGradient>
+                  <mask id="nl-explorer-orbit-mask-outer">
+                    <rect width="100%" height="100%" fill="url(#nl-explorer-orbit-fade-outer)" />
+                  </mask>
+                  <mask id="nl-explorer-orbit-mask-inner">
+                    <rect width="100%" height="100%" fill="url(#nl-explorer-orbit-fade-inner)" />
+                  </mask>
+                </defs>
+                <circle
+                  className="nlite-hero-orbit nlite-hero-orbit-a"
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  mask="url(#nl-explorer-orbit-mask-outer)"
+                  r="49"
+                  stroke="currentColor"
+                  strokeDasharray="3 8"
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <circle
+                  className="nlite-hero-orbit nlite-hero-orbit-a"
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  mask="url(#nl-explorer-orbit-mask-inner)"
+                  r="36"
+                  stroke="currentColor"
+                  strokeDasharray="2 7"
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+            </div>
+
+            <div
+              className={`relative z-10 overflow-hidden rounded-2xl border border-[var(--nl-border)] bg-[var(--nl-surface)] p-5 transition-[border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] sm:p-6 ${hoverFine}border-[var(--nl-border-strong)]`}
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="font-mono text-[11px] text-[var(--nl-subtle)]">explorer</span>
+                <span className="rounded border border-[var(--nl-border)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--nl-muted)]">
+                  nlite/
+                </span>
+              </div>
+              <ul className="font-mono text-[13px] leading-7">
+                {TREE.map((node) => (
+                  <li
+                    key={`${node.name}-${node.note}`}
+                    className={`-mx-1 flex items-baseline justify-between gap-4 rounded-md px-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] ${hoverFine}bg-[var(--nl-surface-2)]`}
+                    style={{ paddingLeft: `${(node.depth ?? 0) * 14 + 4}px` }}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span
+                        className={
+                          node.kind === "dir" ? "text-[var(--nl-fg)]" : "text-[var(--nl-muted)]"
+                        }
+                      >
+                        {node.kind === "dir" ? "▸" : "·"}
+                      </span>
+                      <span className={node.kind === "dir" ? "font-medium" : ""}>{node.name}</span>
+                    </span>
+                    <span
+                      className={`hidden truncate text-[11px] text-[var(--nl-subtle)] transition-colors duration-150 sm:inline ${hoverFine}text-[var(--nl-muted)]`}
+                    >
+                      {node.note}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 /**
- * Ambient hero field — soft glow, large dotted grid, overlapping orbits.
+ * Ambient hero field — large dotted grid and secondary orbits.
  * Full-bleed behind content (not a content frame).
+ * Large orbit around the explorer lives on the page, not here.
  */
 export function HeroBackdrop() {
   return (
@@ -8,8 +9,6 @@ export function HeroBackdrop() {
       aria-hidden
       className="nlite-hero-backdrop pointer-events-none absolute inset-0 overflow-hidden text-[var(--nl-fg)]"
     >
-      <div className="nlite-hero-glow" />
-
       <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern
@@ -40,20 +39,8 @@ export function HeroBackdrop() {
 
         <rect width="100%" height="100%" fill="url(#nl-hero-grid)" mask="url(#nl-hero-grid-mask)" />
 
-        {/* Large orbit — right / behind explorer */}
-        <circle
-          className="nlite-hero-orbit nlite-hero-orbit-a"
-          cx="78%"
-          cy="48%"
-          fill="none"
-          r="38%"
-          stroke="currentColor"
-          strokeDasharray="3 8"
-          strokeWidth="1.25"
-          vectorEffect="non-scaling-stroke"
-        />
         {/* Mid orbit — top-left bleed */}
-        <circle
+        {/* <circle
           className="nlite-hero-orbit nlite-hero-orbit-b"
           cx="8%"
           cy="12%"
@@ -63,9 +50,9 @@ export function HeroBackdrop() {
           strokeDasharray="2 7"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
-        />
+        /> */}
         {/* Tight orbit — bottom */}
-        <circle
+        {/* <circle
           className="nlite-hero-orbit nlite-hero-orbit-c"
           cx="48%"
           cy="108%"
@@ -75,13 +62,7 @@ export function HeroBackdrop() {
           strokeDasharray="2 6"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
-        />
-
-        {/* Crosshair at large orbit center */}
-        <g className="nlite-hero-cross" stroke="currentColor" strokeWidth="1">
-          <line x1="78%" x2="78%" y1="44%" y2="52%" />
-          <line x1="75.2%" x2="80.8%" y1="48%" y2="48%" />
-        </g>
+        /> */}
       </svg>
     </div>
   );

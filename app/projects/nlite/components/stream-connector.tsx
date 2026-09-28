@@ -12,8 +12,16 @@ type Geom = {
   d: string;
 };
 
-function buildPath(x1: number, y1: number, x2: number, y2: number) {
+function buildPath(x1: number, y1: number, x2: number, y2: number, stacked: boolean) {
   const dx = x2 - x1;
+  const dy = y2 - y1;
+
+  if (stacked) {
+    // Right → right: bulge outward so the arc sits clear of the cards
+    const bulge = Math.max(28, Math.abs(dy) * 0.22);
+    return `M ${x1} ${y1} C ${x1 + bulge} ${y1 + dy * 0.25}, ${x2 + bulge} ${y2 - dy * 0.25}, ${x2} ${y2}`;
+  }
+
   const cx1 = x1 + dx * 0.4;
   const cx2 = x1 + dx * 0.6;
   return `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
@@ -39,11 +47,26 @@ export function StreamConnector() {
       const fr = from.getBoundingClientRect();
       const tr = to.getBoundingClientRect();
 
-      // Right edge of Origin → left edge of CDN (mid-upper on each card)
-      const x1 = fr.right - cr.left;
-      const y1 = fr.top + fr.height * 0.4 - cr.top;
-      const x2 = tr.left - cr.left;
-      const y2 = tr.top + tr.height * 0.4 - cr.top;
+      const stacked = tr.top >= fr.bottom - 12;
+
+      let x1: number;
+      let y1: number;
+      let x2: number;
+      let y2: number;
+
+      if (stacked) {
+        // Right side of Origin → right side of CDN
+        x1 = fr.right - cr.left;
+        y1 = fr.top + fr.height * 0.55 - cr.top;
+        x2 = tr.right - cr.left;
+        y2 = tr.top + tr.height * 0.45 - cr.top;
+      } else {
+        // Right edge of Origin → left edge of CDN
+        x1 = fr.right - cr.left;
+        y1 = fr.top + fr.height * 0.4 - cr.top;
+        x2 = tr.left - cr.left;
+        y2 = tr.top + tr.height * 0.4 - cr.top;
+      }
 
       setGeom({
         w: cr.width,
@@ -52,7 +75,7 @@ export function StreamConnector() {
         y1,
         x2,
         y2,
-        d: buildPath(x1, y1, x2, y2),
+        d: buildPath(x1, y1, x2, y2, stacked),
       });
     }
 
@@ -74,7 +97,7 @@ export function StreamConnector() {
   return (
     <svg
       ref={svgRef}
-      className="pointer-events-none absolute inset-0 z-10 hidden overflow-visible lg:block"
+      className="pointer-events-none absolute inset-0 z-30 overflow-visible"
       width={geom?.w ?? "100%"}
       height={geom?.h ?? "100%"}
       viewBox={geom ? `0 0 ${geom.w} ${geom.h}` : undefined}
