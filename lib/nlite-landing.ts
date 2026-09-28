@@ -6,7 +6,7 @@ export const NLITE = {
   install: "pnpm add nlite react react-dom",
   github: "https://github.com/shamilkotta/nlite",
   npm: "https://npmx.dev/package/nlite",
-  docs: "https://github.com/shamilkotta/nlite#readme",
+  docs: "https://github.com/shamilkotta/nlite/tree/main/packages/nlite#readme",
 } as const;
 
 export const DEPLOYS = [
