@@ -36,7 +36,9 @@ function PprCopy({ className = "" }: { className?: string }) {
         <span className="lg:hidden"> </span>
         Pre-Rendering
       </h2>
-      <p className="mb-3 text-lg font-medium text-(--nl-fg) sm:text-xl">Make full use of your infra.</p>
+      <p className="mb-3 text-lg font-medium text-(--nl-fg) sm:text-xl">
+        Make full use of your infra.
+      </p>
       <p className="mx-auto max-w-xl text-(--nl-muted) sm:text-lg lg:mx-0">
         Cache a static shell on the CDN. Stream dynamic regions from origin when data is ready. One
         response, edge speed and live data.

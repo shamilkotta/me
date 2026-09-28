@@ -244,8 +244,7 @@ html.light .nlite-root {
   }
 
   html.light .nlite-vite-art {
-    filter: drop-shadow(0 0 5px rgb(255 255 255 / 0.8))
-      drop-shadow(0 0 14px rgb(200 208 220 / 0.5))
+    filter: drop-shadow(0 0 5px rgb(255 255 255 / 0.8)) drop-shadow(0 0 14px rgb(200 208 220 / 0.5))
       drop-shadow(0 0 24px rgb(180 190 205 / 0.3));
   }
 }
@@ -526,13 +525,11 @@ html.light .nlite-vite-bloom {
   0%,
   100% {
     filter: drop-shadow(0 0 4px rgb(255 255 255 / 0.7))
-      drop-shadow(0 0 12px rgb(200 208 220 / 0.45))
-      drop-shadow(0 0 22px rgb(180 190 205 / 0.28));
+      drop-shadow(0 0 12px rgb(200 208 220 / 0.45)) drop-shadow(0 0 22px rgb(180 190 205 / 0.28));
   }
   50% {
     filter: drop-shadow(0 0 7px rgb(255 255 255 / 0.95))
-      drop-shadow(0 0 18px rgb(210 218 230 / 0.6))
-      drop-shadow(0 0 32px rgb(190 200 215 / 0.4));
+      drop-shadow(0 0 18px rgb(210 218 230 / 0.6)) drop-shadow(0 0 32px rgb(190 200 215 / 0.4));
   }
 }
 
