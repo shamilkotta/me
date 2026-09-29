@@ -7,6 +7,7 @@ import { GitHubCorner } from "./components/github-corner";
 import { FeaturesGrid } from "./components/features-grid";
 import { HeroBackdrop } from "./components/hero-backdrop";
 import { PprShowcase } from "./components/ppr-showcase";
+import { FinalCta } from "./components/final-cta";
 import { ViteFoundation } from "./components/vite-foundation";
 
 const ogImage = {
@@ -204,7 +205,7 @@ export default function NlitePage() {
 
       <ViteFoundation />
 
-      <div aria-hidden className="h-16 sm:h-24" />
+      <FinalCta />
     </>
   );
 }
