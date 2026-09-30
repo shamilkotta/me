@@ -88,6 +88,14 @@
     "createdAt": "2026-09-28T04:17:00.000Z"
   },
   {
+    "id": "designengineer-tools",
+    "title": "Curated tools for design engineers",
+    "url": "https://designengineer.tools",
+    "type": "website",
+    "tags": ["design", "tools", "inspiration", "resources"],
+    "createdAt": "2026-09-30T10:14:00.000Z"
+  },
+  {
     "id": "placeholder",
     "title": "Place Holder data start here",
     "tags": ["placeholder"],

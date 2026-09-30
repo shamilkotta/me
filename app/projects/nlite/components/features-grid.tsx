@@ -81,7 +81,7 @@ export async function FeaturesGrid() {
           Everything you need to get started
         </h2>
 
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-(--nl-border) bg-(--nl-border) sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-(--nl-border) bg-(--nl-border) sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature) => {
             const isSoon = Boolean(feature.soon);
 
@@ -89,7 +89,7 @@ export async function FeaturesGrid() {
               <article
                 key={feature.title}
                 className={[
-                  "relative flex flex-col p-6 sm:p-7",
+                  "relative flex min-w-0 flex-col p-6 sm:p-7",
                   isSoon ? "bg-(--nl-surface)" : "bg-(--nl-bg)",
                 ].join(" ")}
               >
@@ -120,14 +120,14 @@ export async function FeaturesGrid() {
             );
           })}
 
-          <article className="relative flex flex-col justify-center bg-(--nl-bg) p-6 sm:p-7">
+          <article className="relative flex min-w-0 flex-col justify-center bg-(--nl-bg) p-6 sm:p-7">
             <h3 className="mb-2 text-lg font-semibold tracking-tight text-(--nl-fg)">
               {DEPLOY_FEATURE.title}
             </h3>
             <p className="text-sm leading-relaxed text-(--nl-muted)">{DEPLOY_FEATURE.body}</p>
           </article>
 
-          <div className="bg-(--nl-bg) sm:col-span-2 self-stretch">
+          <div className="min-w-0 self-stretch bg-(--nl-bg) sm:col-span-2">
             <DeployConfigTabs tabs={tabs} />
           </div>
         </div>
