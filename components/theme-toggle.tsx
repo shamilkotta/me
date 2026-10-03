@@ -14,10 +14,15 @@ function toggleWithCircleReveal(origin: { x: number; y: number }, next: Theme) {
     return;
   }
 
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const x = `${(origin.x / vw) * 100}%`;
+  const y = `${(origin.y / vh) * 100}%`;
   const endRadius = Math.hypot(
-    Math.max(origin.x, window.innerWidth - origin.x),
-    Math.max(origin.y, window.innerHeight - origin.y),
+    Math.max(origin.x, vw - origin.x),
+    Math.max(origin.y, vh - origin.y),
   );
+  const endRadiusPct = `${(endRadius / (Math.hypot(vw, vh) / Math.SQRT2)) * 100}%`;
 
   const transition = document.startViewTransition(() => {
     setTheme(next);
@@ -26,14 +31,12 @@ function toggleWithCircleReveal(origin: { x: number; y: number }, next: Theme) {
   transition.ready.then(() => {
     document.documentElement.animate(
       {
-        clipPath: [
-          `circle(0px at ${origin.x}px ${origin.y}px)`,
-          `circle(${endRadius}px at ${origin.x}px ${origin.y}px)`,
-        ],
+        clipPath: [`circle(0% at ${x} ${y})`, `circle(${endRadiusPct} at ${x} ${y})`],
       },
       {
-        duration: 450,
-        easing: "ease-out",
+        duration: 500,
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        fill: "both",
         pseudoElement: "::view-transition-new(root)",
       },
     );
