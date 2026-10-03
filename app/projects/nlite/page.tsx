@@ -14,7 +14,7 @@ const ogImage = {
   url: "/projects/nlite/og.jpg",
   width: 2400,
   height: 1260,
-  alt: "nlite — Next.js familiar React on Vite",
+  alt: "nlite - Next.js familiar React on Vite",
   type: "image/png",
 } as const;
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description: NLITE.description,
   alternates: { canonical: absoluteUrl("/projects/nlite") },
   openGraph: {
-    title: "nlite — The React framework on Vite",
+    title: "nlite - The React framework on Vite",
     description: NLITE.description,
     url: absoluteUrl("/projects/nlite"),
     type: "website",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "nlite — The React framework on Vite",
+    title: "nlite - The React framework on Vite",
     description: NLITE.description,
     images: [ogImage.url],
   },
