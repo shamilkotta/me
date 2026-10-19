@@ -1,7 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
-import { WritingPost } from "@/lib/content";
-import { absoluteUrl } from "@/lib/links";
+import { formatWritingDate, WritingPost } from "@/lib/content";
+import { absoluteUrl, siteName, siteUrl } from "@/lib/links";
 import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
@@ -14,14 +14,6 @@ type WritingPostPageProps = {
 
 export async function generateStaticParams() {
   return (await getCollection<WritingPost>("writing")).map((post) => ({ slug: post.slug }));
-}
-
-function formatDate(date: Date) {
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
 }
 
 export async function generateMetadata({ params }: WritingPostPageProps) {
@@ -73,11 +65,33 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
   return (
     <>
       <TrackPostView slug={slug} />
-      <header className="mb-8 border-b border-border pb-8 text-center">
-        <h1 className="mb-2 text-[clamp(1.375rem,4vw,1.875rem)] font-bold">{post.data.title}</h1>
-        <div className="flex justify-center gap-2 items-center">
-          <p className="text-xs tabular-nums text-muted">{formatDate(post.data.date)}</p>
-          <span className="mr-[0.35rem] text-muted">·</span>
+      <header className="mb-10">
+        <h1 className="text-[clamp(1.75rem,4.5vw,2.25rem)] font-bold tracking-[-0.03em]">
+          {post.data.title}
+        </h1>
+        <div className="mt-4 flex flex-wrap items-center text-[0.8125rem] text-muted">
+          <a
+            className="inline-flex items-center text-inherit no-underline transition-colors hover:text-fg"
+            href={siteUrl}
+          >
+            <img
+              alt=""
+              className="mr-2 size-6 shrink-0 rounded-full object-cover ring-1 ring-fg/10"
+              height={24}
+              src="/shamil.jpg"
+              width={24}
+            />
+            {siteName}
+          </a>
+          <span aria-hidden="true" className="mx-[0.35rem]">
+            ·
+          </span>
+          <time className="tabular-nums" dateTime={post.data.date.toISOString()}>
+            {formatWritingDate(post.data.date)}
+          </time>
+          <span aria-hidden="true" className="mx-[0.35rem]">
+            ·
+          </span>
           <CopyUrl />
         </div>
       </header>
