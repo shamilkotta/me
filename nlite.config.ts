@@ -5,11 +5,13 @@ import path from "node:path";
 import { cloudflare } from "nlite/adapters";
 import { defineCollection, mdx } from "nlite/mdx";
 import remarkGfm from "remark-gfm";
+import { ogImagesPlugin } from "./lib/og/build";
 import { z } from "zod";
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
+    ogImagesPlugin(),
     cloudflare(),
     mdx({
       collections: {

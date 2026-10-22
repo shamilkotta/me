@@ -1,13 +1,6 @@
 import type { Metadata } from "nlite";
-import {
-  OG_HEIGHT,
-  OG_WIDTH,
-  generateTitleOgSvg,
-  ogR2Key,
-  ogResponseHeaders,
-} from "@/lib/og/shared";
-import { serveOgImage } from "@/lib/og/render";
-import { absoluteUrl } from "@/lib/links";
+import { OG_HEIGHT, OG_WIDTH, generateTitleOgSvg } from "./shared";
+import { absoluteUrl } from "../links";
 
 export const PAGE_OG_TEMPLATE_VERSION = "1";
 
@@ -49,20 +42,20 @@ export function generatePageOgSvg(title: string) {
   return generateTitleOgSvg({ idPrefix: "page-og", title });
 }
 
+export function pageOgImagePath(key: PageOgKey) {
+  return `/og/${key}-v${PAGE_OG_TEMPLATE_VERSION}.png` as const;
+}
+
 export function pageOgImageMeta(key: PageOgKey) {
   const { title } = PAGE_OG_CONFIG[key];
 
   return {
-    url: `/${key}/og`,
+    url: pageOgImagePath(key),
     width: OG_WIDTH,
     height: OG_HEIGHT,
     alt: title,
     type: "image/png",
   } as const;
-}
-
-export function pageOgResponseHeaders(key: PageOgKey) {
-  return ogResponseHeaders(`${key}-${PAGE_OG_TEMPLATE_VERSION}`);
 }
 
 export function buildPageOgMetadata(key: PageOgKey, extra?: Pick<Metadata, "robots">): Metadata {
@@ -90,15 +83,4 @@ export function buildPageOgMetadata(key: PageOgKey, extra?: Pick<Metadata, "robo
       images: [image.url],
     },
   };
-}
-
-export async function servePageOg(key: PageOgKey) {
-  const { title } = PAGE_OG_CONFIG[key];
-
-  return serveOgImage({
-    cacheKey: ogR2Key(key),
-    headers: pageOgResponseHeaders(key),
-    generateSvg: () => generatePageOgSvg(title),
-    customMetadata: { key, title },
-  });
 }

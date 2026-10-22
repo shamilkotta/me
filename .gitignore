@@ -5,3 +5,4 @@ dist
 ctx
 .wrangler
 .env*
+/public/og

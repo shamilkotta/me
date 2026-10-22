@@ -1,5 +1,4 @@
-import geistFontBase64 from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?base64";
-import { siteUrl } from "@/lib/links";
+import { siteUrl } from "../links";
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
@@ -8,7 +7,6 @@ export const TITLE_LEFT_PADDING = 80;
 export const TITLE_RIGHT_INSET_RATIO = 0.15;
 export const TITLE_MAX_LINES = 2;
 export const TITLE_ELLIPSIS = "…";
-export const OG_R2_PREFIX = "og";
 
 export const domain = new URL(siteUrl).hostname;
 export const geistFontFamily = "Geist";
@@ -87,14 +85,6 @@ export function dotPatternBackgroundSvg(idPrefix: string) {
 
 export function ogSvgDefs(idPrefix: string) {
   return `
-    <style>
-      @font-face {
-        font-family: "${geistFontFamily}";
-        src: url("data:font/woff2;base64,${geistFontBase64}") format("woff2");
-        font-weight: 100 900;
-        font-style: normal;
-      }
-    </style>
     <pattern id="${idPrefix}-dots" width="16" height="16" patternUnits="userSpaceOnUse">
       <circle cx="8" cy="8" r="1.1" fill="rgba(255,255,255,0.2)" />
     </pattern>
@@ -171,17 +161,4 @@ export async function ogContentHash(templateVersion: string, ...parts: string[])
     .slice(0, 8)
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
-}
-
-export function ogResponseHeaders(hash: string) {
-  return {
-    "Cache-Control": "public, max-age=31536000, immutable",
-    ETag: `"${hash}"`,
-    "Content-Type": "image/png",
-    "X-Robots-Tag": "noindex, nofollow",
-  };
-}
-
-export function ogR2Key(key: string) {
-  return `${OG_R2_PREFIX}/${key}.png`;
 }
