@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteName,
-  authors: [{ name: "Shamil Kotta", url: siteUrl }],
-  creator: "Shamilkotta",
-  publisher: "Shamilkotta",
+  authors: [{ name: "shamil", url: siteUrl }],
+  creator: "shamil",
+  publisher: "shamil",
   keywords: ["Shamil", "shamilkotta", "software engineer", "developer"],
   alternates: {
     canonical: absoluteUrl("/"),

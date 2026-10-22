@@ -1,7 +1,7 @@
 import type { Metadata } from "nlite";
 
 import { NLITE, TREE } from "@/lib/nlite-landing";
-import { absoluteUrl } from "@/lib/links";
+import { absoluteUrl, personJsonLd } from "@/lib/links";
 import { CopyCommand } from "./components/copy-command";
 import { GitHubCorner } from "./components/github-corner";
 import { FeaturesGrid } from "./components/features-grid";
@@ -19,11 +19,11 @@ const ogImage = {
 } as const;
 
 export const metadata: Metadata = {
-  title: "nlite — The React framework on Vite",
+  title: "nlite: The React framework on Vite",
   description: NLITE.description,
   alternates: { canonical: absoluteUrl("/projects/nlite") },
   openGraph: {
-    title: "nlite - The React framework on Vite",
+    title: "nlite: The React framework on Vite",
     description: NLITE.description,
     url: absoluteUrl("/projects/nlite"),
     type: "website",
@@ -31,10 +31,23 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "nlite - The React framework on Vite",
+    title: "nlite: The React framework on Vite",
     description: NLITE.description,
     images: [ogImage.url],
   },
+};
+
+const softwareSourceCodeJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: NLITE.name,
+  description: NLITE.description,
+  url: absoluteUrl("/projects/nlite"),
+  codeRepository: NLITE.github,
+  programmingLanguage: "TypeScript",
+  runtimePlatform: "Node.js",
+  license: "https://opensource.org/licenses/MIT",
+  author: personJsonLd,
 };
 
 const press =
@@ -44,6 +57,10 @@ const hoverFine = "[@media(hover:hover)_and_(pointer:fine)]:hover:";
 export default function NlitePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSourceCodeJsonLd) }}
+      />
       <section className="relative flex min-h-[100dvh] items-center overflow-hidden border-b border-[var(--nl-border)]">
         <GitHubCorner />
         <HeroBackdrop />

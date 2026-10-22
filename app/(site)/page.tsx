@@ -1,15 +1,36 @@
+import type { Metadata } from "nlite";
 import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
 import { ProjectRow } from "@/components/project-row";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
+import { githubUrl, homeTitle, siteDescription, siteUrl, xUrl } from "@/lib/links";
+
+export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "shamil",
+  url: `${siteUrl}/`,
+  image: `${siteUrl}/shamil.jpg`,
+  jobTitle: "software engineer",
+  description: siteDescription,
+  sameAs: [githubUrl, xUrl],
+};
 
 export default async function HomePage() {
   const writings = await writingList(5);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <div className="mb-4 mt-2 w-fit relative ">
         <h1 className="text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.03em]">
           shamil

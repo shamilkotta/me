@@ -1,7 +1,7 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { formatWritingDate, WritingPost } from "@/lib/content";
-import { absoluteUrl, siteName, siteUrl } from "@/lib/links";
+import { absoluteUrl, personJsonLd, siteName, siteUrl } from "@/lib/links";
 import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
@@ -59,11 +59,28 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
   const post = await getEntry<WritingPost>("writing", slug);
 
   if (!post || !post.data) {
-    return notFound();
+    notFound();
   }
+
+  const url = absoluteUrl(`/writing/${slug}`);
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date.toISOString(),
+    author: personJsonLd,
+    publisher: personJsonLd,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
       <TrackPostView slug={slug} />
       <header className="mb-10">
         <h1 className="text-[clamp(1.75rem,4.5vw,2.25rem)] font-bold tracking-[-0.03em]">

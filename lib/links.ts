@@ -6,6 +6,7 @@ export function absoluteUrl(path: string = "/") {
   return `${siteUrl}${normalized}`;
 }
 export const siteName = "shamil";
+export const homeTitle = "shamil | a curious mind";
 export const siteTitle = "SHAMIL";
 export const siteDescription =
   "Solving problems as a profession. Software engineer building for developers.";
@@ -35,7 +36,16 @@ export const pageLinks: NavLink[] = [
 export const sectionNavLinks: NavLink[] = [{ href: "/", label: "home" }];
 export const writingPostNavLinks: NavLink[] = [{ href: "/writing", label: "writing" }];
 
-export const contactEmail = "hi@shamilkotta.com";
+export const githubUrl = "https://github.com/shamilkotta";
+export const xUrl = "https://x.com/shamilkotta";
+
+export const personJsonLd = {
+  "@type": "Person",
+  name: siteName,
+  url: `${siteUrl}/`,
+} as const;
+
+export const contactEmail = "hello@shamilkotta.com";
 
 export const socialLinks: NavLink[] = [
   { href: "https://github.com/shamilkotta", label: "github", external: true },

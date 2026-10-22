@@ -2,17 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://shamilkotta.com/</loc>
+    <lastmod>2026-09-28</lastmod>
   </url>
   <url>
     <loc>https://shamilkotta.com/writing</loc>
+    <lastmod>2026-10-19</lastmod>
   </url>
   <url>
     <loc>https://shamilkotta.com/projects</loc>
+    <lastmod>2026-09-28</lastmod>
   </url>
   <url>
     <loc>https://shamilkotta.com/writing/vite-and-react-are-all-you-need</loc>
+    <lastmod>2026-10-19</lastmod>
   </url>
   <url>
     <loc>https://shamilkotta.com/projects/nlite</loc>
+    <lastmod>2026-10-03</lastmod>
   </url>
 </urlset>

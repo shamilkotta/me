@@ -4,7 +4,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: siteName,
-  alternateName: ["shamil kotta", "shamilkotta"],
+  alternateName: ["shamilkotta"],
   description: siteDescription,
   url: `${siteUrl}/`,
   image: `${siteUrl}/shamilkotta.jpg`,

@@ -1,0 +1,29 @@
+# shamil
+
+> shamil is a software engineer who builds for developers and cares about developer and AI experience. This is his personal site: writing, projects, and contact.
+
+- Site: https://shamilkotta.com/
+- GitHub: https://github.com/shamilkotta
+- X: https://x.com/shamilkotta
+- Email: hello@shamilkotta.com
+
+## Projects
+
+- [nlite](https://shamilkotta.com/projects/nlite): a React 19 framework on Vite with Next.js-style app/ routing, SSR, SSG, and Partial Prerendering, with adapters for Vercel, Cloudflare, and Netlify. Source: https://github.com/shamilkotta/nlite
+- [Floate](https://floate.app): a Mac app by shamil.
+- [All projects](https://shamilkotta.com/projects): the full list, including npm packages, a browser extension, and an Obsidian plugin.
+
+## nlite
+
+- [nlite (markdown)](https://shamilkotta.com/projects/nlite.md): what nlite is, who it's for, quickstart, features, adapters, and status, as plain markdown.
+- [nlite project page](https://shamilkotta.com/projects/nlite)
+- [nlite source](https://github.com/shamilkotta/nlite)
+
+## Writing
+
+- [All writing](https://shamilkotta.com/writing)
+- [Vite and React are all you need](https://shamilkotta.com/writing/vite-and-react-are-all-you-need): how React 19 already ships streaming SSR, static generation, hydration, and Server Components, and why Vite is the only collaborator left.
+
+## Optional
+
+- [Sitemap](https://shamilkotta.com/sitemap.xml)
