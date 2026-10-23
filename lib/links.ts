@@ -9,12 +9,12 @@ export const siteName = "shamil";
 export const homeTitle = "shamil | a curious mind";
 export const siteTitle = "SHAMIL";
 export const siteDescription =
-  "Solving problems as a profession. Software engineer building for developers.";
+  "Following my curiosity, chasing what feels better, and mastering one tool at a time with craft and taste.";
 export const ogImage = {
   url: "/shamilkotta.jpg",
   width: 2400,
   height: 1260,
-  alt: "Hi I'm SHAMIL — Solving problems as a profession",
+  alt: "shamil | a curious mind",
   type: "image/jpeg",
 } as const;
 

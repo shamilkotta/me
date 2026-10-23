@@ -14,13 +14,13 @@ export const PAGE_OG_CONFIG: Record<
   writing: {
     title: "Writing",
     path: "/writing",
-    description: "Writing by shamil, a software engineer building for developers.",
+    description:
+      "Notes on what I'm learning, building and thinking about, written slowly and with care.",
   },
   projects: {
     title: "Projects",
     path: "/projects",
-    description:
-      "Projects by shamil: nlite, a React 19 framework on Vite, plus developer tools, npm packages, and apps.",
+    description: "Things I spend my time building: frameworks, tools, agents, compilers and more.",
   },
   marks: {
     title: "Marks",
