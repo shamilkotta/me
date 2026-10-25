@@ -1,7 +1,7 @@
 ---
 title: Why Cloudflare is the solution
 description: VMs per agent are a waste. A few scratch notes on why I'm betting on V8 isolates with SQLite instead.
-slug: why-DO-is-the-solution
+slug: why-cloudflare-is-the-solution
 date: 2026-10-25
 ---
 
