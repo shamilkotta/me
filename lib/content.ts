@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     external: true,
   },
   {
-    href: "https://dotlet.app",
+    href: "https://dotlet.vercel.app",
     name: "dotlet",
     desc: "make your environment portable",
     meta: "",
@@ -50,7 +50,7 @@ export const PROJECTS: Project[] = [
     external: true,
   },
   {
-    href: "https://rlist.app",
+    href: "https://rlist.shamilkotta.workers.dev",
     name: "rlist",
     desc: "your digital library, simplified",
     meta: "",
