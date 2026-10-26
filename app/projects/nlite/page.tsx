@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata } from "nlite";
 
 import { NLITE, TREE } from "@/lib/nlite-landing";
@@ -9,6 +10,7 @@ import { HeroBackdrop } from "./components/hero-backdrop";
 import { PprShowcase } from "./components/ppr-showcase";
 import { FinalCta } from "./components/final-cta";
 import { ViteFoundation } from "./components/vite-foundation";
+import { sharedName } from "@/lib/view-transition";
 
 const ogImage = {
   url: "/projects/nlite/og.jpg",
@@ -71,9 +73,11 @@ export default function NlitePage() {
               Next.js-familiar · Vite-native
             </p>
 
-            <h1 className="nlite-animate-in nlite-animate-in-delay-1 mb-5 text-[clamp(3.5rem,10vw,5.5rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
-              {NLITE.name}
-            </h1>
+            <ViewTransition name={sharedName("project", NLITE.name, "name")}>
+              <h1 className="nlite-animate-in nlite-animate-in-delay-1 mb-5 text-[clamp(3.5rem,10vw,5.5rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
+                {NLITE.name}
+              </h1>
+            </ViewTransition>
 
             <p className="nlite-animate-in nlite-animate-in-delay-2 mb-3 text-lg text-[var(--nl-muted)] sm:text-xl">
               {NLITE.tagline}

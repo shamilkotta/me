@@ -1,7 +1,9 @@
+import { ViewTransition } from "react";
 import Link from "nlite/link";
 
 import { SiteNav } from "@/components/site-nav";
 import { writingList } from "@/lib/content";
+import { sharedName } from "@/lib/view-transition";
 import { buildPageOgMetadata } from "@/lib/og/page";
 
 export const metadata = buildPageOgMetadata("writing");
@@ -12,7 +14,9 @@ export default async function WritingPage() {
   return (
     <>
       <SiteNav className="mb-10" variant="section" />
-      <h1 className="mb-8 text-base font-semibold tracking-normal">writing</h1>
+      <ViewTransition name={sharedName("heading", "writing")}>
+        <h1 className="mb-8 w-fit text-base font-semibold tracking-normal">writing</h1>
+      </ViewTransition>
 
       {/* <ul className="list-none">
         {writings.map((group) => (
@@ -42,10 +46,14 @@ export default async function WritingPage() {
               className="block border-b border-border py-[0.45rem] text-[0.8125rem] text-inherit no-underline hover:text-muted"
               href={`/writing/${writing.slug}`}
             >
-              <span className="mr-1 inline-block min-w-26 tabular-nums text-muted">
-                {writing.date}
-              </span>
-              {writing.title}
+              <ViewTransition name={sharedName("post-date", writing.slug)}>
+                <span className="mr-1 inline-block min-w-26 tabular-nums text-muted">
+                  {writing.date}
+                </span>
+              </ViewTransition>
+              <ViewTransition name={sharedName("post-title", writing.slug)}>
+                <span className="inline-block">{writing.title}</span>
+              </ViewTransition>
             </Link>
           </li>
         ))}

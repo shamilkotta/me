@@ -24,9 +24,13 @@ function toggleWithCircleReveal(origin: { x: number; y: number }, next: Theme) {
   );
   const endRadiusPct = `${(endRadius / (Math.hypot(vw, vh) / Math.SQRT2)) * 100}%`;
 
+  // Scopes the circle-reveal CSS so it doesn't apply to route transitions.
+  const root = document.documentElement;
+  root.dataset.transition = "theme";
   const transition = document.startViewTransition(() => {
     setTheme(next);
   });
+  transition.finished.finally(() => delete root.dataset.transition);
 
   transition.ready.then(() => {
     document.documentElement.animate(

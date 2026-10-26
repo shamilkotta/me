@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata } from "nlite";
 import Link from "nlite/link";
 
@@ -5,6 +6,7 @@ import { SiteNav } from "@/components/site-nav";
 import { ProjectRow } from "@/components/project-row";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WORK, writingList, PROJECTS, TIMELINE } from "@/lib/content";
+import { sharedName } from "@/lib/view-transition";
 import { githubUrl, homeTitle, siteDescription, siteUrl, xUrl } from "@/lib/links";
 
 export const metadata: Metadata = {
@@ -99,9 +101,11 @@ export default async function HomePage() {
 
       <section className="mb-10">
         <div className="mb-4 flex items-baseline justify-between gap-4">
-          <h2 className="text-[0.6875rem] font-normal uppercase tracking-[0.12em] text-muted">
-            projects
-          </h2>
+          <ViewTransition name={sharedName("heading", "projects")}>
+            <h2 className="text-[0.6875rem] font-normal uppercase tracking-[0.12em] text-muted">
+              projects
+            </h2>
+          </ViewTransition>
           <Link
             className="text-xs normal-case tracking-normal text-muted no-underline hover:text-fg"
             href="/projects"
@@ -118,9 +122,11 @@ export default async function HomePage() {
 
       <section className="mb-10">
         <div className="mb-4 flex items-baseline justify-between gap-4">
-          <h2 className="text-[0.6875rem] font-normal uppercase tracking-[0.12em] text-muted">
-            writing
-          </h2>
+          <ViewTransition name={sharedName("heading", "writing")}>
+            <h2 className="text-[0.6875rem] font-normal uppercase tracking-[0.12em] text-muted">
+              writing
+            </h2>
+          </ViewTransition>
           <Link
             className="text-xs normal-case tracking-normal text-muted no-underline hover:text-fg"
             href="/writing"
@@ -135,10 +141,14 @@ export default async function HomePage() {
                 className="block border-b border-border py-[0.45rem] text-[0.8125rem] text-inherit no-underline hover:text-muted"
                 href={`/writing/${writing.slug}`}
               >
-                <span className="mr-1 inline-block min-w-26 tabular-nums text-muted">
-                  {writing.date}
-                </span>
-                {writing.title}
+                <ViewTransition name={sharedName("post-date", writing.slug)}>
+                  <span className="mr-1 inline-block min-w-26 tabular-nums text-muted">
+                    {writing.date}
+                  </span>
+                </ViewTransition>
+                <ViewTransition name={sharedName("post-title", writing.slug)}>
+                  <span className="inline-block">{writing.title}</span>
+                </ViewTransition>
               </Link>
             </li>
           ))}

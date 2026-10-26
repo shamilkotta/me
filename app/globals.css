@@ -152,26 +152,68 @@ html.dark .writing-content .shiki span {
   content: " ";
 }
 
-/* Theme toggle: circular reveal from the button */
-::view-transition-group(root) {
+/* Theme toggle: circular reveal from the button (html[data-transition] is set
+   by theme-toggle.tsx) */
+html[data-transition="theme"]::view-transition-group(root) {
   animation-duration: 500ms;
 }
 
-::view-transition-image-pair(root) {
+html[data-transition="theme"]::view-transition-image-pair(root) {
   isolation: auto;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
+html[data-transition="theme"]::view-transition-old(root),
+html[data-transition="theme"]::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
   display: block;
 }
 
-::view-transition-old(root) {
+html[data-transition="theme"]::view-transition-old(root) {
   z-index: 1;
 }
 
-::view-transition-new(root) {
+html[data-transition="theme"]::view-transition-new(root) {
   z-index: 9999;
+}
+
+/* Route transitions (React <ViewTransition>): shared elements morph, the rest
+   of the page cross-fades. */
+html:not([data-transition="theme"])::view-transition-group(*) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+html:not([data-transition="theme"])::view-transition-old(root) {
+  animation: 140ms cubic-bezier(0.4, 0, 1, 1) both vt-fade-out;
+}
+
+html:not([data-transition="theme"])::view-transition-new(root) {
+  animation: 260ms cubic-bezier(0, 0, 0.2, 1) 60ms both vt-fade-in;
+}
+
+/* Elements present on only one side just fade, quicker than the morph. */
+html:not([data-transition="theme"])::view-transition-old(*):only-child,
+html:not([data-transition="theme"])::view-transition-new(*):only-child {
+  animation-duration: 200ms;
+}
+
+/* Scale snapshots by height so text keeps its aspect ratio while morphing. */
+html:not([data-transition="theme"])::view-transition-old(*),
+html:not([data-transition="theme"])::view-transition-new(*) {
+  height: 100%;
+  width: auto;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }

@@ -2,11 +2,12 @@ import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
 import { formatWritingDate, WritingPost } from "@/lib/content";
 import { absoluteUrl, personJsonLd, siteName, siteUrl } from "@/lib/links";
+import { sharedName } from "@/lib/view-transition";
 import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
 import { getEntry, getCollection } from "nlite/mdx";
 import { notFound } from "nlite/navigation";
-import { ComponentProps } from "react";
+import { ComponentProps, ViewTransition } from "react";
 
 type WritingPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -83,9 +84,11 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
       />
       <TrackPostView slug={slug} />
       <header className="mb-10">
-        <h1 className="text-[clamp(1.75rem,4.5vw,2.25rem)] font-bold tracking-[-0.03em]">
-          {post.data.title}
-        </h1>
+        <ViewTransition name={sharedName("post-title", slug)}>
+          <h1 className="w-fit text-[clamp(1.75rem,4.5vw,2.25rem)] font-bold tracking-[-0.03em]">
+            {post.data.title}
+          </h1>
+        </ViewTransition>
         <div className="mt-4 flex flex-wrap items-center text-[0.8125rem] text-muted">
           <a
             className="inline-flex items-center text-inherit no-underline transition-colors hover:text-fg"
@@ -103,9 +106,11 @@ export default async function WritingPostPage({ params }: WritingPostPageProps) 
           <span aria-hidden="true" className="mx-[0.35rem]">
             ·
           </span>
-          <time className="tabular-nums" dateTime={post.data.date.toISOString()}>
-            {formatWritingDate(post.data.date)}
-          </time>
+          <ViewTransition name={sharedName("post-date", slug)}>
+            <time className="inline-block tabular-nums" dateTime={post.data.date.toISOString()}>
+              {formatWritingDate(post.data.date)}
+            </time>
+          </ViewTransition>
           <span aria-hidden="true" className="mx-[0.35rem]">
             ·
           </span>

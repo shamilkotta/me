@@ -1,8 +1,10 @@
+import { ViewTransition } from "react";
 import Link from "nlite/link";
 import { ArrowLeft } from "lucide-react";
 
 import { CopyEmail } from "@/components/copy-email";
 import { navLinkWithArrow, navLinksForVariant, type SiteNavVariant } from "@/lib/links";
+import { sharedName } from "@/lib/view-transition";
 
 type SiteNavProps = {
   className?: string;
@@ -30,19 +32,21 @@ export function SiteNav({ className = "", variant = "home" }: SiteNavProps) {
               {item.label}
             </a>
           ) : (
-            <Link
-              className={
-                item.label === arrowLabel
-                  ? "inline-flex items-center gap-1 text-muted no-underline transition-colors hover:text-fg"
-                  : "text-muted no-underline transition-colors hover:text-fg"
-              }
-              href={item.href}
-            >
-              {item.label === arrowLabel ? (
-                <ArrowLeft aria-hidden className="size-[1em] shrink-0" />
-              ) : null}
-              {item.label}
-            </Link>
+            <ViewTransition name={sharedName("heading", item.label)}>
+              <Link
+                className={
+                  item.label === arrowLabel
+                    ? "inline-flex items-center gap-1 text-muted no-underline transition-colors hover:text-fg"
+                    : "text-muted no-underline transition-colors hover:text-fg"
+                }
+                href={item.href}
+              >
+                {item.label === arrowLabel ? (
+                  <ArrowLeft aria-hidden className="size-[1em] shrink-0" />
+                ) : null}
+                {item.label}
+              </Link>
+            </ViewTransition>
           )}
         </div>
       ))}
