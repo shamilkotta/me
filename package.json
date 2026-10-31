@@ -1,5 +1,6 @@
 {
   "name": "shamil-kotta-site",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {
