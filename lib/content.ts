@@ -10,10 +10,10 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    href: "",
-    name: "···",
-    desc: "design, run, and iterate on ai agents",
-    meta: "soon",
+    href: "https://github.com/shamilkotta/neo",
+    name: "neo",
+    desc: "A persistant always-on personal assistant",
+    meta: "wip",
   },
   {
     href: "/projects/nlite",
