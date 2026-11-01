@@ -21,7 +21,7 @@
     "hast-util-to-jsx-runtime": "^2.3.7",
     "lucide-react": "^1.17.0",
     "masonic": "^4.1.0",
-    "nlite": "^0.10.1",
+    "nlite": "^0.11.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "remark-gfm": "^4.0.1",
