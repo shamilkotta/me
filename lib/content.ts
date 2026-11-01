@@ -1,4 +1,4 @@
-import { getCollection } from "nlite/mdx";
+import { getCollection } from "@/lib/writing";
 
 export type Project = {
   href: string;
@@ -116,7 +116,7 @@ export function formatWritingDate(date: Date) {
 }
 
 export async function writingList(count?: number) {
-  const writings = await getCollection<WritingPost>("writing");
+  const writings = await getCollection();
 
   return writings
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())

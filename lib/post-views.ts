@@ -1,6 +1,5 @@
 import { env } from "cloudflare:workers";
-import type { WritingPost } from "@/lib/content";
-import { getEntry } from "nlite/mdx";
+import { getEntry } from "@/lib/writing";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const BOT_RE =
@@ -47,7 +46,7 @@ export async function getPostViewCount(slug: string): Promise<number> {
 export async function trackPostView(request: Request, slug: string): Promise<boolean> {
   if (!isValidPostSlug(slug)) return false;
 
-  const post = await getEntry<WritingPost>("writing", slug);
+  const post = await getEntry(slug);
   if (!post) return false;
 
   const userAgent = request.headers.get("user-agent") ?? "";

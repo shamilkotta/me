@@ -1,11 +1,11 @@
 import { CopyUrl } from "@/components/copy-url";
 import { TrackPostView } from "@/components/track-post-view";
-import { formatWritingDate, WritingPost } from "@/lib/content";
+import { formatWritingDate } from "@/lib/content";
 import { absoluteUrl, personJsonLd, siteName, siteUrl } from "@/lib/links";
 import { sharedName } from "@/lib/view-transition";
 import { writingOgContentHash, writingOgImageMeta } from "@/lib/og/writing";
 import Link from "nlite/link";
-import { getEntry, getCollection } from "nlite/mdx";
+import { getEntry, getCollection } from "@/lib/writing";
 import { notFound } from "nlite/navigation";
 import { ComponentProps, ViewTransition } from "react";
 
@@ -14,12 +14,12 @@ type WritingPostPageProps = {
 };
 
 export async function generateStaticParams() {
-  return (await getCollection<WritingPost>("writing")).map((post) => ({ slug: post.slug }));
+  return (await getCollection()).map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: WritingPostPageProps) {
   const { slug } = await params;
-  const post = await getEntry<WritingPost>("writing", slug);
+  const post = await getEntry(slug);
 
   if (!post || !post.data) {
     return {
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: WritingPostPageProps) {
 
 export default async function WritingPostPage({ params }: WritingPostPageProps) {
   const { slug } = await params;
-  const post = await getEntry<WritingPost>("writing", slug);
+  const post = await getEntry(slug);
 
   if (!post || !post.data) {
     notFound();
