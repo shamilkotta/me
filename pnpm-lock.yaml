@@ -33,8 +33,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(react@19.3.1)
       nlite:
-        specifier: ^0.11.0
-        version: 0.11.0(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(esbuild@0.27.3)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: ^0.11.1
+        version: 0.11.1(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(esbuild@0.27.3)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -1402,8 +1402,8 @@ packages:
       babel-plugin-react-compiler:
         optional: true
 
-  '@vitejs/plugin-rsc@0.5.38':
-    resolution: {integrity: sha512-SoiRBJBVd3Qg6Frnvdk6LwugJYlQKgee+uqySxKz5T/KsCZUgdw529Klzg4IDJuP/EOfsIJ2YiOKAFY8tnr1kg==}
+  '@vitejs/plugin-rsc@0.5.39':
+    resolution: {integrity: sha512-hRa6CK119r1NkwgPWlPRiDP8e4rELCsIZwjGmQK0sOnayAkYPBkyJMip0GhYEt2ukBZaO0Uw3ICHHO9T692OFw==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -1706,8 +1706,8 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
-  magic-string@1.4.3:
-    resolution: {integrity: sha512-z12OxmaPGE0F4xlpGdjuAUckipLpQlTAuAmyGhNoD7ODpYUzvDfvtxUbjM/jwznyP178oju/KDdyi220wNJ0RQ==}
+  magic-string@1.4.5:
+    resolution: {integrity: sha512-oLLC2+YvQUfAa+vxoufE/yc1icb87M9iXIRqAoR/2EhE/8cb3SF/+Gi0c2By1B+5Vz2e2vQtUvHiu1+63Znh+w==}
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
@@ -1880,14 +1880,14 @@ packages:
       sass:
         optional: true
 
-  nlite@0.11.0:
-    resolution: {integrity: sha512-hULbyaVLcZj+HSnepP67cJfSs7/y468Ptf4QlaOlQRF40jtm3CkP8teobyR54RDn5Dx4IT7fZUCCBgSZq/Ye8g==}
+  nlite@0.11.1:
+    resolution: {integrity: sha512-k2ienEKyMa6IiQxvruPU8wigZM3EDi41Gjs7le+cyX3iejv6mDM2WHgytvbSAlPp5GyNK+kNPOqgYufnFfdUIw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
       '@cloudflare/vite-plugin': ^1.37.1
-      react: ^19.2.5
-      react-dom: ^19.2.5
+      react: ^19.3.1
+      react-dom: ^19.3.1
     peerDependenciesMeta:
       '@cloudflare/vite-plugin':
         optional: true
@@ -2037,8 +2037,8 @@ packages:
     engines: {node: '>=20.16.0'}
     hasBin: true
 
-  srvx@1.0.6:
-    resolution: {integrity: sha512-QeTKgAhk8OSsfeq60bl3wuVs9PmBftzmk7owBInA/F1YQne+TRw0UcPymNpURldAmx8hfmM2PNNGH/zgo3GpLA==}
+  srvx@1.0.8:
+    resolution: {integrity: sha512-ngFS/J6St4PJfHRHGjr78xkPPtbyXtdMOLNE4x/XZunEK3OhV7aGUWMHf9WTUEy6wm1U0W4okkd82ZFFWRVQTw==}
     engines: {node: '>=20.16.0'}
     hasBin: true
 
@@ -3088,16 +3088,16 @@ snapshots:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.0.16(esbuild@0.27.3)(jiti@2.7.0)
 
-  '@vitejs/plugin-rsc@0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))':
+  '@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       es-module-lexer: 3.0.4
       estree-walker: 3.0.3
-      magic-string: 1.4.3
+      magic-string: 1.4.5
       obug: 3.0.0
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      srvx: 1.0.6
+      srvx: 1.0.8
       strip-literal: 4.0.0
       turbo-stream: 3.2.1
       vite: 8.0.16(esbuild@0.27.3)(jiti@2.7.0)
@@ -3365,7 +3365,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  magic-string@1.4.3:
+  magic-string@1.4.5:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
 
@@ -3771,10 +3771,10 @@ snapshots:
       - '@types/node'
       - babel-plugin-macros
 
-  nlite@0.11.0(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(esbuild@0.27.3)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  nlite@0.11.1(@cloudflare/vite-plugin@1.39.1(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))(workerd@1.20260529.1)(wrangler@4.96.0))(esbuild@0.27.3)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@vitejs/plugin-react': 6.0.2(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))
-      '@vitejs/plugin-rsc': 0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))
+      '@vitejs/plugin-rsc': 0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.0.16(esbuild@0.27.3)(jiti@2.7.0))
       h3: 2.0.1-rc.22
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
@@ -4058,7 +4058,7 @@ snapshots:
 
   srvx@0.11.16: {}
 
-  srvx@1.0.6: {}
+  srvx@1.0.8: {}
 
   stringify-entities@4.0.4:
     dependencies:
